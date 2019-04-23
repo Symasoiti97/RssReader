@@ -4,6 +4,16 @@
              xmlns:local="clr-namespace:WpfAppRss"
              StartupUri="Views/LoginWindow.xaml">
     <Application.Resources>
-         
+        
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                
+                <ResourceDictionary Source="Styles\Texts.xaml" />
+                <ResourceDictionary Source="Styles\Resources.xaml" />
+                <ResourceDictionary Source="Styles\Buttons.xaml" />
+                
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+        
     </Application.Resources>
 </Application>

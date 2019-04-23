@@ -52,6 +52,7 @@
     <Compile Include="Models\RssChanel.cs" />
     <Compile Include="Models\RssItem.cs" />
     <Compile Include="Models\User.cs" />
+    <Compile Include="Models\UserContent.cs" />
     <Compile Include="OperationDataBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

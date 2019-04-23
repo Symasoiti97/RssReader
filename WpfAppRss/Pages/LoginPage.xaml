@@ -8,7 +8,7 @@
       d:DesignHeight="120" d:DesignWidth="150"
       Title="LoginPage">
 
-    <Grid>
+    <Grid Background="Indigo">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="30"/>
@@ -16,15 +16,18 @@
         <Grid>
             <StackPanel>
                 <TextBox Text="{Binding LoginText}"
-                         Margin="10"/>
+                         Margin="10"
+                         Style="{StaticResource BaseTextBox}"/>
                 <TextBox Text="{Binding PasswordText}"
-                         Margin="10"/>
+                         Margin="10"
+                         Style="{StaticResource BaseTextBox}"/>
             </StackPanel>
         </Grid>
         
         <Grid Grid.Row="1">
             <Button Content="Log In"
                     Command="{Binding LogIn_Click}"
+                    Style="{StaticResource BaseButton}"
                     Margin="70,5,10,5"/>
         </Grid>
         
