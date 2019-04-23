@@ -14,8 +14,6 @@ namespace DataBase.Models
         [Required]
         public string Login { get; set; }
         [Required]
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public string Email { get; set; }
         [Required]
         public string Password { get; set; }

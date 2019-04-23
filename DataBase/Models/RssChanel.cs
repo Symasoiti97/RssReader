@@ -14,8 +14,6 @@ namespace DataBase.Models
         [Required]
         public string Title { get; set; }
         [Required]
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public string Link { get; set; }
 
         public ICollection<UserContent> UserContents { get; set; }

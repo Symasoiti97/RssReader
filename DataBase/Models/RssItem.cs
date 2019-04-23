@@ -16,8 +16,6 @@ namespace DataBase.Models
         [Required]
         public string Content { get; set; }
         [Required]
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public string Link { get; set; }
         public string Author { get; set; }
         public string Category { get; set; }
