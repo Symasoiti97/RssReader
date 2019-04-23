@@ -21,7 +21,7 @@ namespace WpfAppRss.ViewModels
         public LoginPageViewModel()
         {
             _currentUser = new User();
-            _operationDataBase = new OperationDataBase();
+            _operationDataBase = OperationDataBase.GetInstance();
         }
 
         public ICommand LogIn_Click

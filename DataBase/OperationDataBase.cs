@@ -10,65 +10,58 @@ namespace DataBase
 {
     public class OperationDataBase
     {
-        //private ApplicationContext db;
+        private static OperationDataBase _operationDataBase;
+        private ApplicationContext _db;
 
-        public OperationDataBase()
+        private OperationDataBase()
         {
-            //_db = new ApplicationContext();
+            _db = new ApplicationContext();
+        }
+
+        public static OperationDataBase GetInstance()
+        {
+            if (_operationDataBase == null)
+            {
+                _operationDataBase = new OperationDataBase();
+            }
+
+            return _operationDataBase;
         }
 
         public void AddUser(User user)
         {
-            using (ApplicationContext db = new ApplicationContext())
-            {
-                db.Users.Add(user);
-                db.SaveChanges();
-            }
+            _db.Users.Add(user);
+            _db.SaveChanges();
         }
 
         public void RemoveUser(User user)
         {
-            using (ApplicationContext db = new ApplicationContext())
-            {
-                db.Users.Remove(user);
-                db.SaveChanges();
-            }
+            _db.Users.Remove(user);
+            _db.SaveChanges();
         }
 
         public void AddRssChanel(RssChanel rssChanel)
         {
-            using (ApplicationContext db = new ApplicationContext())
-            {
-                db.RssChanels.Add(rssChanel);
-                db.SaveChanges();
-            }
+            _db.RssChanels.Add(rssChanel);
+            _db.SaveChanges();
         }
 
         public void RemoveRssChanel(RssChanel rssChanel)
         {
-            using (ApplicationContext db = new ApplicationContext())
-            {
-                db.RssChanels.Remove(rssChanel);
-                db.SaveChanges();
-            }
+            _db.RssChanels.Remove(rssChanel);
+            _db.SaveChanges();
         }
 
         public void AddRssItemFavorite(RssItem rssItem)
         {
-            using (ApplicationContext db = new ApplicationContext())
-            {
-                db.RssItems.Add(rssItem);
-                db.SaveChanges();
-            }
+            _db.RssItems.Add(rssItem);
+            _db.SaveChanges();
         }
 
         public void RemoveRssItemFavorite(RssItem rssItem)
         {
-            using (ApplicationContext db = new ApplicationContext())
-            {
-                db.RssItems.Remove(rssItem);
-                db.SaveChanges();
-            }
+            _db.RssItems.Remove(rssItem);
+            _db.SaveChanges();
         }
     }
 }

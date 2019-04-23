@@ -20,7 +20,7 @@ namespace WpfAppRss.ViewModels
 
         public RegistrationPageViewModel()
         {
-            _operationDataBase = new OperationDataBase();
+            _operationDataBase = OperationDataBase.GetInstance();
             _currentRegistrUser = new User();
         }
 
