@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DevExpress.Mvvm;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,6 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using WpfAppRss.Commands;
 using WpfAppRss.Views;
 
 namespace WpfAppRss.ViewModels
@@ -30,7 +30,7 @@ namespace WpfAppRss.ViewModels
         {
             get
             {
-                return new DelegateCommand((obj)=>
+                return new DelegateCommand(()=>
                 {
                     CurrentPage = _loginPage;
                 });
@@ -41,7 +41,7 @@ namespace WpfAppRss.ViewModels
         {
             get
             {
-                return new DelegateCommand((obj) =>
+                return new DelegateCommand(() =>
                 {
                     CurrentPage = _registrationPage;
                 });

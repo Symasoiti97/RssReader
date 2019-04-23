@@ -1,5 +1,6 @@
 ﻿using DataBase;
 using DataBase.Models;
+using DevExpress.Mvvm;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
-using WpfAppRss.Commands;
 
 namespace WpfAppRss.ViewModels
 {
@@ -28,7 +28,7 @@ namespace WpfAppRss.ViewModels
         {
             get
             {
-                return new DelegateCommand((obj) =>
+                return new DelegateCommand(() =>
                 {
                     RegistrationUser();
                 });

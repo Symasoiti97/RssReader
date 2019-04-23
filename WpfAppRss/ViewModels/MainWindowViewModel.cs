@@ -1,4 +1,5 @@
 ﻿using DataBase.Models;
+using DevExpress.Mvvm;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -6,7 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Windows.Controls;
 using System.Windows.Input;
-using WpfAppRss.Commands;
 
 namespace WpfAppRss.ViewModels
 {
@@ -30,7 +30,7 @@ namespace WpfAppRss.ViewModels
         {
             get
             {
-                return new DelegateCommand((obj) =>
+                return new DelegateCommand(() =>
                 {
                     ContentPage = _addChanelPage;
                 });
@@ -41,7 +41,7 @@ namespace WpfAppRss.ViewModels
         {
             get
             {
-                return new DelegateCommand((obj) =>
+                return new DelegateCommand(() =>
                 {
 
                 });
