@@ -4,9 +4,14 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:WpfAppRss.Pages"
+      xmlns:vm="clr-namespace:WpfAppRss.ViewModels"
       mc:Ignorable="d" 
       d:DesignHeight="250" d:DesignWidth="400"
       Title="AddChanelPage">
+
+    <Page.DataContext>
+        <vm:AddChanelPageViewModel/>
+    </Page.DataContext>
 
     <Grid>
         <Grid.RowDefinitions>
@@ -18,13 +23,17 @@
             <StackPanel>
                 <StackPanel Orientation="Horizontal"
                             Margin="10">
-                    <TextBlock Text="Rss link"/>
-                    <TextBox Text=""/>
+                    <TextBlock Text="Rss link"
+                               Margin="5,0"/>
+                    <TextBox Text="{Binding RssLinkText}"
+                             MinWidth="200"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal"
                             Margin="10">
-                    <TextBlock Text="Catalog"/>
-                    <TextBox Text=""/>
+                    <TextBlock Text="Catalog"
+                               Margin="5,0"/>
+                    <TextBox Text="{Binding CatalogText}"
+                             MinWidth="200"/>
                 </StackPanel>
             </StackPanel>     
         </Grid>

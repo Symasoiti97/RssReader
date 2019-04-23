@@ -4,11 +4,16 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:WpfAppRss.Pages"
+      xmlns:vm="clr-namespace:WpfAppRss.ViewModels"
       mc:Ignorable="d" 
       d:DesignHeight="120" d:DesignWidth="150"
       Title="LoginPage">
 
-    <Grid Background="Indigo">
+    <Page.DataContext>
+        <vm:LoginPageViewModel/>
+    </Page.DataContext>
+
+    <Grid Background="Beige">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="30"/>
@@ -27,6 +32,7 @@
         <Grid Grid.Row="1">
             <Button Content="Log In"
                     Command="{Binding LogIn_Click}"
+                    CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}"
                     Style="{StaticResource BaseButton}"
                     Margin="70,5,10,5"/>
         </Grid>

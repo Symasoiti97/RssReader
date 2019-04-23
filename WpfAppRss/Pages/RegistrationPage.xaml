@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:WpfAppRss.Pages"
       xmlns:vm="clr-namespace:WpfAppRss.ViewModels"
       mc:Ignorable="d" 
-      d:DesignHeight="200" d:DesignWidth="250"
+      d:DesignHeight="200" d:DesignWidth="200"
       Title="RegistrationPage">
 
     <Page.DataContext>
@@ -35,7 +35,7 @@
         <Grid Grid.Row="1">
             <Button Content="Registration"
                     Command="{Binding Registration_Click}"
-                    Margin="150,15,10,15"/>
+                    Margin="100,15,10,15"/>
         </Grid>
     </Grid>
 </Page>

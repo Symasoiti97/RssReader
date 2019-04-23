@@ -96,7 +96,7 @@ namespace WpfAppRss.ViewModels
 
             _currentRegistrUser.Password = _currentPasswordFirst;
             _operationDataBase.AddUser(_currentRegistrUser);
-            MessageBox.Show($"{_currentRegistrUser.Login}\n{_currentRegistrUser.Email}\n{_currentRegistrUser.Password}");
+            MessageBox.Show("Registration completed successfully");
         }
     }
 }

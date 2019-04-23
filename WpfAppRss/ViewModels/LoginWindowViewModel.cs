@@ -3,16 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using WpfAppRss.Commands;
+using WpfAppRss.Views;
 
 namespace WpfAppRss.ViewModels
 {
     class LoginWindowViewModel : BaseViewModel
     {
-        private Page _loginPage;
-        private Page _registrationPage;
+        private readonly Page _loginPage;
+        private readonly Page _registrationPage;
 
         private Page _currentPage;
 

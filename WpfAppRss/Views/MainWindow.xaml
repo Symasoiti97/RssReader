@@ -9,26 +9,34 @@
     <Grid>
         
         <Grid.RowDefinitions>
-            <RowDefinition Height="50"/>
+            <RowDefinition Height="25"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
         <Grid>
 
             <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="100"/>
                 <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="50"/>
             </Grid.ColumnDefinitions>
             
             <Grid>
-                <TextBlock Text="Name_Login"/>
+                <TextBlock Text="{Binding CurrentUser, FallbackValue=User_Name}"
+                           Style="{StaticResource BaseTextBlock}"
+                           Margin="4"
+                           TextAlignment="Center"/>
             </Grid>
             <Grid Grid.Column="1">
-                <TextBlock Text="Add Chanel"/>
+                <Button Content="Add Chanel"
+                        Command="{Binding AddChanel_Click}"
+                        Style="{StaticResource BaseButton}"/>
             </Grid>
-            <Grid Grid.Column="2">
-                <Button Content="Setting"/>
+            <Grid Grid.Column="3">
+                <Button Content="Setting"
+                        Command="{Binding Setting_Click}"
+                        Style="{StaticResource BaseButton}"/>
             </Grid>
         </Grid>
 
@@ -40,15 +48,20 @@
             </Grid.ColumnDefinitions>
 
             <Grid>
-                
+                <TreeView>
+                    
+                </TreeView>
             </Grid>
 
             <Grid Grid.Column="1">
-                
+                <ListBox>
+                    
+                </ListBox>
             </Grid>
 
             <Grid Grid.Column="2">
-                
+                <Frame Content="{Binding ContentPage}"
+                       NavigationUIVisibility="Hidden"/>
             </Grid>
         </Grid>
     </Grid>

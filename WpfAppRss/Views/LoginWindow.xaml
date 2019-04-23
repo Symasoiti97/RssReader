@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:WpfAppRss.Views"
         xmlns:vm="clr-namespace:WpfAppRss.ViewModels"
         mc:Ignorable="d"
-        Title="LoginWindow" Height="200" Width="250">
+        Title="LoginWindow" Height="300" Width="250">
     
     <Window.DataContext>
         <vm:LoginWindowViewModel/>
@@ -18,15 +18,21 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
-            <StackPanel Margin="5" Orientation="Horizontal">
-                <Button Content="login"
-                        Command="{Binding GoToLoginPage_Click}"/>
-                <Button Content="Registr"
-                        Command="{Binding GoToRegistrationPage_Click}"/>
-            </StackPanel>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Button Content="login"
+                    Command="{Binding GoToLoginPage_Click}"
+                    Style="{StaticResource BaseButton}"/>
+            <Button Grid.Column="1"
+                    Content="Registration"
+                    Command="{Binding GoToRegistrationPage_Click}"
+                    Style="{StaticResource BaseButton}"/>
         </Grid>
         <Grid Grid.Row="1">
-            <Frame NavigationUIVisibility="Hidden"  Content="{Binding CurrentPage}"/>
+            <Frame Content="{Binding CurrentPage}"
+                   NavigationUIVisibility="Hidden"/>
         </Grid>
     </Grid>
 </Window>
