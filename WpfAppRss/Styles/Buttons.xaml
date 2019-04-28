@@ -3,8 +3,8 @@
                     xmlns:local="clr-namespace:WpfAppRss.Styles">
 
     <Style x:Key="BaseButton" TargetType="Button">
-        <Setter Property="Background" Value="LightSteelBlue"/>
-        <Setter Property="Foreground" Value="Black"/>
+        <Setter Property="Background" Value="Gray"/>
+        <Setter Property="Foreground" Value="White"/>
         <Setter Property="FontFamily" Value="{StaticResource FontFamily1}"/>
         <Setter Property="FontSize" Value="14"/>
         <Setter Property="BorderThickness" Value="0"/>

@@ -20,26 +20,48 @@
         </Grid.RowDefinitions>
 
         <Grid>
-            <StackPanel>
-                <StackPanel Orientation="Horizontal"
-                            Margin="10">
-                    <TextBlock Text="Rss link"
-                               Margin="5,0"/>
-                    <TextBox Text="{Binding RssLinkText}"
-                             MinWidth="200"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal"
-                            Margin="10">
-                    <TextBlock Text="Catalog"
-                               Margin="5,0"/>
-                    <TextBox Text="{Binding CatalogText}"
-                             MinWidth="200"/>
-                </StackPanel>
-            </StackPanel>     
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="70"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Rss link"
+                           Margin="0,15"
+                           TextAlignment="Center"/>
+                <TextBox Grid.Column="1"
+                         Text="{Binding RssLinkText}"
+                         Style="{StaticResource BaseTextBox}"
+                         Margin="10"
+                         MinWidth="200"/>
+            </Grid>
+
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="70"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Catalog"
+                           Margin="0,15"
+                           TextAlignment="Center"/>
+                <TextBox Grid.Column="1" 
+                         Style="{StaticResource BaseTextBox}"
+                         Text="{Binding CatalogText}"
+                         Margin="10"
+                         Width="Auto"
+                         MinWidth="200"/>
+            </Grid>
         </Grid>
         
         <Grid Grid.Row="1">
             <Button Content="Add Channel"
+                    Style="{StaticResource BaseButton}"
                     Command="{Binding AddChannel_Click}"
                     Margin="150,10"/>
         </Grid>

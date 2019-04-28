@@ -8,11 +8,44 @@
         <Setter Property="FontFamily" Value="{StaticResource FontFamily1}"/>
         <Setter Property="FontSize" Value="14"/>
         <Setter Property="BorderThickness" Value="0"/>
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TextBox">
+                    <Border
+                        Background="{TemplateBinding Background}"
+                        BorderThickness="{TemplateBinding BorderThickness}">
+                        <Grid Margin="5">
+
+                            <!--Для прозрачного фона-->
+                            <ScrollViewer x:Name="PART_ContentHost" Margin="0" />
+
+                            <TextBlock
+                                x:Name="hint"
+                                Background="Transparent"
+                                FontSize="{TemplateBinding FontSize}"
+                                Foreground="Gray"
+                                IsHitTestVisible="False"
+                                Text="{TemplateBinding Tag}"
+                                TextAlignment="{TemplateBinding TextAlignment}"
+                                Visibility="Collapsed" />
+                        </Grid>
+                    </Border>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="Text" Value="">
+                            <Setter TargetName="hint" Property="Visibility" Value="Visible" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        
     </Style>
 
     <Style x:Key="BaseTextBlock" TargetType="TextBlock">
-        <Setter Property="Background" Value="White"/>
-        <Setter Property="Foreground" Value="Black"/>
+        <Setter Property="Background" Value="Gray"/>
+        <Setter Property="Foreground" Value="White"/>
         <Setter Property="FontFamily" Value="{StaticResource FontFamily1}"/>
         <Setter Property="FontSize" Value="14"/>
     </Style>

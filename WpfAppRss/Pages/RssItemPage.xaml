@@ -20,29 +20,28 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="30"/>
         </Grid.RowDefinitions>
+        
         <Grid>
             <TextBlock Text="{Binding Title}"/>
         </Grid>
 
         <Grid Grid.Row="1">
             <WrapPanel Orientation="Horizontal" Margin="5">
-                <Border BorderBrush="Black" BorderThickness="1">
-                    <ScrollViewer>
-                        <RichTextBox >
-                            <FlowDocument>
-                                <Paragraph TextAlignment="Left">
-
-                                    <Run Text="{Binding Content}"/>
-                                </Paragraph>
-                            </FlowDocument>
-                        </RichTextBox>
-                    </ScrollViewer>
-                </Border>
+                <ScrollViewer>
+                    <RichTextBox IsReadOnly="True" BorderThickness="0">
+                        <FlowDocument>
+                            <Paragraph TextAlignment="Left">
+                                <Run Text="{Binding Content}"/>
+                            </Paragraph>
+                        </FlowDocument>
+                    </RichTextBox>
+                </ScrollViewer>
             </WrapPanel>
-           
         </Grid>
+        
         <Grid Grid.Row="2">
             <TextBlock Text="{Binding PubTime}"/>
         </Grid>
+    
     </Grid>
 </Page>

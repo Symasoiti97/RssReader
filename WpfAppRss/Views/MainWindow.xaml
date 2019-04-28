@@ -8,7 +8,10 @@
         xmlns:models="clr-namespace:WpfAppRss.Models"
         xmlns:vm="clr-namespace:WpfAppRss.ViewModels"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" 
+        Height="450"
+        Width="800"
+        Background="{StaticResource WindowColor}">
 
     <Window.DataContext>
         <vm:MainWindowViewModel/>
@@ -34,6 +37,7 @@
                 <TextBlock Text="{Binding UserName}"
                            Style="{StaticResource BaseTextBlock}"
                            Margin="4"
+                           Foreground="GreenYellow"
                            TextAlignment="Center"/>
             </Grid>
             <Grid Grid.Column="1">
@@ -50,8 +54,8 @@
 
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="150"/>
-                <ColumnDefinition Width="150"/>
+                <ColumnDefinition MinWidth="150" Width="Auto" MaxWidth="240"/>
+                <ColumnDefinition MinWidth="150" Width="Auto" MaxWidth="240"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
@@ -89,6 +93,7 @@
 
             <Grid Grid.Column="2">
                 <Frame Content="{Binding ContentPage}"
+                       Margin="5"
                        NavigationUIVisibility="Hidden"/>
             </Grid>
         </Grid>

@@ -6,7 +6,8 @@
       xmlns:local="clr-namespace:WpfAppRss.Pages"
       xmlns:vm="clr-namespace:WpfAppRss.ViewModels"
       mc:Ignorable="d" 
-      d:DesignHeight="200" d:DesignWidth="200"
+      d:DesignHeight="230" d:DesignWidth="200"
+      Background="{StaticResource WindowColor}"
       Title="RegistrationPage">
 
     <Page.DataContext>
@@ -22,20 +23,30 @@
         <Grid>
             <StackPanel>
                 <TextBox Text="{Binding LoginText}"
+                         Style="{StaticResource BaseTextBox}"
+                         Tag="Login"
                          Margin="10"/>
                 <TextBox Text="{Binding PasswordFirstText}"
+                         Style="{StaticResource BaseTextBox}"
+                         Tag="Password"
                          Margin="10"/>
                 <TextBox Text="{Binding PasswordSecondText}"
+                         Style="{StaticResource BaseTextBox}"
+                         Tag="Confirm password"
                          Margin="10"/>
                 <TextBox Text="{Binding EmailText}"
+                         Style="{StaticResource BaseTextBox}"
+                         Tag="Email"
                          Margin="10"/>
             </StackPanel>
         </Grid>
 
         <Grid Grid.Row="1">
             <Button Content="Registration"
+                    Style="{StaticResource BaseButton}"
                     Command="{Binding Registration_Click}"
-                    Margin="100,15,10,15"/>
+                    Margin="0,15,15,15"
+                    HorizontalAlignment="Right"/>
         </Grid>
     </Grid>
 </Page>

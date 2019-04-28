@@ -6,36 +6,39 @@
       xmlns:local="clr-namespace:WpfAppRss.Pages"
       xmlns:vm="clr-namespace:WpfAppRss.ViewModels"
       mc:Ignorable="d" 
-      d:DesignHeight="120" d:DesignWidth="150"
+      d:DesignHeight="150" d:DesignWidth="150"
       Title="LoginPage">
 
     <Page.DataContext>
         <vm:LoginPageViewModel/>
     </Page.DataContext>
 
-    <Grid Background="Beige">
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="30"/>
+            <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
         <Grid>
             <StackPanel>
                 <TextBox Text="{Binding LoginText}"
+                         Tag="Login"
                          Margin="10"
                          Style="{StaticResource BaseTextBox}"/>
                 <TextBox Text="{Binding PasswordText}"
+                         Tag="Password"
                          Margin="10"
                          Style="{StaticResource BaseTextBox}"/>
             </StackPanel>
         </Grid>
-        
+
         <Grid Grid.Row="1">
             <Button Content="Log In"
                     Command="{Binding LogIn_Click}"
                     CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}"
                     Style="{StaticResource BaseButton}"
-                    Margin="70,5,10,5"/>
+                    Margin="0,15,15,15"
+                    HorizontalAlignment="Right"/>
         </Grid>
-        
+
     </Grid>
 </Page>

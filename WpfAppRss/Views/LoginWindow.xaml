@@ -6,7 +6,10 @@
         xmlns:local="clr-namespace:WpfAppRss.Views"
         xmlns:vm="clr-namespace:WpfAppRss.ViewModels"
         mc:Ignorable="d"
-        Title="LoginWindow" Height="300" Width="250">
+        Title="LoginWindow" 
+        Height="310" 
+        Width="250"
+        Background="{StaticResource WindowColor}">
     
     <Window.DataContext>
         <vm:LoginWindowViewModel/>

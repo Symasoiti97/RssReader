@@ -3,5 +3,6 @@
                     xmlns:local="clr-namespace:WpfAppRss.Styles">
 
     <FontFamily x:Key="FontFamily1">Times Roman</FontFamily>
+    <SolidColorBrush x:Key="WindowColor">Gray</SolidColorBrush>
    
 </ResourceDictionary>
