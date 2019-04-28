@@ -24,6 +24,6 @@ namespace DataBase.Models
         public int RssChannelId { get; set; }
         public RssChannel RssChannel { get; set; }
 
-        public ICollection<UserFavoriteItem> UserFavoriteItem { get; set; }
+        public ICollection<UserFavoriteItem> UserFavoriteItems { get; set; }
     }
 }

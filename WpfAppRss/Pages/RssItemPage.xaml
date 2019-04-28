@@ -32,7 +32,7 @@
                             <FlowDocument>
                                 <Paragraph TextAlignment="Left">
 
-                                    <TextBlock Text="{Binding Content}"/>
+                                    <Run Text="{Binding Content}"/>
                                 </Paragraph>
                             </FlowDocument>
                         </RichTextBox>

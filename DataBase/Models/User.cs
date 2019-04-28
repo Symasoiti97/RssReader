@@ -19,5 +19,6 @@ namespace DataBase.Models
         public string Password { get; set; }
 
         public ICollection<UserContent> UserContents { get; set; }
+        public ICollection<UserFavoriteItem> UserFavoriteItems { get; set; }
     }
 }

@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:e="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         xmlns:local="clr-namespace:WpfAppRss.Views"
+        xmlns:models="clr-namespace:WpfAppRss.Models"
         xmlns:vm="clr-namespace:WpfAppRss.ViewModels"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
@@ -30,7 +31,7 @@
             </Grid.ColumnDefinitions>
             
             <Grid>
-                <TextBlock Text="{Binding CurrentUser}"
+                <TextBlock Text="{Binding UserName}"
                            Style="{StaticResource BaseTextBlock}"
                            Margin="4"
                            TextAlignment="Center"/>
@@ -55,22 +56,21 @@
             </Grid.ColumnDefinitions>
 
             <Grid>
-                <TreeView x:Name="MainTreeView" 
+                <TreeView x:Name="MainTreeView"
                           Margin="5" 
                           ItemsSource="{Binding RssChanels}">
                     <TreeView.ItemTemplate>
-                        <HierarchicalDataTemplate ItemsSource="{Binding RssChanelTitles}" 
-                                                  DataType="{x:Type vm:Category}">
+                        <HierarchicalDataTemplate ItemsSource="{Binding RssChanelTitles}">
                             <Label Content="{Binding CategoryName}"/>
                             <HierarchicalDataTemplate.ItemTemplate>
-                                <DataTemplate DataType="{x:Type vm:RssChanelTitle}">
+                                <DataTemplate>
                                     <Label Content="{Binding RssChanelTitleName}"/>
                                 </DataTemplate>
                             </HierarchicalDataTemplate.ItemTemplate>
                         </HierarchicalDataTemplate>
                     </TreeView.ItemTemplate>
                     <e:Interaction.Behaviors>
-                        <vm:BindableSelectedItemBehavior  SelectedItem="{Binding SelectedItem, Mode=TwoWay}" />
+                        <vm:BindableSelectedItemBehavior  SelectedItem="{Binding SelectedItem, Mode=OneWay, NotifyOnTargetUpdated=True}"/>
                     </e:Interaction.Behaviors>
                 </TreeView>
             </Grid>
@@ -78,10 +78,10 @@
             <Grid Grid.Column="1">
                 <ListBox Margin="5"
                          SelectedValue="{Binding RssItems_SelectValue}"
-                         ItemsSource="{Binding RssItems}">
+                         ItemsSource="{Binding RssItems, NotifyOnSourceUpdated=True}">
                     <ListBox.ItemTemplate>
-                        <DataTemplate DataType="{x:Type vm:RssItemsTitle}">
-                            <Label Content="{Binding RssItemTitleName}"/>
+                        <DataTemplate>
+                            <Label Content="{Binding RssItemTitleName, NotifyOnSourceUpdated=True}"/>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>

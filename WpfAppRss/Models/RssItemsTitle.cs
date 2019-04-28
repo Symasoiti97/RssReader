@@ -7,7 +7,7 @@ using WpfAppRss.ViewModels;
 
 namespace WpfAppRss.Models
 {
-    class RssItemsTitle : BaseViewModel
+    class RssItemTitle : BaseViewModel
     {
         private string _rssItemTitleName;
 

@@ -8,7 +8,6 @@ using WpfAppRss.ViewModels;
 
 namespace WpfAppRss.Models
 {
-
     class Category : BaseViewModel
     {
         private string _categoryName;

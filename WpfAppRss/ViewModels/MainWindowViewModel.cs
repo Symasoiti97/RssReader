@@ -1,4 +1,5 @@
-﻿using DataBase.Models;
+﻿using DataBase;
+using DataBase.Models;
 using DevExpress.Mvvm;
 using System;
 using System.Collections.Generic;
@@ -19,53 +20,66 @@ namespace WpfAppRss.ViewModels
         private readonly Page _settingPage;
         private readonly Page _addChanelPage;
         private readonly Page _currentRssItemPage;
+
+        private ActiveContent _activeContent;
         private ObservableCollection<Category> _categories;
-        private ObservableCollection<RssItemsTitle> _rssItems;
-        private RssItemsTitle _rssItemTitle;
+        private OperationDataBase _operationDataBase;
 
-        private string _userName;
         private Page _contentPage;
-
-        private ActiveContent _activeUser;
 
         public MainWindowViewModel()
         {
-            _activeUser = ActiveContent.GetInstance();
+            _activeContent = ActiveContent.GetInstance();
+            _operationDataBase = OperationDataBase.GetInstance();
 
             _currentRssItemPage = new Pages.RssItemPage();
             _addChanelPage = new Pages.AddChanelPage();
 
             _categories = new ObservableCollection<Category>();
-            _rssItems = new ObservableCollection<RssItemsTitle>();
 
-            for (int i = 0; i < 5; i++)
+            List<string> categories = _operationDataBase.FindRssChannelCategory(_activeContent.User).ToList();
+
+            for (int i = 0; i < categories.Count; i++)
             {
                 Category category = new Category();
-                category.CategoryName = ""+i;
+                category.CategoryName = categories[i];
+
                 ObservableCollection<RssChanelTitle> rssChanelTitles = new ObservableCollection<RssChanelTitle>();
-                
-                for (int j = 0; j < 5; j++)
+                List<string> listChannelsTitles = _operationDataBase.FindRssChanelTitels(_activeContent.User, categories[i]).ToList();
+
+                for (int j = 0; j < listChannelsTitles.Count; j++)
                 {
-                    rssChanelTitles.Add(new RssChanelTitle { RssChanelTitleName = $"{j}" });
+                    rssChanelTitles.Add(new RssChanelTitle { RssChanelTitleName = listChannelsTitles[j] });
                 }
 
                 category.RssChanelTitles = rssChanelTitles;
+
                 _categories.Add(category);
-
-                _rssItems.Add(new RssItemsTitle {RssItemTitleName = ""+i });
             }
-            
-            RssChanels = _categories;
-            RssItems = _rssItems;
-        }
 
+            _activeContent.RssItemTitles = new ObservableCollection<RssItemTitle>
+            {
+                new RssItemTitle
+                {
+                    RssItemTitleName = "1"
+                },
+                new RssItemTitle
+                {
+                    RssItemTitleName = "1"
+                },
+                new RssItemTitle
+                {
+                    RssItemTitleName = "1"
+                }
+            };
+        }
         public ICommand AddChanel_Click
         {
             get
             {
                 return new DelegateCommand(() =>
                 {
-                    ContentPage = _addChanelPage; 
+                    ContentPage = _addChanelPage;
                 });
             }
         }
@@ -94,30 +108,29 @@ namespace WpfAppRss.ViewModels
             }
         }
 
-        public ObservableCollection<RssItemsTitle> RssItems
+        public ObservableCollection<RssItemTitle> RssItems
         {
             get
             {
-                return _rssItems;
+                return _activeContent.RssItemTitles;
             }
             set
             {
-                _rssItems = value;
+                _activeContent.RssItemTitles = value;
                 OnPropertyChanged("RssItems");
             }
         }
 
-        public RssItemsTitle RssItems_SelectValue
+        public RssItemTitle RssItems_SelectValue
         {
             get
             {
-                return _rssItemTitle;
+                return _activeContent.RssItemTitle;
             }
             set
             {
-                _rssItemTitle = value;
+                _activeContent.RssItemTitle = value;
                 ContentPage = _currentRssItemPage;
-                MessageBox.Show("" + value.RssItemTitleName);
                 OnPropertyChanged("RssItems_SelectValue");
             }
         }
@@ -139,11 +152,11 @@ namespace WpfAppRss.ViewModels
         {
             get
             {
-                return _activeUser.User.Login;
+                return _activeContent.User.Login;
             }
             set
             {
-                _activeUser.User.Login = value;
+                _activeContent.User.Login = value;
                 OnPropertyChanged("UserName");
             }
         }

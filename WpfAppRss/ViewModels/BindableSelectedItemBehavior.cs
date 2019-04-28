@@ -1,5 +1,7 @@
-﻿using System;
+﻿using DataBase;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +14,15 @@ namespace WpfAppRss.ViewModels
 {
     class BindableSelectedItemBehavior : Behavior<TreeView>
     {
+        private ActiveContent _activeContent;
+        private OperationDataBase _operationDataBase;
+
+        public BindableSelectedItemBehavior()
+        {
+            _activeContent = ActiveContent.GetInstance();
+            _operationDataBase = OperationDataBase.GetInstance();
+        }
+
         #region SelectedItem Property
 
         public object SelectedItem
@@ -54,10 +65,28 @@ namespace WpfAppRss.ViewModels
         private void OnTreeViewSelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
             this.SelectedItem = e.NewValue;
+
             if (SelectedItem is RssChanelTitle)
             {
                 RssChanelTitle selectTitle = (RssChanelTitle)SelectedItem as RssChanelTitle;
-                string item = selectTitle.RssChanelTitleName;
+                _activeContent.RssChanelTitle = selectTitle;
+
+                ICollection<string> collectionName = _operationDataBase.FindRssItemTitels(_activeContent.RssChanelTitle.RssChanelTitleName);
+                ObservableCollection<RssItemTitle> rssItemTitles = new ObservableCollection<RssItemTitle>();
+
+                foreach (var i in collectionName)
+                {
+                    rssItemTitles.Add(new RssItemTitle { RssItemTitleName = i });
+                }
+
+                _activeContent.RssItemTitles = rssItemTitles;
+
+            }
+            else if (SelectedItem is Category)
+            {
+                Category selectCategory = (Category)SelectedItem as Category;
+                string item = selectCategory.CategoryName;
+                _activeContent.Catalog = item;
                 MessageBox.Show(item);
             }
         }

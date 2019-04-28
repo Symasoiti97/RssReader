@@ -2,6 +2,7 @@
 using DataBase.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -65,12 +66,13 @@ namespace DataBase
             }
         }
 
-        public bool AddUserContent(User user, RssChannel rssChannel)
+        public bool AddUserContent(User user, RssChannel rssChannel, string catalog)
         {
+            if (catalog == "" || catalog == null) catalog = "Different";
             UserContent userContent = new UserContent
             {
                 User = user,
-                Category = "null",
+                Category = catalog,
                 RssChannel = rssChannel
             };
 
@@ -99,21 +101,30 @@ namespace DataBase
             }
         }
 
-        public List<string> FindRssChanelTitels(User user)
+        public ICollection<string> FindRssChannelCategory(User user)
         {
             using (_db = new ApplicationContext())
             {
-                var listTitels = _db.UserContents.Where(t => t.User.Login == user.Login).Select(rc => rc.RssChannel.Title);
-                return listTitels.ToList();
+                ICollection<string> listTitels = _db.UserContents.Where(t => t.User.Login == user.Login).Select(rc => rc.Category).ToArray();
+                return listTitels;
+            }
+        }
+
+        public ICollection<string> FindRssChanelTitels(User user, string category)
+        {
+            using (_db = new ApplicationContext())
+            {
+                ICollection<string> listTitels = _db.UserContents.Where(t => t.User.Login == user.Login && t.Category == category).Select(rc => rc.RssChannel.Title).ToArray();
+                return listTitels;
             }             
         }
 
-        public List<string> FindRssItemTitels(string title)
+        public ICollection<string> FindRssItemTitels(string title)
         {
             using (_db = new ApplicationContext())
             {
-                var listTitels = _db.RssItems.Where(ri => ri.RssChannel.Title == title).Select(ri => ri.Title);
-                return listTitels.ToList();
+                ICollection<string> listTitels = _db.RssItems.Where(ri => ri.RssChannel.Title == title).Select(ri => ri.Title).ToArray();
+                return listTitels;
             }
         }
 

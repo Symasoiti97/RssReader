@@ -45,10 +45,7 @@ namespace WpfAppRss.ViewModels
                 return;
             }
 
-            var mainWindow = new MainWindow()
-            {
-                DataContext = new MainWindowViewModel()
-            };
+            var mainWindow = new MainWindow();
             mainWindow.Show();
         }
 
