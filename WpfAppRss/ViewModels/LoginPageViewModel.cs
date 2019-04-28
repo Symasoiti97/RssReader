@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using WpfAppRss.Models;
 using WpfAppRss.Views;
 
 namespace WpfAppRss.ViewModels
@@ -16,11 +17,11 @@ namespace WpfAppRss.ViewModels
     class LoginPageViewModel : BaseViewModel
     {
         private OperationDataBase _operationDataBase;
-        private User _currentUser;
+        private ActiveContent _activeUser;
 
         public LoginPageViewModel()
         {
-            _currentUser = new User();
+            _activeUser = ActiveContent.GetInstance();
             _operationDataBase = OperationDataBase.GetInstance();
         }
 
@@ -37,12 +38,16 @@ namespace WpfAppRss.ViewModels
 
         private void ShowMainWindow()
         {
+            _activeUser.User = _operationDataBase.FindUser(_activeUser.User);
+            if (_activeUser == null)
+            {
+                MessageBox.Show("Error");
+                return;
+            }
+
             var mainWindow = new MainWindow()
             {
-                DataContext = new MainWindowViewModel
-                {
-                    CurrentUser = _currentUser
-                }
+                DataContext = new MainWindowViewModel()
             };
             mainWindow.Show();
         }
@@ -51,11 +56,11 @@ namespace WpfAppRss.ViewModels
         {
             get
             {
-                return _currentUser.Login;
+                return _activeUser.User.Login;
             }
             set
             {
-                _currentUser.Login = value;
+                _activeUser.User.Login = value;
                 OnPropertyChanged("LoginText");
             }
         }
@@ -64,11 +69,11 @@ namespace WpfAppRss.ViewModels
         {
             get
             {
-                return _currentUser.Password;
+                return _activeUser.User.Password;
             }
             set
             {
-                _currentUser.Password = value;
+                _activeUser.User.Password = value;
                 OnPropertyChanged("PasswordText");
             }
         }

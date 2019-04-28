@@ -93,10 +93,17 @@ namespace WpfAppRss.ViewModels
             {
                 return;
             }
-
+            
             _currentRegistrUser.Password = _currentPasswordFirst;
-            _operationDataBase.AddUser(_currentRegistrUser);
-            MessageBox.Show("Registration completed successfully");
+
+            if (_operationDataBase.AddUser(_currentRegistrUser))
+            {
+                MessageBox.Show("Registration completed successfully");
+            }
+            else
+            {
+                MessageBox.Show("Registration NOcompleted successfully");
+            }
         }
     }
 }

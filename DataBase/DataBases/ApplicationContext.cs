@@ -11,8 +11,10 @@ namespace DataBase.DataBases
     public class ApplicationContext : DbContext
     {
         public DbSet<User> Users { get; set; }
-        public DbSet<RssChanel> RssChanels { get; set; }
+        public DbSet<RssChannel> RssChanels { get; set; }
         public DbSet<RssItem> RssItems { get; set; }
+        public DbSet<UserContent> UserContents { get; set; }
+        public DbSet<UserFavoriteItem> UserFavoriteItems { get; set; }
 
         public ApplicationContext(): base("DbConnection")
         {
@@ -21,10 +23,6 @@ namespace DataBase.DataBases
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<User>().HasKey(u => new { u.Id });
-            modelBuilder.Entity<RssChanel>().HasKey(rc => new { rc.Id});
-            modelBuilder.Entity<RssItem>().HasKey(ri => new { ri.Id});
-            modelBuilder.Entity<UserContent>().HasKey( uc => uc.Id);
 
             base.OnModelCreating(modelBuilder);
         }

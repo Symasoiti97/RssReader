@@ -39,7 +39,8 @@
         </Grid>
         
         <Grid Grid.Row="1">
-            <Button Content="Add Chanel"
+            <Button Content="Add Channel"
+                    Command="{Binding AddChannel_Click}"
                     Margin="150,10"/>
         </Grid>
     </Grid>

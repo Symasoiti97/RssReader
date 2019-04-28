@@ -3,9 +3,16 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:e="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         xmlns:local="clr-namespace:WpfAppRss.Views"
+        xmlns:vm="clr-namespace:WpfAppRss.ViewModels"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
+
+    <Window.DataContext>
+        <vm:MainWindowViewModel/>
+    </Window.DataContext>
+    
     <Grid>
         
         <Grid.RowDefinitions>
@@ -23,13 +30,13 @@
             </Grid.ColumnDefinitions>
             
             <Grid>
-                <TextBlock Text="{Binding CurrentUser, FallbackValue=User_Name}"
+                <TextBlock Text="{Binding CurrentUser}"
                            Style="{StaticResource BaseTextBlock}"
                            Margin="4"
                            TextAlignment="Center"/>
             </Grid>
             <Grid Grid.Column="1">
-                <Button Content="Add Chanel"
+                <Button Content="Add Channel"
                         Command="{Binding AddChanel_Click}"
                         Style="{StaticResource BaseButton}"/>
             </Grid>
@@ -48,14 +55,35 @@
             </Grid.ColumnDefinitions>
 
             <Grid>
-                <TreeView>
-                    
+                <TreeView x:Name="MainTreeView" 
+                          Margin="5" 
+                          ItemsSource="{Binding RssChanels}">
+                    <TreeView.ItemTemplate>
+                        <HierarchicalDataTemplate ItemsSource="{Binding RssChanelTitles}" 
+                                                  DataType="{x:Type vm:Category}">
+                            <Label Content="{Binding CategoryName}"/>
+                            <HierarchicalDataTemplate.ItemTemplate>
+                                <DataTemplate DataType="{x:Type vm:RssChanelTitle}">
+                                    <Label Content="{Binding RssChanelTitleName}"/>
+                                </DataTemplate>
+                            </HierarchicalDataTemplate.ItemTemplate>
+                        </HierarchicalDataTemplate>
+                    </TreeView.ItemTemplate>
+                    <e:Interaction.Behaviors>
+                        <vm:BindableSelectedItemBehavior  SelectedItem="{Binding SelectedItem, Mode=TwoWay}" />
+                    </e:Interaction.Behaviors>
                 </TreeView>
             </Grid>
 
             <Grid Grid.Column="1">
-                <ListBox>
-                    
+                <ListBox Margin="5"
+                         SelectedValue="{Binding RssItems_SelectValue}"
+                         ItemsSource="{Binding RssItems}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate DataType="{x:Type vm:RssItemsTitle}">
+                            <Label Content="{Binding RssItemTitleName}"/>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
                 </ListBox>
             </Grid>
 

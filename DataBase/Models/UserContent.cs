@@ -12,7 +12,7 @@ namespace DataBase.Models
     {
         public int Id { get; set; }
         [Required]
-        public bool Favorite { get; set;}
+        public string Category { get; set; }
 
         public int UserId { get; set; }
         [ForeignKey("UserId")]
@@ -20,10 +20,6 @@ namespace DataBase.Models
 
         public int RssChanelId { get; set; }
         [ForeignKey("RssChanelId")]
-        public RssChanel RssChanel { get; set; }
-
-        public int RssItemId { get; set; }
-        [ForeignKey("RssItemId")]
-        public RssItem RssItem { get; set; }
+        public RssChannel RssChannel { get; set; }
     }
 }

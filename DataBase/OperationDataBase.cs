@@ -15,7 +15,7 @@ namespace DataBase
 
         private OperationDataBase()
         {
-            _db = new ApplicationContext();
+
         }
 
         public static OperationDataBase GetInstance()
@@ -28,40 +28,119 @@ namespace DataBase
             return _operationDataBase;
         }
 
-        public void AddUser(User user)
+        public bool AddUser(User user)
         {
-            _db.Users.Add(user);
-            _db.SaveChanges();
+            using (_db = new ApplicationContext())
+            {
+
+                var i = _db.Users.FirstOrDefault(p => p.Login == user.Login);
+
+                if (i != null)
+                {
+                    return false;
+                }
+
+                _db.Users.Add(user);
+                _db.SaveChanges();
+            }
+
+            return true;
         }
 
         public void RemoveUser(User user)
         {
-            _db.Users.Remove(user);
-            _db.SaveChanges();
+            using (_db = new ApplicationContext())
+            {
+                _db.Users.Remove(user);
+                _db.SaveChanges();
+            }
+        }
+         
+        public User FindUser(User user)
+        {
+            using (_db = new ApplicationContext())
+            {
+               var i  = _db.Users.FirstOrDefault(p => p.Login == user.Login && p.Password == user.Password);
+               return (User)i;
+            }
         }
 
-        public void AddRssChanel(RssChanel rssChanel)
+        public bool AddUserContent(User user, RssChannel rssChannel)
         {
-            _db.RssChanels.Add(rssChanel);
-            _db.SaveChanges();
+            UserContent userContent = new UserContent
+            {
+                User = user,
+                Category = "null",
+                RssChannel = rssChannel
+            };
+
+            using (_db = new ApplicationContext())
+            {
+                //var i = db.UserContents.FirstOrDefault(p => p == userContent);
+
+                //if (i != null)
+                //{
+                //    return false;
+                //}
+
+                _db.UserContents.Add(userContent);
+                _db.SaveChanges();
+            }
+
+            return true;
         }
 
-        public void RemoveRssChanel(RssChanel rssChanel)
+        public void RemoveRssChanel(RssChannel rssChanel)
         {
-            _db.RssChanels.Remove(rssChanel);
-            _db.SaveChanges();
+            using (_db = new ApplicationContext())
+            {
+                _db.RssChanels.Remove(rssChanel);
+                _db.SaveChanges();
+            }
+        }
+
+        public List<string> FindRssChanelTitels(User user)
+        {
+            using (_db = new ApplicationContext())
+            {
+                var listTitels = _db.UserContents.Where(t => t.User.Login == user.Login).Select(rc => rc.RssChannel.Title);
+                return listTitels.ToList();
+            }             
+        }
+
+        public List<string> FindRssItemTitels(string title)
+        {
+            using (_db = new ApplicationContext())
+            {
+                var listTitels = _db.RssItems.Where(ri => ri.RssChannel.Title == title).Select(ri => ri.Title);
+                return listTitels.ToList();
+            }
+        }
+
+        public RssItem FindRssItem(string title)
+        {
+            using (_db = new ApplicationContext())
+            {
+                return _db.RssItems.FirstOrDefault(ri => ri.Title == title);
+            }
         }
 
         public void AddRssItemFavorite(RssItem rssItem)
         {
-            _db.RssItems.Add(rssItem);
-            _db.SaveChanges();
+            using (_db = new ApplicationContext())
+            {
+                _db.RssItems.Add(rssItem);
+                _db.SaveChanges();
+            }
         }
 
         public void RemoveRssItemFavorite(RssItem rssItem)
         {
-            _db.RssItems.Remove(rssItem);
-            _db.SaveChanges();
+            using (_db = new ApplicationContext())
+            {
+                _db.RssItems.Remove(rssItem);
+                _db.SaveChanges();
+            }
         }
     }
 }

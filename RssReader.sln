@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfAppRss", "WpfAppRss\WpfA
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataBase", "DataBase\DataBase.csproj", "{7A6A84E2-7326-466C-86C7-B3BA31F6458F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Parsers", "Parsers\Parsers.csproj", "{56EBC336-83B0-451D-8C03-F169B9185069}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{7A6A84E2-7326-466C-86C7-B3BA31F6458F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7A6A84E2-7326-466C-86C7-B3BA31F6458F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7A6A84E2-7326-466C-86C7-B3BA31F6458F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{56EBC336-83B0-451D-8C03-F169B9185069}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{56EBC336-83B0-451D-8C03-F169B9185069}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{56EBC336-83B0-451D-8C03-F169B9185069}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{56EBC336-83B0-451D-8C03-F169B9185069}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

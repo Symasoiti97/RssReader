@@ -14,13 +14,16 @@ namespace DataBase.Models
         [Required]
         public string Title { get; set; }
         [Required]
-        public string Content { get; set; }
+        public string Content { get; set; }  
         [Required]
         public string Link { get; set; }
         public string Author { get; set; }
         public string Category { get; set; }
         public DateTime PubTime { get; set; }
 
-        public ICollection<UserContent> UserContents { get; set; }
+        public int RssChannelId { get; set; }
+        public RssChannel RssChannel { get; set; }
+
+        public ICollection<UserFavoriteItem> UserFavoriteItem { get; set; }
     }
 }
