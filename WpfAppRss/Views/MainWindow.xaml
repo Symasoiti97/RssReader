@@ -98,7 +98,7 @@
             </Grid>
 
             <Grid Grid.Column="2">
-                <Frame Content="{Binding ContentPage}"
+                <Frame Content="{Binding CurrentContent.ContentPage}"
                        Margin="5"
                        NavigationUIVisibility="Hidden"/>
             </Grid>

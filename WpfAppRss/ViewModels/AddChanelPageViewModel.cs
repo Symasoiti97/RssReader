@@ -17,12 +17,10 @@ namespace WpfAppRss.ViewModels
         private OperationDataBase _operationDataBase;
 
         public Content CurrentContent;
-        //public ActiveContent ActiveContent;
 
         public AddChanelPageViewModel()
         {
             CurrentContent = Content.GetInstance();
-            //ActiveContent = ActiveContent.GetInstance();
             _operationDataBase = OperationDataBase.GetInstance();
         }
 
@@ -32,10 +30,8 @@ namespace WpfAppRss.ViewModels
             {
                 return new DelegateCommand(()=>
                 {
-                    CurrentContent.User.Login = "AddChannelPage";
-                    //ActiveContent.User.Login = "AddChannel";
-                    //RssChannel rssChannel = RssLoader.ParserRss(RssLinkText);
-                    //_operationDataBase.AddUserContent(ActiveContent.User, rssChannel, CatalogText);
+                    var rssChannel = RssLoader.ParserRss(RssLinkText);
+                    _operationDataBase.AddUserContent(CurrentContent.User.Login, rssChannel, CatalogText);
                 });
             }
         }

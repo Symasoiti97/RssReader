@@ -12,6 +12,7 @@ using WpfAppRss.Models;
 
 namespace WpfAppRss.ViewModels
 {
+    #region
     //class BindableSelectedItemBehavior : Behavior<TreeView>
     //{
 
@@ -91,4 +92,5 @@ namespace WpfAppRss.ViewModels
     //        }
     //    }
     //}
+    #endregion
 }

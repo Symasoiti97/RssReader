@@ -66,25 +66,25 @@ namespace DataBase
             }
         }
 
-        public bool AddUserContent(User user, RssChannel rssChannel, string catalog)
+        public bool AddUserContent(string login, RssChannel rssChannel, string catalog)
         {
-            if (catalog == "" || catalog == null) catalog = "Different";
-
-            UserContent userContent = new UserContent
-            {
-                User = user,
-                Category = catalog,
-                RssChannel = rssChannel
-            };
-
             using (_db = new ApplicationContext())
             {
-                //var i = db.UserContents.FirstOrDefault(p => p == userContent);
+                var user = _db.Users.FirstOrDefault(p => p.Login == login);
 
-                //if (i != null)
-                //{
-                //    return false;
-                //}
+                if (user != null)
+                {
+                    return false;
+                }
+
+                if (catalog == "" || catalog == null) catalog = "Different";
+
+                UserContent userContent = new UserContent
+                {
+                    User = user,
+                    Category = catalog,
+                    RssChannel = rssChannel
+                };
 
                 _db.UserContents.Add(userContent);
                 _db.SaveChanges();

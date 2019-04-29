@@ -121,12 +121,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Models\Catalog.cs" />
-    <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Content.cs" />
-    <Compile Include="Models\RssChannelTitle.cs" />
     <Compile Include="Models\RssChannel.cs" />
     <Compile Include="Models\RssItem.cs" />
-    <Compile Include="Models\RssItemsTitle.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Pages\AddChanelPage.xaml.cs">
       <DependentUpon>AddChanelPage.xaml</DependentUpon>

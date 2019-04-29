@@ -27,15 +27,10 @@ namespace WpfAppRss.ViewModels
         {
             _operationDataBase = OperationDataBase.GetInstance();
 
-            _currentRssItemPage = new Pages.RssItemPage();
-            _addChanelPage = new Pages.AddChanelPage();
-
             CurrentContent = Content.GetInstance();
 
             UpdateChannels();
         }
-
-
 
         public ICommand<TreeView> TreeView_SelectedItem
         {
@@ -54,7 +49,7 @@ namespace WpfAppRss.ViewModels
             {
                 return new DelegateCommand(() =>
                 {
-                    ContentPage = _addChanelPage;
+                    CurrentContent.ContentPage = _addChanelPage;
                 });
             }
         }
@@ -70,8 +65,6 @@ namespace WpfAppRss.ViewModels
             }
         }
 
-        public Page ContentPage { get; set; }
-
         private void ActionSelectTreeItem(TreeView item)
         {
             object i = item.SelectedValue;
@@ -79,9 +72,8 @@ namespace WpfAppRss.ViewModels
             if (i is RssChannel)
             {
                 RssChannel selectTitle = (RssChannel)i as RssChannel;
-                CurrentContent.RssItems_SelectValue = selectTitle.Title;
 
-                ICollection<string> collectionName = _operationDataBase.FindRssItemTitels(CurrentContent.RssItems_SelectValue);
+                ICollection<string> collectionName = _operationDataBase.FindRssItemTitels(selectTitle.Title);
                 ObservableCollection<RssItem> rssItemTitles = new ObservableCollection<RssItem>();
 
                 foreach (var ii in collectionName)

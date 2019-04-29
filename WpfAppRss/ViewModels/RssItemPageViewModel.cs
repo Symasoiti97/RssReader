@@ -11,7 +11,7 @@ namespace WpfAppRss.ViewModels
 {
     class RssItemPageViewModel : BaseViewModel
     {
-        public Content CurrentContent;
+        public Content CurrentContent { get; set; }
         private OperationDataBase _operationDataBase;
 
         public RssItemPageViewModel()
@@ -19,7 +19,7 @@ namespace WpfAppRss.ViewModels
             CurrentContent = Content.GetInstance();
             _operationDataBase = OperationDataBase.GetInstance();
 
-            var rssItem = _operationDataBase.FindRssItem(CurrentContent.RssItems_SelectValue);
+            var rssItem = _operationDataBase.FindRssItem(CurrentContent.RssItems_SelectValue.Title);
 
             if (rssItem != null)
             {

@@ -4,6 +4,8 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
 using WpfAppRss.ViewModels;
 
 namespace WpfAppRss.Models
@@ -39,6 +41,21 @@ namespace WpfAppRss.Models
 
         public User User { get; set; }
 
-        public string RssItems_SelectValue { get; set; }
+        public Page ContentPage { get; set; }
+
+        private RssItem _selectValue;
+
+        public RssItem RssItems_SelectValue
+        {
+            get
+            {
+                return _selectValue;
+            }
+            set
+            {
+                _selectValue = value;
+                ContentPage = new Pages.RssItemPage();
+            }
+        }
     }
 }
