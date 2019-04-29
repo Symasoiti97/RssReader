@@ -12,83 +12,83 @@ using WpfAppRss.Models;
 
 namespace WpfAppRss.ViewModels
 {
-    class BindableSelectedItemBehavior : Behavior<TreeView>
-    {
-        private ActiveContent _activeContent;
-        private OperationDataBase _operationDataBase;
+    //class BindableSelectedItemBehavior : Behavior<TreeView>
+    //{
 
-        public BindableSelectedItemBehavior()
-        {
-            _activeContent = ActiveContent.GetInstance();
-            _operationDataBase = OperationDataBase.GetInstance();
-        }
+    //    private OperationDataBase _operationDataBase;
 
-        #region SelectedItem Property
+    //    public BindableSelectedItemBehavior()
+    //    {
+    //        _activeContent = ActiveContent.GetInstance();
+    //        _operationDataBase = OperationDataBase.GetInstance();
+    //    }
 
-        public object SelectedItem
-        {
-            get { return (object)GetValue(SelectedItemProperty); }
-            set { SetValue(SelectedItemProperty, value); }
-        }
+    //    #region SelectedItem Property
 
-        public static readonly DependencyProperty SelectedItemProperty =
-            DependencyProperty.Register("SelectedItem", typeof(object), typeof(BindableSelectedItemBehavior), new UIPropertyMetadata(null, OnSelectedItemChanged));
+    //    public object SelectedItem
+    //    {
+    //        get { return (object)GetValue(SelectedItemProperty); }
+    //        set { SetValue(SelectedItemProperty, value); }
+    //    }
 
-        private static void OnSelectedItemChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
-        {
-            var item = e.NewValue as TreeViewItem;
-            if (item != null)
-            {
-                item.SetValue(TreeViewItem.IsSelectedProperty, true);
-            }
-        }
+    //    public static readonly DependencyProperty SelectedItemProperty =
+    //        DependencyProperty.Register("SelectedItem", typeof(object), typeof(BindableSelectedItemBehavior), new UIPropertyMetadata(null, OnSelectedItemChanged));
 
-        #endregion
+    //    private static void OnSelectedItemChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
+    //    {
+    //        var item = e.NewValue as TreeViewItem;
+    //        if (item != null)
+    //        {
+    //            item.SetValue(TreeViewItem.IsSelectedProperty, true);
+    //        }
+    //    }
 
-        protected override void OnAttached()
-        {
-            base.OnAttached();
+    //    #endregion
 
-            this.AssociatedObject.SelectedItemChanged += OnTreeViewSelectedItemChanged;
-        }
+    //    protected override void OnAttached()
+    //    {
+    //        base.OnAttached();
 
-        protected override void OnDetaching()
-        {
-            base.OnDetaching();
+    //        this.AssociatedObject.SelectedItemChanged += OnTreeViewSelectedItemChanged;
+    //    }
 
-            if (this.AssociatedObject != null)
-            {
-                this.AssociatedObject.SelectedItemChanged -= OnTreeViewSelectedItemChanged;
-            }
-        }
+    //    protected override void OnDetaching()
+    //    {
+    //        base.OnDetaching();
 
-        private void OnTreeViewSelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
-        {
-            this.SelectedItem = e.NewValue;
+    //        if (this.AssociatedObject != null)
+    //        {
+    //            this.AssociatedObject.SelectedItemChanged -= OnTreeViewSelectedItemChanged;
+    //        }
+    //    }
 
-            if (SelectedItem is RssChanelTitle)
-            {
-                RssChanelTitle selectTitle = (RssChanelTitle)SelectedItem as RssChanelTitle;
-                _activeContent.RssChanelTitle = selectTitle;
+    //    private void OnTreeViewSelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+    //    {
+    //        this.SelectedItem = e.NewValue;
 
-                ICollection<string> collectionName = _operationDataBase.FindRssItemTitels(_activeContent.RssChanelTitle.RssChanelTitleName);
-                ObservableCollection<RssItemTitle> rssItemTitles = new ObservableCollection<RssItemTitle>();
+    //        if (SelectedItem is RssChanelTitle)
+    //        {
+    //            RssChanelTitle selectTitle = (RssChanelTitle)SelectedItem as RssChanelTitle;
+    //            _activeContent.RssChanelTitle = selectTitle;
 
-                foreach (var i in collectionName)
-                {
-                    rssItemTitles.Add(new RssItemTitle { RssItemTitleName = i });
-                }
+    //            ICollection<string> collectionName = _operationDataBase.FindRssItemTitels(_activeContent.RssChanelTitle.RssChanelTitleName);
+    //            ObservableCollection<RssItemTitle> rssItemTitles = new ObservableCollection<RssItemTitle>();
 
-                _activeContent.RssItemTitles = rssItemTitles;
+    //            foreach (var i in collectionName)
+    //            {
+    //                rssItemTitles.Add(new RssItemTitle { RssItemTitleName = i });
+    //            }
 
-            }
-            else if (SelectedItem is Category)
-            {
-                Category selectCategory = (Category)SelectedItem as Category;
-                string item = selectCategory.CategoryName;
-                _activeContent.Catalog = item;
-                MessageBox.Show(item);
-            }
-        }
-    }
+    //            _activeContent.RssItemTitles = rssItemTitles;
+
+    //        }
+    //        else if (SelectedItem is Catalog)
+    //        {
+    //            Catalog selectCategory = (Catalog)SelectedItem as Catalog;
+    //            string item = selectCategory.CatalogName;
+    //            _activeContent.Catalog = item;
+    //            MessageBox.Show(item);
+    //        }
+    //    }
+    //}
 }

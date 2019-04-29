@@ -7,8 +7,8 @@ using WpfAppRss.ViewModels;
 
 namespace WpfAppRss.Models
 {
-    class RssItemTitle : BaseViewModel
+    class RssChannelTitle : BaseViewModel
     {
-        public string RssItemTitleName { get; set; }
+        public string RssChanelTitleName { get; set; }
     }
 }

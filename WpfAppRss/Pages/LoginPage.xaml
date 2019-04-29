@@ -20,11 +20,11 @@
         </Grid.RowDefinitions>
         <Grid>
             <StackPanel>
-                <TextBox Text="{Binding LoginText}"
+                <TextBox Text="{Binding CurrentContent.User.Login}"
                          Tag="Login"
                          Margin="10"
                          Style="{StaticResource BaseTextBox}"/>
-                <TextBox Text="{Binding PasswordText}"
+                <TextBox Text="{Binding CurrentContent.User.Password}"
                          Tag="Password"
                          Margin="10"
                          Style="{StaticResource BaseTextBox}"/>

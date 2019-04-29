@@ -1,5 +1,4 @@
 ﻿using DataBase;
-using DataBase.Models;
 using DevExpress.Mvvm;
 using System;
 using System.Collections.Generic;
@@ -21,24 +20,22 @@ namespace WpfAppRss.ViewModels
         private readonly Page _addChanelPage;
         private readonly Page _currentRssItemPage;
 
-        private ActiveContent _activeContent;
-        private ObservableCollection<Category> _categories;
+        public Content CurrentContent { get; set; }
         private OperationDataBase _operationDataBase;
-
-        private Page _contentPage;
 
         public MainWindowViewModel()
         {
-            _activeContent = ActiveContent.GetInstance();
             _operationDataBase = OperationDataBase.GetInstance();
 
             _currentRssItemPage = new Pages.RssItemPage();
             _addChanelPage = new Pages.AddChanelPage();
 
-            _categories = new ObservableCollection<Category>();
+            CurrentContent = Content.GetInstance();
 
             UpdateChannels();
         }
+
+
 
         public ICommand<TreeView> TreeView_SelectedItem
         {
@@ -73,120 +70,58 @@ namespace WpfAppRss.ViewModels
             }
         }
 
-        public ObservableCollection<Category> RssChanels
-        {
-            get
-            {
-                return _categories;
-            }
-            set
-            {
-                _categories = value;
-                OnPropertyChanged("RssChanels");
-            }
-        }
-
-        public ObservableCollection<RssItemTitle> RssItems
-        {
-            get
-            {
-                return _activeContent.RssItemTitles;
-            }
-            set
-            {
-                _activeContent.RssItemTitles = value;
-                OnPropertyChanged("RssItems");
-            }
-        }
-
-        public RssItemTitle RssItems_SelectValue
-        {
-            get
-            {
-                return _activeContent.RssItemTitle;
-            }
-            set
-            {
-                _activeContent.RssItemTitle = value;
-                ContentPage = new Pages.RssItemPage();
-                OnPropertyChanged("RssItems_SelectValue");
-            }
-        }
-
-        public Page ContentPage
-        {
-            get
-            {
-                return _contentPage;
-            }
-            set
-            {
-                _contentPage = value;
-                OnPropertyChanged("ContentPage");
-            }
-        }
-
-        public string UserName
-        {
-            get
-            {
-                return _activeContent.User.Login;
-            }
-            set
-            {
-                _activeContent.User.Login = value;
-                OnPropertyChanged("UserName");
-            }
-        }
+        public Page ContentPage { get; set; }
 
         private void ActionSelectTreeItem(TreeView item)
         {
             object i = item.SelectedValue;
-            if (i is RssChanelTitle)
-            {
-                RssChanelTitle selectTitle = (RssChanelTitle)i as RssChanelTitle;
-                _activeContent.RssChanelTitle = selectTitle;
 
-                ICollection<string> collectionName = _operationDataBase.FindRssItemTitels(_activeContent.RssChanelTitle.RssChanelTitleName);
-                ObservableCollection<RssItemTitle> rssItemTitles = new ObservableCollection<RssItemTitle>();
+            if (i is RssChannel)
+            {
+                RssChannel selectTitle = (RssChannel)i as RssChannel;
+                CurrentContent.RssItems_SelectValue = selectTitle.Title;
+
+                ICollection<string> collectionName = _operationDataBase.FindRssItemTitels(CurrentContent.RssItems_SelectValue);
+                ObservableCollection<RssItem> rssItemTitles = new ObservableCollection<RssItem>();
 
                 foreach (var ii in collectionName)
                 {
-                    rssItemTitles.Add(new RssItemTitle { RssItemTitleName = ii });
+                    rssItemTitles.Add(new RssItem { Title = ii });
                 }
 
-                RssItems = rssItemTitles;
+                CurrentContent.User.RssChannel.RssItems = rssItemTitles;
 
             }
-            else if (i is Category)
+            else if (i is Catalog)
             {
-                Category selectCategory = (Category)i as Category;
-                string it = selectCategory.CategoryName;
-                _activeContent.Catalog = it;
+                Catalog selectCategory = (Catalog)i as Catalog;
+                string it = selectCategory.CatalogName;
+                //CurrentContent.User..Catalog = it;
                 MessageBox.Show(it);
             }
         }
 
         private void UpdateChannels()
         {
-            List<string> categories = _operationDataBase.FindRssChannelCategory(_activeContent.User).ToList();
+            List<string> catalogs = _operationDataBase.FindRssChannelCategory(CurrentContent.User.Login).ToList();
 
-            for (int i = 0; i < categories.Count; i++)
+            for (int i = 0; i < catalogs.Count; i++)
             {
-                Category category = new Category();
-                category.CategoryName = categories[i];
+                Catalog catalog = new Catalog();
+                catalog.CatalogName = catalogs[i];
 
-                ObservableCollection<RssChanelTitle> rssChanelTitles = new ObservableCollection<RssChanelTitle>();
-                List<string> listChannelsTitles = _operationDataBase.FindRssChanelTitels(_activeContent.User, categories[i]).ToList();
+                ObservableCollection<RssChannel> rssChannels = new ObservableCollection<RssChannel>();
+
+                List<string> listChannelsTitles = _operationDataBase.FindRssChanelTitels(CurrentContent.User.Login, catalogs[i]).ToList();
 
                 for (int j = 0; j < listChannelsTitles.Count; j++)
                 {
-                    rssChanelTitles.Add(new RssChanelTitle { RssChanelTitleName = listChannelsTitles[j] });
+                    rssChannels.Add(new RssChannel { Title = listChannelsTitles[j] });
                 }
 
-                category.RssChanelTitles = rssChanelTitles;
+                catalog.RssChannels = rssChannels;
 
-                _categories.Add(category);
+                CurrentContent.User.Catalogs.Add(catalog);
             }
         }
     }

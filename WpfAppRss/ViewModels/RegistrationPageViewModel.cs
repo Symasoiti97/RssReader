@@ -14,7 +14,7 @@ namespace WpfAppRss.ViewModels
     class RegistrationPageViewModel : BaseViewModel
     {
         private OperationDataBase _operationDataBase;
-        private User _currentRegistrUser;
+        private DataBase.Models.User _currentRegistrUser;
         private string _currentPasswordFirst;
         private string _currentPasswordSecond;
 

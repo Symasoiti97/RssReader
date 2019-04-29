@@ -17,11 +17,11 @@ namespace WpfAppRss.ViewModels
     class LoginPageViewModel : BaseViewModel
     {
         private OperationDataBase _operationDataBase;
-        private ActiveContent _activeUser;
+        public Content CurrentContent { get; set; }
 
         public LoginPageViewModel()
         {
-            _activeUser = ActiveContent.GetInstance();
+            CurrentContent = Content.GetInstance();
             _operationDataBase = OperationDataBase.GetInstance();
         }
 
@@ -38,41 +38,20 @@ namespace WpfAppRss.ViewModels
 
         private void ShowMainWindow()
         {
-            _activeUser.User = _operationDataBase.FindUser(_activeUser.User);
-            if (_activeUser == null)
+            var user = _operationDataBase.FindUser(CurrentContent.User.Login, CurrentContent.User.Password);
+
+            if (user == null)
             {
                 MessageBox.Show("Error");
                 return;
             }
 
+            CurrentContent.User.Login = user.Login;
+            CurrentContent.User.Password = user.Password;
+            CurrentContent.User.Email = user.Email;
+
             var mainWindow = new MainWindow();
             mainWindow.Show();
-        }
-
-        public string LoginText
-        {
-            get
-            {
-                return _activeUser.User.Login;
-            }
-            set
-            {
-                _activeUser.User.Login = value;
-                OnPropertyChanged("LoginText");
-            }
-        }
-
-        public string PasswordText
-        {
-            get
-            {
-                return _activeUser.User.Password;
-            }
-            set
-            {
-                _activeUser.User.Password = value;
-                OnPropertyChanged("PasswordText");
-            }
         }
     }
 }

@@ -1,65 +1,39 @@
 ﻿using DataBase;
-using DataBase.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using WpfAppRss.Models;
 
 namespace WpfAppRss.ViewModels
 {
     class RssItemPageViewModel : BaseViewModel
     {
-        private ActiveContent _activeContent;
+        public Content CurrentContent;
         private OperationDataBase _operationDataBase;
 
         public RssItemPageViewModel()
         {
-            _activeContent = ActiveContent.GetInstance();
+            CurrentContent = Content.GetInstance();
             _operationDataBase = OperationDataBase.GetInstance();
 
-            _activeContent.RssItem = _operationDataBase.FindRssItem(_activeContent.RssItemTitle.RssItemTitleName);
-        }
+            var rssItem = _operationDataBase.FindRssItem(CurrentContent.RssItems_SelectValue);
 
-        public string Title
-        {
-            get
+            if (rssItem != null)
             {
-                return _activeContent.RssItem.Title;
+                CurrentContent.User.RssItem.Author = rssItem.Author;
+                CurrentContent.User.RssItem.Category = rssItem.Category;
+                CurrentContent.User.RssItem.Content = rssItem.Content;
+                CurrentContent.User.RssItem.Link = rssItem.Link;
+                CurrentContent.User.RssItem.PubTime = rssItem.PubTime;
+                CurrentContent.User.RssItem.Title = rssItem.Title;
             }
-            set
+            else
             {
-                _activeContent.RssItem.Title = value;
-                OnPropertyChanged("Title");
-            }
-        }
-
-        public string Content
-        {
-            get
-            {
-                return _activeContent.RssItem.Content;
-            }
-            set
-            {
-                _activeContent.RssItem.Content = value;
-                OnPropertyChanged("Content");
+                MessageBox.Show("rssItem == null");
             }
         }
-
-        public string PubTime
-        {
-            get
-            {
-                return _activeContent.RssItem.PubTime.ToShortDateString();
-            }
-            set
-            {
-                _activeContent.RssItem.PubTime = DateTime.Parse(value); ;
-                OnPropertyChanged("PubTime");
-            }
-        }
-
     }
 }

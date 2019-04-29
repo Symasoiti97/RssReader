@@ -22,7 +22,7 @@
         </Grid.RowDefinitions>
         
         <Grid>
-            <TextBlock Text="{Binding Title}"/>
+            <TextBlock Text="{Binding CurrentContent.User.RssItem.Title}"/>
         </Grid>
 
         <Grid Grid.Row="1">
@@ -31,7 +31,7 @@
                     <RichTextBox IsReadOnly="True" BorderThickness="0">
                         <FlowDocument>
                             <Paragraph TextAlignment="Left">
-                                <Run Text="{Binding Content}"/>
+                                <Run Text="{Binding CurrentContent.User.RssItem.Content}"/>
                             </Paragraph>
                         </FlowDocument>
                     </RichTextBox>
@@ -40,7 +40,7 @@
         </Grid>
         
         <Grid Grid.Row="2">
-            <TextBlock Text="{Binding PubTime}"/>
+            <TextBlock Text="{Binding CurrentContent.User.RssItem.PubTime}"/>
         </Grid>
     
     </Grid>

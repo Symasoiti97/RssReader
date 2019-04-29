@@ -16,14 +16,13 @@ namespace WpfAppRss.ViewModels
     {
         private OperationDataBase _operationDataBase;
 
-        private string _rssLink;
-        private string _catalog;
-
-        private ActiveContent _activeContent;
+        public Content CurrentContent;
+        //public ActiveContent ActiveContent;
 
         public AddChanelPageViewModel()
         {
-            _activeContent = ActiveContent.GetInstance();
+            CurrentContent = Content.GetInstance();
+            //ActiveContent = ActiveContent.GetInstance();
             _operationDataBase = OperationDataBase.GetInstance();
         }
 
@@ -33,36 +32,16 @@ namespace WpfAppRss.ViewModels
             {
                 return new DelegateCommand(()=>
                 {
-                    RssChannel rssChannel = RssLoader.ParserRss(RssLinkText);
-                    _operationDataBase.AddUserContent(_activeContent.User, rssChannel, CatalogText);
+                    CurrentContent.User.Login = "AddChannelPage";
+                    //ActiveContent.User.Login = "AddChannel";
+                    //RssChannel rssChannel = RssLoader.ParserRss(RssLinkText);
+                    //_operationDataBase.AddUserContent(ActiveContent.User, rssChannel, CatalogText);
                 });
             }
         }
 
-        public string RssLinkText
-        {
-            get
-            {
-                return _rssLink;
-            }
-            set
-            {
-                _rssLink = value;
-                OnPropertyChanged("RssLinkText");
-            }
-        }
+        public string RssLinkText { get; set; }
 
-        public string CatalogText
-        {
-            get
-            {
-                return _catalog;
-            }
-            set
-            {
-                _catalog = value;
-                OnPropertyChanged("CatalogText");
-            }
-        }
+        public string CatalogText { get; set; }
     }
 }

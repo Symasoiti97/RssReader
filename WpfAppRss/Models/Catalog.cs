@@ -8,10 +8,11 @@ using WpfAppRss.ViewModels;
 
 namespace WpfAppRss.Models
 {
-    class Category : BaseViewModel
+    class Catalog : BaseViewModel
     {
-        public ObservableCollection<RssChannelTitle> RssChannelTitles { get; set; } = new ObservableCollection<RssChannelTitle>();
+        public ObservableCollection<RssChannel> RssChannels { get; set; }
 
         public string CatalogName { get; set; }
     }
+
 }

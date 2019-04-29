@@ -34,7 +34,7 @@
             </Grid.ColumnDefinitions>
             
             <Grid>
-                <TextBlock Text="{Binding UserName}"
+                <TextBlock Text="{Binding CurrentContent.User.Login}"
                            Style="{StaticResource BaseTextBlock}"
                            Margin="4"
                            Foreground="GreenYellow"
@@ -62,7 +62,7 @@
             <Grid>
                 <TreeView x:Name="MainTreeView"
                           Margin="5" 
-                          ItemsSource="{Binding RssChanels}">
+                          ItemsSource="{Binding CurrentContent.User.Catalogs}">
                     <e:Interaction.Triggers>
                         <e:EventTrigger EventName="SelectedItemChanged">
                             <e:InvokeCommandAction Command="{Binding TreeView_SelectedItem}"
@@ -70,11 +70,11 @@
                         </e:EventTrigger>
                     </e:Interaction.Triggers>
                     <TreeView.ItemTemplate>
-                        <HierarchicalDataTemplate ItemsSource="{Binding RssChanelTitles}">
-                            <Label Content="{Binding CategoryName}"/>
+                        <HierarchicalDataTemplate ItemsSource="{Binding RssChannels}">
+                            <Label Content="{Binding CatalogName}"/>
                             <HierarchicalDataTemplate.ItemTemplate>
                                 <DataTemplate>
-                                    <Label Content="{Binding RssChanelTitleName}"/>
+                                    <Label Content="{Binding Title}"/>
                                 </DataTemplate>
                             </HierarchicalDataTemplate.ItemTemplate>
                         </HierarchicalDataTemplate>
@@ -87,11 +87,11 @@
 
             <Grid Grid.Column="1">
                 <ListBox Margin="5"
-                         SelectedValue="{Binding RssItems_SelectValue}"
-                         ItemsSource="{Binding RssItems, NotifyOnSourceUpdated=True}">
+                         SelectedValue="{Binding CurrentContent.RssItems_SelectValue}"
+                         ItemsSource="{Binding CurrentContent.User.RssChannel.RssItems, NotifyOnSourceUpdated=True}">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
-                            <Label Content="{Binding RssItemTitleName, NotifyOnSourceUpdated=True}"/>
+                            <Label Content="{Binding Title, NotifyOnSourceUpdated=True}"/>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>
