@@ -69,6 +69,7 @@ namespace DataBase
         public bool AddUserContent(User user, RssChannel rssChannel, string catalog)
         {
             if (catalog == "" || catalog == null) catalog = "Different";
+
             UserContent userContent = new UserContent
             {
                 User = user,

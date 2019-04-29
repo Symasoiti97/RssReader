@@ -63,6 +63,12 @@
                 <TreeView x:Name="MainTreeView"
                           Margin="5" 
                           ItemsSource="{Binding RssChanels}">
+                    <e:Interaction.Triggers>
+                        <e:EventTrigger EventName="SelectedItemChanged">
+                            <e:InvokeCommandAction Command="{Binding TreeView_SelectedItem}"
+                                  CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type TreeView}}}"/>
+                        </e:EventTrigger>
+                    </e:Interaction.Triggers>
                     <TreeView.ItemTemplate>
                         <HierarchicalDataTemplate ItemsSource="{Binding RssChanelTitles}">
                             <Label Content="{Binding CategoryName}"/>
@@ -73,9 +79,9 @@
                             </HierarchicalDataTemplate.ItemTemplate>
                         </HierarchicalDataTemplate>
                     </TreeView.ItemTemplate>
-                    <e:Interaction.Behaviors>
+                    <!--<e:Interaction.Behaviors>
                         <vm:BindableSelectedItemBehavior  SelectedItem="{Binding SelectedItem, Mode=OneWay, NotifyOnTargetUpdated=True}"/>
-                    </e:Interaction.Behaviors>
+                    </e:Interaction.Behaviors>-->
                 </TreeView>
             </Grid>
 

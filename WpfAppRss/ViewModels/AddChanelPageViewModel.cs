@@ -33,9 +33,8 @@ namespace WpfAppRss.ViewModels
             {
                 return new DelegateCommand(()=>
                 {
-                    _activeContent.User.Login = "login";
-                    // RssChannel rssChannel = RssLoader.ParserRss(RssLinkText);
-                    //_operationDataBase.AddUserContent(_activeContent.User, rssChannel, CatalogText);
+                    RssChannel rssChannel = RssLoader.ParserRss(RssLinkText);
+                    _operationDataBase.AddUserContent(_activeContent.User, rssChannel, CatalogText);
                 });
             }
         }

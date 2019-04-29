@@ -19,7 +19,7 @@ namespace WpfAppRss.ViewModels
             _activeContent = ActiveContent.GetInstance();
             _operationDataBase = OperationDataBase.GetInstance();
 
-            _activeContent.RssItem = _operationDataBase.FindRssItem("Решение Трампа: США выйдут из договора о торговле оружием");
+            _activeContent.RssItem = _operationDataBase.FindRssItem(_activeContent.RssItemTitle.RssItemTitleName);
         }
 
         public string Title
