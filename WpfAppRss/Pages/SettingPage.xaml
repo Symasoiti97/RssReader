@@ -1,4 +1,4 @@
-﻿<Page x:Class="WpfAppRss.Pages.AddChanelPage"
+﻿<Page x:Class="WpfAppRss.Pages.SettingPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -6,13 +6,13 @@
       xmlns:local="clr-namespace:WpfAppRss.Pages"
       xmlns:vm="clr-namespace:WpfAppRss.ViewModels"
       mc:Ignorable="d" 
-      d:DesignHeight="250" d:DesignWidth="400"
-      Title="AddChanelPage">
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="SettingPage">
 
     <Page.DataContext>
-        <vm:AddChanelPageViewModel/>
+        <vm:SettingPageViewModel/>
     </Page.DataContext>
-
+    
     <Grid Background="DarkGray">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -20,25 +20,31 @@
         </Grid.RowDefinitions>
         <StackPanel>
             <StackPanel Margin="10">
-                <TextBlock Text="Rss link"
+                <TextBlock Text="Login"
                            Style="{StaticResource BaseTextBlock}"
                            Background="DarkGray"/>
                 <TextBox Style="{StaticResource BaseTextBox}"
-                         Text="{Binding RssLinkText}"/>
+                         Text="{Binding CurrentContent.User.Login}"/>
             </StackPanel>
             <StackPanel Margin="10">
-                <TextBlock Text="Catalog"
+                <TextBlock Text="Password"
                            Style="{StaticResource BaseTextBlock}"
                            Background="DarkGray"/>
                 <TextBox Style="{StaticResource BaseTextBox}"
-                         Tag="Default: Different"
-                         Text="{Binding CatalogText}"/>
+                         Text="{Binding CurrentContent.User.Password}"/>
+            </StackPanel>
+            <StackPanel Margin="10">
+                <TextBlock Text="Email"
+                           Style="{StaticResource BaseTextBlock}"
+                           Background="DarkGray"/>
+                <TextBox Style="{StaticResource BaseTextBox}"
+                         Text="{Binding CurrentContent.User.Email}"/>
             </StackPanel>
         </StackPanel>
 
         <Grid Grid.Row="1">
-            <Button Content="Add Channel"
-                    Command="{Binding AddChannel_Click}"
+            <Button Content="Apply Setting"
+                    Command="{Binding ApplySetting_Click}"
                     Style="{StaticResource BaseButton}"
                     Width="120"
                     Height="30"/>

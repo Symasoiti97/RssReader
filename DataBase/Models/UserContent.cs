@@ -18,8 +18,8 @@ namespace DataBase.Models
         [ForeignKey("UserId")]
         public User User { get; set; }
 
-        public int RssChanelId { get; set; }
-        [ForeignKey("RssChanelId")]
+        public int RssChannelId { get; set; }
+        [ForeignKey("RssChannelId")]
         public RssChannel RssChannel { get; set; }
     }
 }

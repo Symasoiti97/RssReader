@@ -13,7 +13,7 @@ namespace WpfAppRss.ViewModels
 {
     class LoginWindowViewModel : BaseViewModel
     {
-        private readonly Page _loginPage;
+        private Page _loginPage;
         private readonly Page _registrationPage;
 
         private Page _currentPage;
@@ -30,8 +30,10 @@ namespace WpfAppRss.ViewModels
         {
             get
             {
-                return new DelegateCommand(()=>
+                return new DelegateCommand<Window>((window)=>
                 {
+
+
                     CurrentPage = _loginPage;
                 });
             }
@@ -58,6 +60,20 @@ namespace WpfAppRss.ViewModels
             {
                 _currentPage = value;
                 OnPropertyChanged("CurrentPage");
+            }
+        }
+
+        public ICommand LoginWindow_Loaded
+        {
+            get
+            {
+                return new DelegateCommand<Window>((window) =>
+                {
+                    _loginPage.DataContext = new LoginPageViewModel
+                    {
+                        CurrentWindow = window
+                    };
+                });
             }
         }
     }

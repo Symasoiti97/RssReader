@@ -34,7 +34,6 @@
         <Grid Grid.Row="1">
             <Button Content="Log In"
                     Command="{Binding LogIn_Click}"
-                    CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}"
                     Style="{StaticResource BaseButton}"
                     Margin="0,15,15,15"
                     HorizontalAlignment="Right"/>

@@ -55,7 +55,7 @@
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition MinWidth="150" Width="Auto" MaxWidth="240"/>
-                <ColumnDefinition MinWidth="150" Width="Auto" MaxWidth="240"/>
+                <ColumnDefinition MinWidth="150" Width="Auto" MaxWidth="240" x:Name="Column1"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
@@ -63,6 +63,21 @@
                 <TreeView x:Name="MainTreeView"
                           Margin="5" 
                           ItemsSource="{Binding CurrentContent.User.Catalogs}">
+                    <TreeView.Template>
+                        <ControlTemplate>
+                            <DockPanel LastChildFill="True">
+                                <Grid DockPanel.Dock="Top" Height="30">
+                                    <Label>Rss Channels</Label>
+                                </Grid>
+                                <Grid Background="White">
+                                    <ScrollViewer>
+                                        <ItemsPresenter>
+                                        </ItemsPresenter>
+                                    </ScrollViewer>
+                                </Grid>
+                            </DockPanel>
+                        </ControlTemplate>
+                    </TreeView.Template>
                     <e:Interaction.Triggers>
                         <e:EventTrigger EventName="SelectedItemChanged">
                             <e:InvokeCommandAction Command="{Binding TreeView_SelectedItem}"
@@ -74,7 +89,9 @@
                             <Label Content="{Binding CatalogName}"/>
                             <HierarchicalDataTemplate.ItemTemplate>
                                 <DataTemplate>
-                                    <Label Content="{Binding Title}"/>
+                                    <TextBlock Text="{Binding Title}" 
+                                               Width="150"
+                                               TextWrapping="Wrap"/>
                                 </DataTemplate>
                             </HierarchicalDataTemplate.ItemTemplate>
                         </HierarchicalDataTemplate>
@@ -87,11 +104,33 @@
 
             <Grid Grid.Column="1">
                 <ListBox Margin="5"
-                         SelectedValue="{Binding CurrentContent.RssItems_SelectValue}"
-                         ItemsSource="{Binding CurrentContent.User.RssChannel.RssItems, NotifyOnSourceUpdated=True}">
+                         MaxWidth="{Binding ElementName=textItem, Path=ActualWidth}"
+                         SelectedValue="{Binding RssItems_SelectValue}"
+                         ItemsSource="{Binding CurrentContent.User.RssChannel.RssItems}">
+                    <ListBox.Template>
+                        <ControlTemplate>
+                            <DockPanel LastChildFill="True">
+                                <Grid DockPanel.Dock="Top" Height="30">
+                                    <Label>Rss Items</Label>
+                                </Grid>
+                                <Grid Background="White">
+                                    <ScrollViewer>
+                                        <ItemsPresenter>
+                                        </ItemsPresenter>
+                                    </ScrollViewer>
+                                </Grid>
+                            </DockPanel>
+                        </ControlTemplate>
+                    </ListBox.Template>
                     <ListBox.ItemTemplate>
                         <DataTemplate>
-                            <Label Content="{Binding Title, NotifyOnSourceUpdated=True}"/>
+                            <StackPanel>
+                                <TextBlock Text="{Binding Title}"
+                                           Background="LightGray"
+                                           x:Name="textItem"
+                                           TextWrapping="Wrap"
+                                           Width="150"/>
+                            </StackPanel>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>

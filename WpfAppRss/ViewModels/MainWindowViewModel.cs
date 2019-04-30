@@ -10,6 +10,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Interactivity;
+using WpfAppRss.Helper;
 using WpfAppRss.Models;
 
 namespace WpfAppRss.ViewModels
@@ -29,7 +30,7 @@ namespace WpfAppRss.ViewModels
 
             CurrentContent = Content.GetInstance();
 
-            UpdateChannels();
+            CurrentContent.User.Catalogs = UpdateRss.UpdateChannels(CurrentContent.User.Login);
         }
 
         public ICommand<TreeView> TreeView_SelectedItem
@@ -49,7 +50,7 @@ namespace WpfAppRss.ViewModels
             {
                 return new DelegateCommand(() =>
                 {
-                    CurrentContent.ContentPage = _addChanelPage;
+                    CurrentContent.ContentPage = new Pages.AddChanelPage();
                 });
             }
         }
@@ -60,8 +61,21 @@ namespace WpfAppRss.ViewModels
             {
                 return new DelegateCommand(() =>
                 {
-
+                    CurrentContent.ContentPage = new Pages.SettingPage();
                 });
+            }
+        }
+
+        public RssItem RssItems_SelectValue
+        {
+            get
+            {
+                return CurrentContent.RssItems_SelectValue;
+            }
+            set
+            {
+                CurrentContent.RssItems_SelectValue = value;
+                CurrentContent.ContentPage = new Pages.RssItemPage();
             }
         }
 
@@ -89,31 +103,7 @@ namespace WpfAppRss.ViewModels
                 Catalog selectCategory = (Catalog)i as Catalog;
                 string it = selectCategory.CatalogName;
                 //CurrentContent.User..Catalog = it;
-                MessageBox.Show(it);
-            }
-        }
-
-        private void UpdateChannels()
-        {
-            List<string> catalogs = _operationDataBase.FindRssChannelCategory(CurrentContent.User.Login).ToList();
-
-            for (int i = 0; i < catalogs.Count; i++)
-            {
-                Catalog catalog = new Catalog();
-                catalog.CatalogName = catalogs[i];
-
-                ObservableCollection<RssChannel> rssChannels = new ObservableCollection<RssChannel>();
-
-                List<string> listChannelsTitles = _operationDataBase.FindRssChanelTitels(CurrentContent.User.Login, catalogs[i]).ToList();
-
-                for (int j = 0; j < listChannelsTitles.Count; j++)
-                {
-                    rssChannels.Add(new RssChannel { Title = listChannelsTitles[j] });
-                }
-
-                catalog.RssChannels = rssChannels;
-
-                CurrentContent.User.Catalogs.Add(catalog);
+                //MessageBox.Show(it);
             }
         }
     }

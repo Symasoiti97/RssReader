@@ -19,6 +19,11 @@ namespace WpfAppRss.ViewModels
             CurrentContent = Content.GetInstance();
             _operationDataBase = OperationDataBase.GetInstance();
 
+            PrintRssItems();
+        }
+
+        private void PrintRssItems()
+        {
             var rssItem = _operationDataBase.FindRssItem(CurrentContent.RssItems_SelectValue.Title);
 
             if (rssItem != null)

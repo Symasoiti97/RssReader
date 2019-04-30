@@ -34,7 +34,7 @@ namespace DataBase
             using (_db = new ApplicationContext())
             {
 
-                var i = _db.Users.FirstOrDefault(p => p.Login == user.Login);
+                var i = _db.Users.FirstOrDefault(p => p.Login == user.Login && p.Email == user.Email);
 
                 if (i != null)
                 {
@@ -70,21 +70,31 @@ namespace DataBase
         {
             using (_db = new ApplicationContext())
             {
-                var user = _db.Users.FirstOrDefault(p => p.Login == login);
+                var userId = _db.Users.Where(u => u.Login == login).Select(p => p.Id).First();
+                var rssCh = _db.RssChanels.FirstOrDefault(rs => rs.Title == rssChannel.Title);
 
-                if (user != null)
+                UserContent userContent;
+
+                if (rssCh == null)
                 {
-                    return false;
+                    userContent = new UserContent
+                    {
+                        UserId = userId,
+                        Category = catalog,
+                        RssChannel = rssChannel
+                    };
+                }
+                else
+                {
+                    userContent = new UserContent
+                    {
+                        UserId = userId,
+                        Category = catalog,
+                        RssChannelId = rssCh.Id
+                    };
                 }
 
-                if (catalog == "" || catalog == null) catalog = "Different";
 
-                UserContent userContent = new UserContent
-                {
-                    User = user,
-                    Category = catalog,
-                    RssChannel = rssChannel
-                };
 
                 _db.UserContents.Add(userContent);
                 _db.SaveChanges();

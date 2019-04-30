@@ -43,19 +43,6 @@ namespace WpfAppRss.Models
 
         public Page ContentPage { get; set; }
 
-        private RssItem _selectValue;
-
-        public RssItem RssItems_SelectValue
-        {
-            get
-            {
-                return _selectValue;
-            }
-            set
-            {
-                _selectValue = value;
-                ContentPage = new Pages.RssItemPage();
-            }
-        }
+        public RssItem RssItems_SelectValue;
     }
 }

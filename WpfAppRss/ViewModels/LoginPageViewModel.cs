@@ -19,6 +19,8 @@ namespace WpfAppRss.ViewModels
         private OperationDataBase _operationDataBase;
         public Content CurrentContent { get; set; }
 
+        public Window CurrentWindow { get; set; }
+
         public LoginPageViewModel()
         {
             CurrentContent = Content.GetInstance();
@@ -31,25 +33,42 @@ namespace WpfAppRss.ViewModels
             {
                 return new DelegateCommand(() =>
                 {
-                    ShowMainWindow();
+                    if (LogIn())
+                    {
+                        ShowMainWindow();
+
+                        if (CurrentWindow != null)
+                        {
+                            CurrentWindow.Close();
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Error");
+                    }
+
                 });
             }
         }
 
-        private void ShowMainWindow()
+        private bool LogIn()
         {
             var user = _operationDataBase.FindUser(CurrentContent.User.Login, CurrentContent.User.Password);
 
             if (user == null)
             {
-                MessageBox.Show("Error");
-                return;
+                return false;
             }
 
             CurrentContent.User.Login = user.Login;
             CurrentContent.User.Password = user.Password;
             CurrentContent.User.Email = user.Email;
 
+            return true;
+        }
+
+        private void ShowMainWindow()
+        {
             var mainWindow = new MainWindow();
             mainWindow.Show();
         }
