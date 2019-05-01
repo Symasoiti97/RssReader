@@ -26,33 +26,54 @@
 
         <Grid>
 
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="100"/>
-                <ColumnDefinition Width="100"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="50"/>
-            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="1"/>
+            </Grid.RowDefinitions>
             
             <Grid>
-                <TextBlock Text="{Binding CurrentContent.User.Login}"
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="50"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid>
+
+                </Grid>
+                <Grid Grid.Column="1">
+
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding CurrentContent.User.Login}"
                            Style="{StaticResource BaseTextBlock}"
-                           Margin="4"
+                           Margin="5,3.5"
                            Foreground="GreenYellow"
                            TextAlignment="Center"/>
-            </Grid>
-            <Grid Grid.Column="1">
-                <Button Content="Add Channel"
+                        <Grid Background="Black" Width="1"/>
+                        <Button Content="Add Channel"
                         Command="{Binding AddChanel_Click}"
+                            Margin="5,0"
                         Style="{StaticResource BaseButton}"/>
-            </Grid>
-            <Grid Grid.Column="3">
-                <Button Content="Setting"
+                        <Grid Background="Black" Width="1"/>
+                        <Button Content="Update"
+                            Margin="5,0"
+                        Command="{Binding Update_Click}"
+                        Style="{StaticResource BaseButton}"/>
+                    </StackPanel>
+                </Grid>
+                <Grid Grid.Column="3">
+                    <Button Content="Setting"
                         Command="{Binding Setting_Click}"
                         Style="{StaticResource BaseButton}"/>
+                </Grid>
             </Grid>
+            <Grid Grid.Row="1" Background="Black" Height="1"></Grid>
         </Grid>
 
         <Grid Grid.Row="1">
+            
             <Grid.ColumnDefinitions>
                 <ColumnDefinition MinWidth="150" Width="Auto" MaxWidth="240"/>
                 <ColumnDefinition MinWidth="150" Width="Auto" MaxWidth="240" x:Name="Column1"/>

@@ -30,7 +30,7 @@ namespace WpfAppRss.ViewModels
 
             CurrentContent = Content.GetInstance();
 
-            CurrentContent.User.Catalogs = UpdateRss.UpdateChannels(CurrentContent.User.Login);
+            CurrentContent.User.Catalogs = UpdateRss.UpdateTreeViewChannels(CurrentContent.User.Login);
         }
 
         public ICommand<TreeView> TreeView_SelectedItem
@@ -62,6 +62,17 @@ namespace WpfAppRss.ViewModels
                 return new DelegateCommand(() =>
                 {
                     CurrentContent.ContentPage = new Pages.SettingPage();
+                });
+            }
+        }
+
+        public ICommand Update_Click
+        {
+            get
+            {
+                return new DelegateCommand(() =>
+                {
+                    UpdateRss.UpdateRssChannelsDateBase(CurrentContent.User);
                 });
             }
         }

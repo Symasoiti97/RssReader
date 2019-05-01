@@ -1,4 +1,5 @@
 ﻿using DataBase;
+using Parsers.ParserRss;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -18,9 +19,16 @@ namespace WpfAppRss.Helper
             _operationDataBase = OperationDataBase.GetInstance();
         }
 
-        public static ObservableCollection<Catalog> UpdateChannels(string login)
+        public static ObservableCollection<Catalog> UpdateTreeViewChannels(string login)
         {
             ObservableCollection<Catalog> catalogs = new ObservableCollection<Catalog>();
+
+            //Catalog catalog; = new Catalog
+            //{
+            //    CatalogName = "Favorite",
+            //    RssChannels
+            //};
+
 
             List<string> catalogsTitle = _operationDataBase.FindRssChannelCategory(login).Distinct().ToList();
 
@@ -44,6 +52,31 @@ namespace WpfAppRss.Helper
             }
 
             return catalogs;
+        }
+
+        public static ObservableCollection<Catalog> AddChannelDataBase(string url, string catalog, string login)
+        {
+            var rssChannel = RssLoader.ParserRss(url);
+            rssChannel.Link = url;
+
+            if (catalog == "" || catalog == null) catalog = "Different";
+
+            _operationDataBase.AddUserContent(login, rssChannel, catalog);
+
+            return UpdateRss.UpdateTreeViewChannels(login);
+        }
+
+        public static void UpdateRssChannelsDateBase(User user)
+        {
+            List<string> listUrl = _operationDataBase.GetCurrentListUrlChannels(user.Login);
+
+            foreach (var url in listUrl)
+            {
+                var rssChannel = RssLoader.ParserRss(url);
+                rssChannel.Link = url;
+
+                _operationDataBase.UpdateUserContent(user.Login, rssChannel);
+            }
         }
     }
 }

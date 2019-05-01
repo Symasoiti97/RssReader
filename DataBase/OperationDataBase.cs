@@ -28,12 +28,11 @@ namespace DataBase
 
             return _operationDataBase;
         }
-
+                                                                         
         public bool AddUser(User user)
         {
             using (_db = new ApplicationContext())
             {
-
                 var i = _db.Users.FirstOrDefault(p => p.Login == user.Login && p.Email == user.Email);
 
                 if (i != null)
@@ -68,12 +67,13 @@ namespace DataBase
 
         public bool AddUserContent(string login, RssChannel rssChannel, string catalog)
         {
+            UserContent userContent;
+
             using (_db = new ApplicationContext())
             {
                 var userId = _db.Users.Where(u => u.Login == login).Select(p => p.Id).First();
-                var rssCh = _db.RssChanels.FirstOrDefault(rs => rs.Title == rssChannel.Title);
 
-                UserContent userContent;
+                var rssCh = _db.RssChanels.FirstOrDefault(rs => rs.Title == rssChannel.Title);
 
                 if (rssCh == null)
                 {
@@ -86,21 +86,49 @@ namespace DataBase
                 }
                 else
                 {
-                    userContent = new UserContent
+                    userContent = _db.UserContents.Where(rs => rs.Category == catalog &&
+                    rs.RssChannelId == rssCh.Id && rs.UserId == userId).FirstOrDefault();
+
+                    if (userContent != null)
                     {
-                        UserId = userId,
-                        Category = catalog,
-                        RssChannelId = rssCh.Id
-                    };
+                        userContent.RssChannel = rssCh;
+                        _db.SaveChanges();
+                        return false;
+                    }
+                    else
+                    {
+                        userContent = new UserContent
+                        {
+                            UserId = userId,
+                            Category = catalog,
+                            RssChannelId = rssCh.Id
+                        };
+                    }
                 }
-
-
 
                 _db.UserContents.Add(userContent);
                 _db.SaveChanges();
             }
 
             return true;
+        }
+
+        public void UpdateUserContent(string login, RssChannel rssChannel)
+        {
+            using (_db = new ApplicationContext())
+            {
+                var userId = _db.Users.Where(u => u.Login == login).Select(p => p.Id).First();
+                var rssCh = _db.RssChanels.FirstOrDefault(rs => rs.Title == rssChannel.Title);
+
+                UserContent userContent = _db.UserContents.FirstOrDefault(rs =>
+                rs.RssChannelId == rssCh.Id && rs.UserId == userId && rs.RssChannel.Link == rssChannel.Link);
+
+                if (userContent != null)
+                {
+                    userContent.RssChannel = rssCh;
+                    _db.SaveChanges();
+                }
+            }
         }
 
         public void RemoveRssChanel(RssChannel rssChanel)
@@ -147,21 +175,68 @@ namespace DataBase
             }
         }
 
-        public void AddRssItemFavorite(RssItem rssItem)
+        public void AddRssItemFavorite(string login, string title)
         {
+            UserFavoriteItem userFavoriteItem;
+
             using (_db = new ApplicationContext())
             {
-                _db.RssItems.Add(rssItem);
+                var userId = _db.Users.Where(u => u.Login == login).Select(p => p.Id).First();
+                var rssItemId = _db.RssItems.Where(ri => ri.Title == title).Select(ri => ri.Id).First();
+
+                userFavoriteItem = new UserFavoriteItem
+                {
+                    UserId = userId,
+                    RssItemId = rssItemId
+                };
+                    
+                _db.UserFavoriteItems.Add(userFavoriteItem);
                 _db.SaveChanges();
             }
         }
 
-        public void RemoveRssItemFavorite(RssItem rssItem)
+        public void RemoveRssItemFavorite(string login, string title)
         {
             using (_db = new ApplicationContext())
             {
-                _db.RssItems.Remove(rssItem);
+                var userId = _db.Users.Where(u => u.Login == login).Select(p => p.Id).First();
+                var rssItemId = _db.RssItems.Where(ri => ri.Title == title).Select(ri => ri.Id).First();
+
+                UserFavoriteItem favoriteItem = _db.UserFavoriteItems.Where(fi => fi.RssItemId == rssItemId && fi.UserId == userId).FirstOrDefault();
+
+                _db.UserFavoriteItems.Remove(favoriteItem);
                 _db.SaveChanges();
+            }
+        }
+
+        public bool CheckedFavoriteItem(string login, string title)
+        {
+            bool flag = false;
+
+            using (_db = new ApplicationContext())
+            {
+                var userId = _db.Users.Where(u => u.Login == login).Select(p => p.Id).First();
+                var rssItemId = _db.RssItems.Where(ri => ri.Title == title).Select(ri => ri.Id).First();
+
+                UserFavoriteItem favoriteItem = _db.UserFavoriteItems.Where(fi => fi.RssItemId == rssItemId && fi.UserId == userId).FirstOrDefault();
+
+                if (favoriteItem != null)
+                {
+                    flag = true;
+                }
+            }
+
+            return flag;
+        }
+
+        public List<string> GetCurrentListUrlChannels(string login)
+        {
+            using (_db = new ApplicationContext())
+            {
+                var userId = _db.Users.Where(u => u.Login == login).Select(p => p.Id).First();
+                var listUrl = _db.UserContents.Where(uc => uc.UserId == userId).Select(uc => uc.RssChannel.Link).ToList();
+
+                return listUrl;
             }
         }
     }

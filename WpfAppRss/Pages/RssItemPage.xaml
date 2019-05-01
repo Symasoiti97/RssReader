@@ -13,20 +13,31 @@
     <Page.DataContext>
         <vm:RssItemPageViewModel/>
     </Page.DataContext>
-    
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="30"/>
         </Grid.RowDefinitions>
-        
+
         <Grid>
-            <TextBlock Text="{Binding CurrentContent.User.RssItem.Title, FallbackValue=Title}"/>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="30"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Text="{Binding CurrentContent.User.RssItem.Title, FallbackValue=Title}" 
+                       TextWrapping="Wrap"/>
+            <ToggleButton Grid.Column="1"
+                          IsChecked="{Binding Favorite_Checked}"
+                          Style="{StaticResource StarToggleButton}" Grid.ColumnSpan="2"/>
         </Grid>
 
         <Grid Grid.Row="1">
-            <WrapPanel Orientation="Horizontal" Margin="5">
+
+            <WrapPanel Orientation="Horizontal" Margin="5" Grid.ColumnSpan="2">
                 <ScrollViewer>
                     <RichTextBox IsReadOnly="True" BorderThickness="0">
                         <FlowDocument>
@@ -38,10 +49,10 @@
                 </ScrollViewer>
             </WrapPanel>
         </Grid>
-        
+
         <Grid Grid.Row="2">
             <TextBlock Text="{Binding CurrentContent.User.RssItem.PubTime, FallbackValue=PubTime}"/>
         </Grid>
-    
+
     </Grid>
 </Page>

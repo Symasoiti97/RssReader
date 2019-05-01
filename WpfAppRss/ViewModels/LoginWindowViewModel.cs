@@ -32,8 +32,6 @@ namespace WpfAppRss.ViewModels
             {
                 return new DelegateCommand<Window>((window)=>
                 {
-
-
                     CurrentPage = _loginPage;
                 });
             }
@@ -50,19 +48,6 @@ namespace WpfAppRss.ViewModels
             }
         }
 
-        public Page CurrentPage
-        {
-            get
-            {
-                return _currentPage;
-            }
-            set
-            {
-                _currentPage = value;
-                OnPropertyChanged("CurrentPage");
-            }
-        }
-
         public ICommand LoginWindow_Loaded
         {
             get
@@ -76,5 +61,7 @@ namespace WpfAppRss.ViewModels
                 });
             }
         }
+
+        public Page CurrentPage { get; set; }
     }
 }

@@ -31,15 +31,7 @@ namespace WpfAppRss.ViewModels
             {
                 return new DelegateCommand(()=>
                 {
-                    var rssChannel = RssLoader.ParserRss(RssLinkText);
-
-                    string catalog = CatalogText;
-
-                    if (catalog == "" || catalog == null) catalog = "Different";
-
-                    _operationDataBase.AddUserContent(CurrentContent.User.Login, rssChannel, CatalogText);
-
-                    CurrentContent.User.Catalogs = UpdateRss.UpdateChannels(CurrentContent.User.Login);
+                    CurrentContent.User.Catalogs = UpdateRss.AddChannelDataBase(RssLinkText, CatalogText, CurrentContent.User.Login);
                 });
             }
         }

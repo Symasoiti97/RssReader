@@ -13,6 +13,7 @@ namespace WpfAppRss.ViewModels
     {
         public Content CurrentContent { get; set; }
         private OperationDataBase _operationDataBase;
+        private bool _favorite_Checked;
 
         public RssItemPageViewModel()
         {
@@ -20,6 +21,29 @@ namespace WpfAppRss.ViewModels
             _operationDataBase = OperationDataBase.GetInstance();
 
             PrintRssItems();
+
+            Favorite_Checked = _operationDataBase.CheckedFavoriteItem(CurrentContent.User.Login, CurrentContent.User.RssItem.Title);
+        }
+
+        public bool Favorite_Checked
+        {
+            get
+            {
+                return _favorite_Checked;
+            }
+            set
+            {
+                _favorite_Checked = value;
+
+                if (_favorite_Checked == true)
+                {
+                    _operationDataBase.AddRssItemFavorite(CurrentContent.User.Login, CurrentContent.User.RssItem.Title);
+                }
+                else
+                {
+                    _operationDataBase.RemoveRssItemFavorite(CurrentContent.User.Login, CurrentContent.User.RssItem.Title);
+                }
+            }
         }
 
         private void PrintRssItems()
