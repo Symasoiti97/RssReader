@@ -48,7 +48,7 @@ namespace WpfAppRss.ViewModels
 
         private void PrintRssItems()
         {
-            var rssItem = _operationDataBase.FindRssItem(CurrentContent.RssItems_SelectValue.Title);
+            var rssItem = _operationDataBase.GetRssItem(CurrentContent.RssItems_SelectValue.Title);
 
             if (rssItem != null)
             {

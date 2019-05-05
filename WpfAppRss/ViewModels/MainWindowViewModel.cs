@@ -98,7 +98,7 @@ namespace WpfAppRss.ViewModels
             {
                 RssChannel selectTitle = (RssChannel)i as RssChannel;
 
-                ICollection<string> collectionName = _operationDataBase.FindRssItemTitels(selectTitle.Title);
+                ICollection<string> collectionName = _operationDataBase.GetRssItemTitels(selectTitle.Title);
                 ObservableCollection<RssItem> rssItemTitles = new ObservableCollection<RssItem>();
 
                 foreach (var ii in collectionName)
@@ -113,8 +113,16 @@ namespace WpfAppRss.ViewModels
             {
                 Catalog selectCategory = (Catalog)i as Catalog;
                 string it = selectCategory.CatalogName;
-                //CurrentContent.User..Catalog = it;
-                //MessageBox.Show(it);
+
+                ICollection<string> collectionName = _operationDataBase.GetRssItemFivoriteTitles(CurrentContent.User.Login);
+                ObservableCollection<RssItem> rssItemTitles = new ObservableCollection<RssItem>();
+
+                foreach (var ii in collectionName)
+                {
+                    rssItemTitles.Add(new RssItem { Title = ii });
+                }
+
+                CurrentContent.User.RssChannel.RssItems = rssItemTitles;
             }
         }
     }

@@ -149,7 +149,7 @@ namespace DataBase
             }
         }
 
-        public ICollection<string> FindRssChanelTitels(string login, string category)
+        public ICollection<string> GetRssChanelTitels(string login, string category)
         {
             using (_db = new ApplicationContext())
             {
@@ -158,7 +158,7 @@ namespace DataBase
             }             
         }
 
-        public ICollection<string> FindRssItemTitels(string title)
+        public ICollection<string> GetRssItemTitels(string title)
         {
             using (_db = new ApplicationContext())
             {
@@ -167,11 +167,33 @@ namespace DataBase
             }
         }
 
-        public RssItem FindRssItem(string title)
+        public RssItem GetRssItem(string title)
         {
             using (_db = new ApplicationContext())
             {
                 return _db.RssItems.FirstOrDefault(ri => ri.Title == title);
+            }
+        }
+
+        public RssItem GetRssItemFavorite(string login, string title)
+        {
+            using (_db = new ApplicationContext())
+            {
+                var favoriteItem = _db.UserFavoriteItems.FirstOrDefault(ufi => ufi.RssItem.Title == title && ufi.User.Login == login);
+
+                return favoriteItem.RssItem;
+            }
+        }
+
+        public List<string> GetRssItemFivoriteTitles(string login)
+        {
+            using (_db = new ApplicationContext())
+            {
+                var favoriteItem = _db.UserFavoriteItems.Where(ufi => ufi.User.Login == login);
+
+                var items = favoriteItem.Select(rs => rs.RssItem.Title);
+
+                return items.ToList();
             }
         }
 

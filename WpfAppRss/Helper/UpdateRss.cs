@@ -23,12 +23,12 @@ namespace WpfAppRss.Helper
         {
             ObservableCollection<Catalog> catalogs = new ObservableCollection<Catalog>();
 
-            //Catalog catalog; = new Catalog
-            //{
-            //    CatalogName = "Favorite",
-            //    RssChannels
-            //};
+            Catalog catalogf = new Catalog
+            {
+                CatalogName = "Favorite"
+            };
 
+            catalogs.Add(catalogf);
 
             List<string> catalogsTitle = _operationDataBase.FindRssChannelCategory(login).Distinct().ToList();
 
@@ -39,7 +39,7 @@ namespace WpfAppRss.Helper
 
                 ObservableCollection<RssChannel> rssChannels = new ObservableCollection<RssChannel>();
 
-                List<string> listChannelsTitles = _operationDataBase.FindRssChanelTitels(login, catalogsTitle[i]).ToList();
+                List<string> listChannelsTitles = _operationDataBase.GetRssChanelTitels(login, catalogsTitle[i]).ToList();
 
                 for (int j = 0; j < listChannelsTitles.Count; j++)
                 {
