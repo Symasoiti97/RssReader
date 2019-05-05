@@ -3,6 +3,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:e="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
       xmlns:local="clr-namespace:WpfAppRss.Pages"
       xmlns:vm="clr-namespace:WpfAppRss.ViewModels"
       mc:Ignorable="d" 
@@ -38,7 +39,7 @@
         <Grid Grid.Row="1">
 
             <WrapPanel Orientation="Horizontal" Margin="5" Grid.ColumnSpan="2">
-                <ScrollViewer>
+                <!--<ScrollViewer>
                     <RichTextBox IsReadOnly="True" BorderThickness="0">
                         <FlowDocument>
                             <Paragraph TextAlignment="Left">
@@ -46,7 +47,15 @@
                             </Paragraph>
                         </FlowDocument>
                     </RichTextBox>
-                </ScrollViewer>
+                </ScrollViewer>-->
+                <WebBrowser>
+                    <e:Interaction.Triggers>
+                        <e:EventTrigger EventName="Loaded">
+                            <e:InvokeCommandAction Command="{Binding WebBrowser_Loaded}"
+                                  CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type WebBrowser}}}"/>
+                        </e:EventTrigger>
+                    </e:Interaction.Triggers>
+                </WebBrowser>
             </WrapPanel>
         </Grid>
 
