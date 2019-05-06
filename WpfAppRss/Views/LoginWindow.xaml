@@ -11,7 +11,7 @@
         Title="LoginWindow" 
         Height="310" 
         Width="250"
-        Background="{StaticResource WindowColor}">
+        Style="{StaticResource BaseWindow}">
 
     <Window.DataContext>
         <vm:LoginWindowViewModel/>

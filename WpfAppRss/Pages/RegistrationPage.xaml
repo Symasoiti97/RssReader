@@ -7,7 +7,6 @@
       xmlns:vm="clr-namespace:WpfAppRss.ViewModels"
       mc:Ignorable="d" 
       d:DesignHeight="230" d:DesignWidth="200"
-      Background="{StaticResource WindowColor}"
       Title="RegistrationPage">
 
     <Page.DataContext>

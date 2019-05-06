@@ -13,7 +13,7 @@
         <vm:SettingPageViewModel/>
     </Page.DataContext>
     
-    <Grid Background="DarkGray">
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="50"/>
@@ -21,22 +21,19 @@
         <StackPanel>
             <StackPanel Margin="10">
                 <TextBlock Text="Login"
-                           Style="{StaticResource BaseTextBlock}"
-                           Background="DarkGray"/>
+                           Style="{StaticResource BaseTextBlock}"/>
                 <TextBox Style="{StaticResource BaseTextBox}"
                          Text="{Binding CurrentContent.User.Login}"/>
             </StackPanel>
             <StackPanel Margin="10">
                 <TextBlock Text="Password"
-                           Style="{StaticResource BaseTextBlock}"
-                           Background="DarkGray"/>
+                           Style="{StaticResource BaseTextBlock}"/>
                 <TextBox Style="{StaticResource BaseTextBox}"
                          Text="{Binding CurrentContent.User.Password}"/>
             </StackPanel>
             <StackPanel Margin="10">
                 <TextBlock Text="Email"
-                           Style="{StaticResource BaseTextBlock}"
-                           Background="DarkGray"/>
+                           Style="{StaticResource BaseTextBlock}"/>
                 <TextBox Style="{StaticResource BaseTextBox}"
                          Text="{Binding CurrentContent.User.Email}"/>
             </StackPanel>

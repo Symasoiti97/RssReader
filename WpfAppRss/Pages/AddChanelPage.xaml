@@ -13,7 +13,7 @@
         <vm:AddChanelPageViewModel/>
     </Page.DataContext>
 
-    <Grid Background="DarkGray">
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="50"/>
@@ -21,15 +21,13 @@
         <StackPanel>
             <StackPanel Margin="10">
                 <TextBlock Text="Rss link"
-                           Style="{StaticResource BaseTextBlock}"
-                           Background="DarkGray"/>
+                           Style="{StaticResource BaseTextBlock}"/>
                 <TextBox Style="{StaticResource BaseTextBox}"
                          Text="{Binding RssLinkText}"/>
             </StackPanel>
             <StackPanel Margin="10">
                 <TextBlock Text="Catalog"
-                           Style="{StaticResource BaseTextBlock}"
-                           Background="DarkGray"/>
+                           Style="{StaticResource BaseTextBlock}"/>
                 <TextBox Style="{StaticResource BaseTextBox}"
                          Tag="Default: Different"
                          Text="{Binding CatalogText}"/>

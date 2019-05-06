@@ -11,14 +11,14 @@
         Title="MainWindow" 
         Height="450"
         Width="800"
-        Background="{StaticResource WindowColor}">
+        Style="{StaticResource BaseWindow}">
 
     <Window.DataContext>
         <vm:MainWindowViewModel/>
     </Window.DataContext>
-    
+
     <Grid>
-        
+
         <Grid.RowDefinitions>
             <RowDefinition Height="25"/>
             <RowDefinition Height="*"/>
@@ -30,7 +30,7 @@
                 <RowDefinition/>
                 <RowDefinition Height="1"/>
             </Grid.RowDefinitions>
-            
+
             <Grid>
 
                 <Grid.ColumnDefinitions>
@@ -47,33 +47,37 @@
 
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="{Binding CurrentContent.User.Login}"
-                           Style="{StaticResource BaseTextBlock}"
-                           Margin="5,3.5"
-                           Foreground="GreenYellow"
-                           TextAlignment="Center"/>
+                                   Style="{StaticResource BaseTextBlock}"
+                                   Margin="5,3.5"
+                                   Foreground="#EA7500"
+                                   TextAlignment="Center"/>
                         <Grid Background="Black" Width="1"/>
                         <Button Content="Add Channel"
-                        Command="{Binding AddChanel_Click}"
-                            Margin="5,0"
-                        Style="{StaticResource BaseButton}"/>
+                                Command="{Binding AddChanel_Click}"
+                                Margin="5,0"
+                                Style="{StaticResource BaseButton}"/>
                         <Grid Background="Black" Width="1"/>
                         <Button Content="Update"
-                            Margin="5,0"
-                        Command="{Binding Update_Click}"
-                        Style="{StaticResource BaseButton}"/>
+                                Margin="5,0"
+                                Command="{Binding Update_Click}"
+                                Style="{StaticResource BaseButton}"/>
                     </StackPanel>
+
                 </Grid>
                 <Grid Grid.Column="3">
                     <Button Content="Setting"
-                        Command="{Binding Setting_Click}"
-                        Style="{StaticResource BaseButton}"/>
+                            Command="{Binding Setting_Click}"
+                            Style="{StaticResource BaseButton}"/>
                 </Grid>
             </Grid>
-            <Grid Grid.Row="1" Background="Black" Height="1"></Grid>
+            <Grid Grid.Row="1" 
+                  Background="Black" 
+                  Height="1">
+            </Grid>
         </Grid>
 
         <Grid Grid.Row="1">
-            
+
             <Grid.ColumnDefinitions>
                 <ColumnDefinition MinWidth="150" Width="Auto" MaxWidth="240"/>
                 <ColumnDefinition MinWidth="150" Width="Auto" MaxWidth="240" x:Name="Column1"/>
@@ -102,7 +106,7 @@
                     <e:Interaction.Triggers>
                         <e:EventTrigger EventName="SelectedItemChanged">
                             <e:InvokeCommandAction Command="{Binding TreeView_SelectedItem}"
-                                  CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type TreeView}}}"/>
+                                                   CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type TreeView}}}"/>
                         </e:EventTrigger>
                     </e:Interaction.Triggers>
                     <TreeView.ItemTemplate>

@@ -55,6 +55,7 @@ namespace WpfAppRss.ViewModels
             {
                 return new DelegateCommand<WebBrowser>((webBrowser) =>
                 {
+                    webBrowser.Opacity = 1;
                     webBrowser.NavigateToString("<meta charset=\"utf-8\"/>" + rssItem.Content);
                 });
             }
