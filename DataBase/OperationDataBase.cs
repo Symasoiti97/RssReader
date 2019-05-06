@@ -47,6 +47,27 @@ namespace DataBase
             return true;
         }
 
+        public bool EditUser(string oldLogin, string login, string password, string email)
+        {
+            using (_db = new ApplicationContext())
+            {
+                var user = _db.Users.FirstOrDefault(p => p.Login == oldLogin);
+
+                if (user == null)
+                {
+                    return false;
+                }
+
+                user.Email = email;
+                user.Login = login;
+                user.Password = password;
+
+                _db.SaveChanges();
+            }
+
+            return true;
+        }
+
         public void RemoveUser(User user)
         {
             using (_db = new ApplicationContext())
@@ -93,6 +114,7 @@ namespace DataBase
                     {
                         userContent.RssChannel = rssCh;
                         _db.SaveChanges();
+
                         return false;
                     }
                     else
@@ -107,7 +129,13 @@ namespace DataBase
                 }
 
                 _db.UserContents.Add(userContent);
-                _db.SaveChanges();
+                try
+                {
+                    _db.SaveChanges();
+                }
+                catch
+                {
+                }
             }
 
             return true;
@@ -205,6 +233,13 @@ namespace DataBase
             {
                 var userId = _db.Users.Where(u => u.Login == login).Select(p => p.Id).First();
                 var rssItemId = _db.RssItems.Where(ri => ri.Title == title).Select(ri => ri.Id).First();
+
+                userFavoriteItem = _db.UserFavoriteItems.Where(ufi => ufi.RssItemId == rssItemId && ufi.UserId == userId).FirstOrDefault();
+
+                if (userFavoriteItem != null)
+                {
+                    return;
+                }
 
                 userFavoriteItem = new UserFavoriteItem
                 {

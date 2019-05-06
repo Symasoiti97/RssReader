@@ -31,7 +31,7 @@ namespace WpfAppRss.ViewModels
             {
                 return new DelegateCommand(()=>
                 {
-                    CurrentContent.User.Catalogs = UpdateRss.AddChannelDataBase(RssLinkText, CatalogText, CurrentContent.User.Login);
+                    CurrentContent.Catalogs = UpdaterRss.AddChannelDataBase(RssLinkText, CatalogText, CurrentContent.User.Login);
                 });
             }
         }

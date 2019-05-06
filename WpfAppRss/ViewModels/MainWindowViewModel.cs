@@ -17,9 +17,6 @@ namespace WpfAppRss.ViewModels
 {
     class MainWindowViewModel : BaseViewModel
     {
-        private readonly Page _settingPage;
-        private readonly Page _addChanelPage;
-        private readonly Page _currentRssItemPage;
 
         public Content CurrentContent { get; set; }
         private OperationDataBase _operationDataBase;
@@ -30,7 +27,7 @@ namespace WpfAppRss.ViewModels
 
             CurrentContent = Content.GetInstance();
 
-            CurrentContent.User.Catalogs = UpdateRss.UpdateTreeViewChannels(CurrentContent.User.Login);
+            CurrentContent.Catalogs = UpdaterRss.UpdateTreeViewChannels(CurrentContent.User.Login);
         }
 
         public ICommand<TreeView> TreeView_SelectedItem
@@ -72,7 +69,7 @@ namespace WpfAppRss.ViewModels
             {
                 return new DelegateCommand(() =>
                 {
-                    UpdateRss.UpdateRssChannelsDateBase(CurrentContent.User);
+                    UpdaterRss.UpdateRssChannelsDateBase(CurrentContent.User);
                 });
             }
         }
@@ -106,7 +103,7 @@ namespace WpfAppRss.ViewModels
                     rssItemTitles.Add(new RssItem { Title = ii });
                 }
 
-                CurrentContent.User.RssChannel.RssItems = rssItemTitles;
+                CurrentContent.RssChannel.RssItems = rssItemTitles;
 
             }
             else if (i is Catalog)
@@ -122,7 +119,7 @@ namespace WpfAppRss.ViewModels
                     rssItemTitles.Add(new RssItem { Title = ii });
                 }
 
-                CurrentContent.User.RssChannel.RssItems = rssItemTitles;
+                CurrentContent.RssChannel.RssItems = rssItemTitles;
             }
         }
     }

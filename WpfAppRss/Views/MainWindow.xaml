@@ -48,9 +48,10 @@
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="{Binding CurrentContent.User.Login}"
                                    Style="{StaticResource BaseTextBlock}"
-                                   Margin="5,3.5"
                                    Foreground="#EA7500"
-                                   TextAlignment="Center"/>
+                                   FontSize="17"
+                                   Margin="5,0"
+                                   TextAlignment="Justify"/>
                         <Grid Background="Black" Width="1"/>
                         <Button Content="Add Channel"
                                 Command="{Binding AddChanel_Click}"
@@ -87,7 +88,7 @@
             <Grid>
                 <TreeView x:Name="MainTreeView"
                           Margin="5" 
-                          ItemsSource="{Binding CurrentContent.User.Catalogs}">
+                          ItemsSource="{Binding CurrentContent.Catalogs}">
                     <TreeView.Template>
                         <ControlTemplate>
                             <DockPanel LastChildFill="True">
@@ -131,7 +132,7 @@
                 <ListBox Margin="5"
                          MaxWidth="{Binding ElementName=textItem, Path=ActualWidth}"
                          SelectedValue="{Binding RssItems_SelectValue}"
-                         ItemsSource="{Binding CurrentContent.User.RssChannel.RssItems}">
+                         ItemsSource="{Binding CurrentContent.RssChannel.RssItems}">
                     <ListBox.Template>
                         <ControlTemplate>
                             <DockPanel LastChildFill="True">

@@ -22,13 +22,13 @@ namespace WpfAppRss.Models
         private Content()
         {
             User = new User();
-            User.RssChannel = new RssChannel();
-            User.RssItem = new RssItem();
-            User.RssChannels = new ObservableCollection<RssChannel>();
-            User.RssChannel = new RssChannel();
-            User.Catalogs = new ObservableCollection<Catalog>();
-            User.RssChannel.RssItems = new ObservableCollection<RssItem>();
-            User.RssItem.PubTime = new DateTime();
+            RssChannel = new RssChannel();
+            RssItem = new RssItem();
+            RssChannels = new ObservableCollection<RssChannel>();
+            RssChannel = new RssChannel();
+            Catalogs = new ObservableCollection<Catalog>();
+            RssChannel.RssItems = new ObservableCollection<RssItem>();
+            RssItem.PubTime = new DateTime();
 
             User.Login = "user1";
             User.Password = "pass1";
@@ -44,5 +44,12 @@ namespace WpfAppRss.Models
         public Page ContentPage { get; set; }
 
         public RssItem RssItems_SelectValue;
+
+
+        public RssChannel RssChannel { get; set; }
+        public RssItem RssItem { get; set; }
+
+        public ObservableCollection<Catalog> Catalogs { get; set; }
+        public ObservableCollection<RssChannel> RssChannels { get; set; }
     }
 }

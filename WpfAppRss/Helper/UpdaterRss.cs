@@ -10,11 +10,11 @@ using WpfAppRss.Models;
 
 namespace WpfAppRss.Helper
 {
-    static class UpdateRss
+    static class UpdaterRss
     {
         private static OperationDataBase _operationDataBase;
 
-        static UpdateRss()
+        static UpdaterRss()
         {
             _operationDataBase = OperationDataBase.GetInstance();
         }
@@ -63,7 +63,7 @@ namespace WpfAppRss.Helper
 
             _operationDataBase.AddUserContent(login, rssChannel, catalog);
 
-            return UpdateRss.UpdateTreeViewChannels(login);
+            return UpdaterRss.UpdateTreeViewChannels(login);
         }
 
         public static void UpdateRssChannelsDateBase(User user)

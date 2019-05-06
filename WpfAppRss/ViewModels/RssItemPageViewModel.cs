@@ -25,7 +25,7 @@ namespace WpfAppRss.ViewModels
 
             PrintRssItems();
 
-            Favorite_Checked = _operationDataBase.CheckedFavoriteItem(CurrentContent.User.Login, CurrentContent.User.RssItem.Title);
+            Favorite_Checked = _operationDataBase.CheckedFavoriteItem(CurrentContent.User.Login, CurrentContent.RssItem.Title);
         }
 
         public bool Favorite_Checked
@@ -40,11 +40,11 @@ namespace WpfAppRss.ViewModels
 
                 if (_favorite_Checked == true)
                 {
-                    _operationDataBase.AddRssItemFavorite(CurrentContent.User.Login, CurrentContent.User.RssItem.Title);
+                    _operationDataBase.AddRssItemFavorite(CurrentContent.User.Login, CurrentContent.RssItem.Title);
                 }
                 else
                 {
-                    _operationDataBase.RemoveRssItemFavorite(CurrentContent.User.Login, CurrentContent.User.RssItem.Title);
+                    _operationDataBase.RemoveRssItemFavorite(CurrentContent.User.Login, CurrentContent.RssItem.Title);
                 }
             }
         }
@@ -55,7 +55,6 @@ namespace WpfAppRss.ViewModels
             {
                 return new DelegateCommand<WebBrowser>((webBrowser) =>
                 {
-                    webBrowser.Opacity = 1;
                     webBrowser.NavigateToString("<meta charset=\"utf-8\"/>" + rssItem.Content);
                 });
             }
@@ -67,12 +66,12 @@ namespace WpfAppRss.ViewModels
 
             if (rssItem != null)
             {
-                CurrentContent.User.RssItem.Author = rssItem.Author;
-                CurrentContent.User.RssItem.Category = rssItem.Category;
+                CurrentContent.RssItem.Author = rssItem.Author;
+                CurrentContent.RssItem.Category = rssItem.Category;
                 //CurrentContent.User.RssItem.Content = rssItem.Content;
-                CurrentContent.User.RssItem.Link = rssItem.Link;
-                CurrentContent.User.RssItem.PubTime = rssItem.PubTime;
-                CurrentContent.User.RssItem.Title = rssItem.Title;
+                CurrentContent.RssItem.Link = rssItem.Link;
+                CurrentContent.RssItem.PubTime = rssItem.PubTime;
+                CurrentContent.RssItem.Title = rssItem.Title;
             }
             else
             {

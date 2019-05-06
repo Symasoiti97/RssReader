@@ -13,11 +13,5 @@ namespace WpfAppRss.Models
         public string Login { get; set; }
         public string Password { get; set; }
         public string Email { get; set; }
-
-        public RssChannel RssChannel { get; set; }
-        public RssItem RssItem { get; set; }
-
-        public ObservableCollection<Catalog> Catalogs { get; set; }
-        public ObservableCollection<RssChannel> RssChannels { get; set; }
     }
 }
