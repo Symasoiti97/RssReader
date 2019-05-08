@@ -100,6 +100,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\SettingRssChannelPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Styles\Buttons.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -149,6 +153,9 @@
     <Compile Include="Pages\SettingPage.xaml.cs">
       <DependentUpon>SettingPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\SettingRssChannelPage.xaml.cs">
+      <DependentUpon>SettingRssChannelPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Styles\Windows\WindowStyle.cs" />
     <Compile Include="ViewModels\AddChanelPageViewModel.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
@@ -159,6 +166,7 @@
     <Compile Include="ViewModels\RegistrationPageViewModel.cs" />
     <Compile Include="ViewModels\RssItemPageViewModel.cs" />
     <Compile Include="ViewModels\SettingPageViewModel.cs" />
+    <Compile Include="ViewModels\SettingRssChannelPageViewModel.cs" />
     <Compile Include="Views\LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
     </Compile>

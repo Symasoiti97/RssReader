@@ -33,17 +33,17 @@
             <Setter.Value>
                 <ControlTemplate TargetType="Window">
                     <Grid>
-                        <Border BorderBrush="#3d2537"
+                        <Border BorderBrush="{StaticResource WindowBorderColor}"
                                 BorderThickness="1">
                             <DockPanel LastChildFill="True">
                                 <Grid DockPanel.Dock="Top"
                                       MouseLeftButtonDown="TitleBarMouseLeftButtonDown"
                                       MouseMove="TitleBarMouseMove"
                                       Height="27"
-                                      Background="#3d2537">
+                                      Background="{StaticResource WindowBorderColor}">
 
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="33"/>
+                                        <ColumnDefinition Width="24"/>
                                         <ColumnDefinition/>
                                         <ColumnDefinition Width="33"/>
                                         <ColumnDefinition Width="33"/>
@@ -53,11 +53,16 @@
                                     <Image Grid.Column="0"
                                            MouseLeftButtonDown="IconMouseLeftButtonDown"/>
 
+                                    <TextBlock Grid.Column="1"
+                                               Text="{TemplateBinding Title}"
+                                               TextAlignment="Left"
+                                               Margin="0,4"/>
+
                                     <Button Grid.Column="2"
                                             Click="MinButtonClick"
                                             Style="{StaticResource BaseButtonWindow}">
                                         <Grid MaxHeight="9" MaxWidth="9">
-                                            <Path Stroke="WhiteSmoke"
+                                            <Path Stroke="White"
                                                   Stretch="None"
                                                   Data="M0,8 H8 M0,7 H8 M0,6 H8"/>
                                         </Grid>
@@ -66,7 +71,7 @@
                                             Click="MaxButtonClick"
                                             Style="{StaticResource BaseButtonWindow}">
                                         <Grid MaxHeight="9" MaxWidth="9">
-                                            <Path Stroke="WhiteSmoke"
+                                            <Path Stroke="White"
                                                   Stretch="None"
                                                   Data="M0,0 H8 V8 H0 V0 M0,1 H8 M0,2 H8"/>
                                         </Grid>
@@ -75,7 +80,7 @@
                                             Click="CloseButtonClick"
                                             Style="{StaticResource BaseButtonWindow}">
                                         <Grid MaxHeight="9" MaxWidth="9">
-                                            <Path Stroke="WhiteSmoke"
+                                            <Path Stroke="White"
                                                   Stretch="None"
                                                   Data="M0,0 L8,8 M0,8 L8,0"/>
                                         </Grid>

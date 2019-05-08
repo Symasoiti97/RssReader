@@ -48,8 +48,9 @@
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="{Binding CurrentContent.User.Login}"
                                    Style="{StaticResource BaseTextBlock}"
-                                   Foreground="#EA7500"
+                                   Foreground="GhostWhite"
                                    FontSize="17"
+                                   FontFamily="Arial Black"
                                    Margin="5,0"
                                    TextAlignment="Justify"/>
                         <Grid Background="Black" Width="1"/>
@@ -87,13 +88,14 @@
 
             <Grid>
                 <TreeView x:Name="MainTreeView"
-                          Margin="5" 
+                          Margin="5"
                           ItemsSource="{Binding CurrentContent.Catalogs}">
                     <TreeView.Template>
                         <ControlTemplate>
                             <DockPanel LastChildFill="True">
                                 <Grid DockPanel.Dock="Top" Height="30">
-                                    <Label>Rss Channels</Label>
+                                    <TextBlock Text="Rss Channels"
+                                               FontSize="18"/>
                                 </Grid>
                                 <Grid Background="White">
                                     <ScrollViewer>
@@ -137,7 +139,8 @@
                         <ControlTemplate>
                             <DockPanel LastChildFill="True">
                                 <Grid DockPanel.Dock="Top" Height="30">
-                                    <Label>Rss Items</Label>
+                                    <TextBlock Text="Rss Items"
+                                               FontSize="18"/>
                                 </Grid>
                                 <Grid Background="White">
                                     <ScrollViewer>

@@ -78,5 +78,11 @@ namespace WpfAppRss.Helper
                 _operationDataBase.UpdateUserContent(user.Login, rssChannel);
             }
         }
+
+        public static void RemoveUserContentAndUpdate(string login, string title)
+        {
+            _operationDataBase.RemoveUserContent(login, title);
+            UpdateTreeViewChannels(login);
+        }
     }
 }

@@ -17,7 +17,6 @@ namespace WpfAppRss.ViewModels
 {
     class MainWindowViewModel : BaseViewModel
     {
-
         public Content CurrentContent { get; set; }
         private OperationDataBase _operationDataBase;
 
@@ -105,6 +104,15 @@ namespace WpfAppRss.ViewModels
 
                 CurrentContent.RssChannel.RssItems = rssItemTitles;
 
+                CurrentContent.ContentPage = new Pages.SettingRssChannelPage()
+                {
+                    DataContext = new SettingRssChannelPageViewModel()
+                    {
+                        Catalog = "NZ",
+                        NumberOfRssItems = rssItemTitles.Count.ToString(),
+                        RssChannelTitle = selectTitle.Title
+                    }
+                };
             }
             else if (i is Catalog)
             {

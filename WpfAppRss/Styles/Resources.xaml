@@ -3,6 +3,7 @@
                     xmlns:local="clr-namespace:WpfAppRss.Styles">
 
     <FontFamily x:Key="FontFamily1">Times Roman</FontFamily>
-    <SolidColorBrush x:Key="WindowColor">DimGray</SolidColorBrush>
+    <SolidColorBrush x:Key="WindowColor">LightSeaGreen</SolidColorBrush>
+    <SolidColorBrush x:Key="WindowBorderColor">LightGray</SolidColorBrush>
    
 </ResourceDictionary>

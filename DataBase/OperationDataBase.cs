@@ -159,11 +159,12 @@ namespace DataBase
             }
         }
 
-        public void RemoveRssChanel(RssChannel rssChanel)
+        public void RemoveUserContent(string login, string title)
         {
             using (_db = new ApplicationContext())
             {
-                _db.RssChanels.Remove(rssChanel);
+                var userContent = _db.UserContents.FirstOrDefault(rs => rs.User.Login == login && rs.RssChannel.Title == title);
+                _db.UserContents.Remove(userContent);
                 _db.SaveChanges();
             }
         }
