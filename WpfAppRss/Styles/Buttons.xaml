@@ -6,7 +6,7 @@
         <Setter Property="Background" Value="Gray"/>
         <Setter Property="Foreground" Value="White"/>
         <Setter Property="FontFamily" Value="{StaticResource FontFamily1}"/>
-        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="FontSize" Value="{StaticResource h4}"/>
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
@@ -31,7 +31,6 @@
         </Setter>
     </Style>
 
-
     <Style x:Key="StarToggleButton" TargetType="ToggleButton">
         <Setter Property="Template">
             <Setter.Value>
@@ -48,6 +47,28 @@
                         </Trigger>
                         <Trigger Property="IsMouseOver"  Value="true">
                             <Setter TargetName="star" Property="Fill" Value="LightBlue"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="BaseButtonWindow" TargetType="Button">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Grid>
+                        <Border
+                            x:Name="PART_border"
+                            Background="Transparent"/>
+                        <ContentPresenter/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter TargetName="PART_border" Property="Background" Value="DarkGray"/>
+                            <Setter TargetName="PART_border" Property="Opacity" Value="0.7"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

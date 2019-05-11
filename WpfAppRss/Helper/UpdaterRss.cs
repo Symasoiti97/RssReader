@@ -37,11 +37,11 @@ namespace WpfAppRss.Helper
 
                 ObservableCollection<RssChannel> rssChannels = new ObservableCollection<RssChannel>();
 
-                List<string> listChannelsTitles = _operationDataBase.GetRssChanels(login, catalogsTitle[i]).ToList();
+                ICollection<RssChannel> selectRssChannels = _operationDataBase.GetRssChannels(login, catalogsTitle[i]);
 
-                for (int j = 0; j < listChannelsTitles.Count; j++)
+                foreach(var rc in selectRssChannels)
                 {
-                    rssChannels.Add(new RssChannel { Title = listChannelsTitles[j] });
+                    rssChannels.Add(rc);
                 }
 
                 catalog.RssChannels = rssChannels;

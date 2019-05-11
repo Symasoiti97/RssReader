@@ -172,11 +172,11 @@ namespace DataBase
             }
         }
 
-        public ICollection<RssChannel> GetRssChannels(User user, string category)
+        public ICollection<RssChannel> GetRssChannels(string login, string category)
         {
             using (_db = new ApplicationContext())
             {
-                return _db.UserContents.Where(t => t.User.Login == user.Login && t.Category == category).Select(rs => rs.RssChannel).ToArray();
+                return _db.UserContents.Where(t => t.User.Login == login && t.Category == category).Select(rs => rs.RssChannel).ToArray();
             }             
         }
 

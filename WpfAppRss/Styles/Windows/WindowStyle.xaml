@@ -3,28 +3,6 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:WpfAppRss.Styles.Windows">
 
-    <Style x:Key="BaseButtonWindow" TargetType="Button">
-        <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="Button">
-                    <Grid>
-                        <Border
-                            x:Name="PART_border"
-                            Background="Transparent"/>
-                        <ContentPresenter/>
-                    </Grid>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsMouseOver" Value="true">
-                            <Setter TargetName="PART_border" Property="Background" Value="DarkGray"/>
-                            <Setter TargetName="PART_border" Property="Opacity" Value="0.7"/>
-                        </Trigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-
     <Style x:Key="BaseWindow" TargetType="Window">
         <Setter Property="ResizeMode" Value="NoResize"/>
         <Setter Property="WindowStyle" Value="None"/>
