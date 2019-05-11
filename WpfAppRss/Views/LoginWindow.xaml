@@ -11,7 +11,6 @@
         Title="LoginWindow" 
         Height="310" 
         Width="250"
-        WindowStartupLocation="CenterScreen"
         Style="{StaticResource BaseWindow}">
 
     <Window.DataContext>
