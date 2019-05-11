@@ -11,6 +11,7 @@
         Title="MainWindow" 
         Height="450"
         Width="800"
+        WindowStartupLocation="CenterOwner"
         Style="{StaticResource BaseWindow}">
 
     <Window.DataContext>
@@ -49,7 +50,7 @@
                         <TextBlock Text="{Binding CurrentContent.User.Login, UpdateSourceTrigger=PropertyChanged}"
                                    Style="{StaticResource BaseTextBlock}"
                                    Foreground="GhostWhite"
-                                   FontSize="17"
+                                   FontSize="{StaticResource h4}"
                                    FontFamily="Arial Black"
                                    Margin="5,0"
                                    TextAlignment="Justify"/>
@@ -89,29 +90,8 @@
             <Grid>
                 <TreeView x:Name="MainTreeView"
                           Margin="5"
-                          ItemsSource="{Binding CurrentContent.Catalogs}">
-                    <TreeView.Template>
-                        <ControlTemplate>
-                            <DockPanel LastChildFill="True">
-                                <Grid DockPanel.Dock="Top" Height="30">
-                                    <TextBlock Text="Rss Channels"
-                                               FontSize="18"/>
-                                </Grid>
-                                <Grid Background="White">
-                                    <ScrollViewer>
-                                        <ItemsPresenter>
-                                        </ItemsPresenter>
-                                    </ScrollViewer>
-                                </Grid>
-                            </DockPanel>
-                        </ControlTemplate>
-                    </TreeView.Template>
-                    <e:Interaction.Triggers>
-                        <e:EventTrigger EventName="SelectedItemChanged">
-                            <e:InvokeCommandAction Command="{Binding TreeView_SelectedItem}"
-                                                   CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type TreeView}}}"/>
-                        </e:EventTrigger>
-                    </e:Interaction.Triggers>
+                          ItemsSource="{Binding CurrentContent.Catalogs}"
+                          Style="{StaticResource BaseTreeView}">
                     <TreeView.ItemTemplate>
                         <HierarchicalDataTemplate ItemsSource="{Binding RssChannels}">
                             <Label Content="{Binding CatalogName}"/>
@@ -124,6 +104,12 @@
                             </HierarchicalDataTemplate.ItemTemplate>
                         </HierarchicalDataTemplate>
                     </TreeView.ItemTemplate>
+                    <e:Interaction.Triggers>
+                        <e:EventTrigger EventName="SelectedItemChanged">
+                            <e:InvokeCommandAction Command="{Binding TreeView_SelectedItem}"
+                                                   CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type TreeView}}}"/>
+                        </e:EventTrigger>
+                    </e:Interaction.Triggers>
                 </TreeView>
             </Grid>
 
@@ -131,23 +117,8 @@
                 <ListBox Margin="5"
                          MaxWidth="{Binding ElementName=textItem, Path=ActualWidth}"
                          SelectedValue="{Binding RssItems_SelectValue}"
-                         ItemsSource="{Binding CurrentContent.RssItems}">
-                    <ListBox.Template>
-                        <ControlTemplate>
-                            <DockPanel LastChildFill="True">
-                                <Grid DockPanel.Dock="Top" Height="30">
-                                    <TextBlock Text="Rss Items"
-                                               FontSize="18"/>
-                                </Grid>
-                                <Grid Background="White">
-                                    <ScrollViewer>
-                                        <ItemsPresenter>
-                                        </ItemsPresenter>
-                                    </ScrollViewer>
-                                </Grid>
-                            </DockPanel>
-                        </ControlTemplate>
-                    </ListBox.Template>
+                         ItemsSource="{Binding CurrentContent.RssItems}"
+                         Style="{StaticResource BaseListBox}">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <StackPanel>
