@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WpfAppRss.ViewModels;
+using DataBase.Models;
 
 namespace WpfAppRss.Models
 {

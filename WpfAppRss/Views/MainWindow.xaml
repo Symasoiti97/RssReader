@@ -46,7 +46,7 @@
                 <Grid Grid.Column="1">
 
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{Binding CurrentContent.User.Login}"
+                        <TextBlock Text="{Binding CurrentContent.User.Login, UpdateSourceTrigger=PropertyChanged}"
                                    Style="{StaticResource BaseTextBlock}"
                                    Foreground="GhostWhite"
                                    FontSize="17"
@@ -124,9 +124,6 @@
                             </HierarchicalDataTemplate.ItemTemplate>
                         </HierarchicalDataTemplate>
                     </TreeView.ItemTemplate>
-                    <!--<e:Interaction.Behaviors>
-                        <vm:BindableSelectedItemBehavior  SelectedItem="{Binding SelectedItem, Mode=OneWay, NotifyOnTargetUpdated=True}"/>
-                    </e:Interaction.Behaviors>-->
                 </TreeView>
             </Grid>
 
@@ -134,7 +131,7 @@
                 <ListBox Margin="5"
                          MaxWidth="{Binding ElementName=textItem, Path=ActualWidth}"
                          SelectedValue="{Binding RssItems_SelectValue}"
-                         ItemsSource="{Binding CurrentContent.RssChannel.RssItems}">
+                         ItemsSource="{Binding CurrentContent.RssItems}">
                     <ListBox.Template>
                         <ControlTemplate>
                             <DockPanel LastChildFill="True">

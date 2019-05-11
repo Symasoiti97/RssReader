@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using WpfAppRss.Models;
+using DataBase.Models;
 
 namespace WpfAppRss.ViewModels
 {
@@ -14,15 +15,19 @@ namespace WpfAppRss.ViewModels
     {
         public Content CurrentContent { get; set; }
         public OperationDataBase _operationDataBase;
+        public User NewUser { get; set; }
 
         public SettingPageViewModel()
         {
             _operationDataBase = OperationDataBase.GetInstance();
             CurrentContent = Content.GetInstance();
 
-            Login = CurrentContent.User.Login;
-            Password = CurrentContent.User.Password;
-            Email = CurrentContent.User.Email;
+            NewUser = new User
+            {
+                Login = CurrentContent.User.Login,
+                Password = CurrentContent.User.Password,
+                Email = CurrentContent.User.Email
+            };
         }
 
         public ICommand ApplySetting_Click
@@ -31,21 +36,12 @@ namespace WpfAppRss.ViewModels
             {
                 return new DelegateCommand(()=>
                 {
-                    if (_operationDataBase.EditUser(CurrentContent.User.Login, Login, Password, Email))
+                    if (_operationDataBase.EditUser(CurrentContent.User, NewUser))
                     {
-                        CurrentContent.User = new User()
-                        {
-                            Login = Login,
-                            Password = Password,
-                            Email = Email
-                        };
+                        CurrentContent.User = NewUser;
                     }
                 });
             }
         }
-
-        public string Login { get; set; }
-        public string Password { get; set; }
-        public string Email { get; set; }
     }
 }

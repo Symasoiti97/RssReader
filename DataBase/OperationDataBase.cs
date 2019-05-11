@@ -47,20 +47,20 @@ namespace DataBase
             return true;
         }
 
-        public bool EditUser(string oldLogin, string login, string password, string email)
+        public bool EditUser(User oldUser, User newUser)
         {
             using (_db = new ApplicationContext())
             {
-                var user = _db.Users.FirstOrDefault(p => p.Login == oldLogin);
+                var user = _db.Users.FirstOrDefault(p => p.Login == oldUser.Login);
 
                 if (user == null)
                 {
                     return false;
                 }
 
-                user.Email = email;
-                user.Login = login;
-                user.Password = password;
+                user.Email = newUser.Email;
+                user.Login = newUser.Login;
+                user.Password = newUser.Password;
 
                 _db.SaveChanges();
             }
@@ -77,12 +77,11 @@ namespace DataBase
             }
         }
          
-        public User FindUser(string login, string pass)
+        public User GetUser(User user)
         {
             using (_db = new ApplicationContext())
             {
-                var i = _db.Users.FirstOrDefault(p => p.Login == login && p.Password == pass);
-               return (User)i;
+                return _db.Users.FirstOrDefault(p => p.Login == user.Login && p.Password == user.Password);
             }
         }
 
@@ -169,30 +168,27 @@ namespace DataBase
             }
         }
 
-        public ICollection<string> FindRssChannelCategory(string login)
+        public ICollection<string> GetCatologsRssChannels(string login)
         {
             using (_db = new ApplicationContext())
             {
-                ICollection<string> listTitels = _db.UserContents.Where(t => t.User.Login == login).Select(rc => rc.Category).ToArray();
-                return listTitels;
+                return _db.UserContents.Where(t => t.User.Login == login).Select(rc => rc.Category).ToArray();
             }
         }
 
-        public ICollection<string> GetRssChanelTitels(string login, string category)
+        public ICollection<RssChannel> GetRssChannels(User user, string category)
         {
             using (_db = new ApplicationContext())
             {
-                ICollection<string> listTitels = _db.UserContents.Where(t => t.User.Login == login && t.Category == category).Select(rc => rc.RssChannel.Title).ToArray();
-                return listTitels;
+                return _db.UserContents.Where(t => t.User.Login == user.Login && t.Category == category).Select(rs => rs.RssChannel).ToArray();
             }             
         }
 
-        public ICollection<string> GetRssItemTitels(string title)
+        public ICollection<RssItem> GetRssItems(string titleRssChannel)
         {
             using (_db = new ApplicationContext())
             {
-                ICollection<string> listTitels = _db.RssItems.Where(ri => ri.RssChannel.Title == title).Select(ri => ri.Title).ToArray();
-                return listTitels;
+                return _db.RssItems.Where(ri => ri.RssChannel.Title == titleRssChannel).ToArray();
             }
         }
 
@@ -214,15 +210,13 @@ namespace DataBase
             }
         }
 
-        public List<string> GetRssItemFivoriteTitles(string login)
+        public ICollection<RssItem> GetFivoriteRssItems(User user)
         {
             using (_db = new ApplicationContext())
             {
-                var favoriteItem = _db.UserFavoriteItems.Where(ufi => ufi.User.Login == login);
+                var favoriteItems = _db.UserFavoriteItems.Where(ufi => ufi.User.Login == user.Login).Select(rs => rs.RssItem).ToArray();
 
-                var items = favoriteItem.Select(rs => rs.RssItem.Title);
-
-                return items.ToList();
+                return favoriteItems;
             }
         }
 

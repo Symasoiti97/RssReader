@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using WpfAppRss.Models;
+using DataBase.Models;
 
 namespace WpfAppRss.ViewModels
 {
@@ -16,7 +17,6 @@ namespace WpfAppRss.ViewModels
         public Content CurrentContent { get; set; }
         private OperationDataBase _operationDataBase;
         private bool _favorite_Checked;
-        private DataBase.Models.RssItem rssItem;
 
         public RssItemPageViewModel()
         {
@@ -55,23 +55,26 @@ namespace WpfAppRss.ViewModels
             {
                 return new DelegateCommand<WebBrowser>((webBrowser) =>
                 {
-                    webBrowser.NavigateToString("<meta charset=\"utf-8\"/>" + rssItem.Content);
+                    webBrowser.NavigateToString("<meta charset=\"utf-8\"/>" + CurrentContent.RssItem.Content);
                 });
             }
         }
 
         private void PrintRssItems()
         {
-            rssItem = _operationDataBase.GetRssItem(CurrentContent.RssItems_SelectValue.Title);
+            RssItem rssItem = _operationDataBase.GetRssItem(CurrentContent.RssItems_SelectValue.Title);
 
             if (rssItem != null)
             {
-                CurrentContent.RssItem.Author = rssItem.Author;
-                CurrentContent.RssItem.Category = rssItem.Category;
-                //CurrentContent.User.RssItem.Content = rssItem.Content;
-                CurrentContent.RssItem.Link = rssItem.Link;
-                CurrentContent.RssItem.PubTime = rssItem.PubTime;
-                CurrentContent.RssItem.Title = rssItem.Title;
+                CurrentContent.RssItem = new RssItem
+                {
+                    Author = rssItem.Author,
+                    Category = rssItem.Category,
+                    Content = rssItem.Content,
+                    Link = rssItem.Link,
+                    PubTime = rssItem.PubTime,
+                    Title = rssItem.Title
+                };
             }
             else
             {

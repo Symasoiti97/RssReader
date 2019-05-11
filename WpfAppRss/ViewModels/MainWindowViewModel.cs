@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Interactivity;
 using WpfAppRss.Helper;
 using WpfAppRss.Models;
+using DataBase.Models;
 
 namespace WpfAppRss.ViewModels
 {
@@ -94,40 +95,42 @@ namespace WpfAppRss.ViewModels
             {
                 RssChannel selectTitle = (RssChannel)i as RssChannel;
 
-                ICollection<string> collectionName = _operationDataBase.GetRssItemTitels(selectTitle.Title);
-                ObservableCollection<RssItem> rssItemTitles = new ObservableCollection<RssItem>();
+                ICollection<RssItem> rssItems = _operationDataBase.GetRssItems(selectTitle.Title);
+                ObservableCollection<RssItem> selectRssItems = new ObservableCollection<RssItem>();
 
-                foreach (var ii in collectionName)
+                foreach (var ri in rssItems)
                 {
-                    rssItemTitles.Add(new RssItem { Title = ii });
+                    selectRssItems.Add(ri);
                 }
 
-                CurrentContent.RssChannel.RssItems = rssItemTitles;
+                CurrentContent.RssItems = selectRssItems;
 
                 CurrentContent.ContentPage = new Pages.SettingRssChannelPage()
                 {
                     DataContext = new SettingRssChannelPageViewModel()
                     {
                         Catalog = "NZ",
-                        NumberOfRssItems = rssItemTitles.Count.ToString(),
+                        NumberOfRssItems = selectRssItems.Count.ToString(),
                         RssChannelTitle = selectTitle.Title
                     }
                 };
             }
             else if (i is Catalog)
             {
-                Catalog selectCategory = (Catalog)i as Catalog;
-                string it = selectCategory.CatalogName;
+                Catalog selectCatolog = (Catalog)i as Catalog;
 
-                ICollection<string> collectionName = _operationDataBase.GetRssItemFivoriteTitles(CurrentContent.User.Login);
-                ObservableCollection<RssItem> rssItemTitles = new ObservableCollection<RssItem>();
-
-                foreach (var ii in collectionName)
+                if(selectCatolog.CatalogName == "Favorite")
                 {
-                    rssItemTitles.Add(new RssItem { Title = ii });
-                }
+                    ICollection<RssItem> rssItems = _operationDataBase.GetFivoriteRssItems(CurrentContent.User);
+                    ObservableCollection<RssItem> selectRssItems = new ObservableCollection<RssItem>();
 
-                CurrentContent.RssChannel.RssItems = rssItemTitles;
+                    foreach (var ri in rssItems)
+                    {
+                        selectRssItems.Add(ri);
+                    }
+
+                    CurrentContent.RssItems = selectRssItems;
+                }
             }
         }
     }

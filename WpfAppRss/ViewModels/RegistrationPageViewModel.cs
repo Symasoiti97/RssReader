@@ -14,9 +14,7 @@ namespace WpfAppRss.ViewModels
     class RegistrationPageViewModel : BaseViewModel
     {
         private OperationDataBase _operationDataBase;
-        private DataBase.Models.User _currentRegistrUser;
-        private string _currentPasswordFirst;
-        private string _currentPasswordSecond;
+        private User _currentRegistrUser;
 
         public RegistrationPageViewModel()
         {
@@ -35,66 +33,27 @@ namespace WpfAppRss.ViewModels
             }
         }
 
-        public string LoginText
-        {
-            get
-            {
-                return _currentRegistrUser.Login;
-            }
-            set
-            {
-                _currentRegistrUser.Login = value;
-                OnPropertyChanged("LoginText");
-            }
-        }
+        public string LoginText { get; set; }
 
-        public string PasswordFirstText
-        {
-            get
-            {
-                return _currentPasswordFirst;
-            }
-            set
-            {
-                _currentPasswordFirst = value;
-                OnPropertyChanged("Password1Text");
-            }
-        }
+        public string PasswordFirstText { get; set; }
 
-        public string PasswordSecondText
-        {
-            get
-            {
-                return _currentPasswordSecond;
-            }
-            set
-            {
-                _currentPasswordSecond = value;
-                OnPropertyChanged("Password2Text");
-            }
-        }
+        public string PasswordSecondText { get; set; }
 
-        public string EmailText
-        {
-            get
-            {
-                return _currentRegistrUser.Email;
-            }
-            set
-            {
-                _currentRegistrUser.Email = value;
-                OnPropertyChanged("EmailText");
-            }
-        }
+        public string EmailText { get; set; }
 
         private void RegistrationUser()
         {
-            if (_currentPasswordFirst != _currentPasswordSecond)
+            if (PasswordFirstText != PasswordSecondText)
             {
                 return;
             }
-            
-            _currentRegistrUser.Password = _currentPasswordFirst;
+
+            _currentRegistrUser = new User
+            {
+                Login = LoginText,
+                Password = PasswordFirstText,
+                Email = EmailText
+            };
 
             if (_operationDataBase.AddUser(_currentRegistrUser))
             {

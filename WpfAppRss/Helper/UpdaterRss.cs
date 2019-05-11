@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WpfAppRss.Models;
+using DataBase.Models;
 
 namespace WpfAppRss.Helper
 {
@@ -30,7 +31,7 @@ namespace WpfAppRss.Helper
 
             catalogs.Add(catalogf);
 
-            List<string> catalogsTitle = _operationDataBase.FindRssChannelCategory(login).Distinct().ToList();
+            List<string> catalogsTitle = _operationDataBase.GetCatologsRssChannels(login).Distinct().ToList();
 
             for (int i = 0; i < catalogsTitle.Count; i++)
             {
@@ -39,7 +40,7 @@ namespace WpfAppRss.Helper
 
                 ObservableCollection<RssChannel> rssChannels = new ObservableCollection<RssChannel>();
 
-                List<string> listChannelsTitles = _operationDataBase.GetRssChanelTitels(login, catalogsTitle[i]).ToList();
+                List<string> listChannelsTitles = _operationDataBase.GetRssChanels(login, catalogsTitle[i]).ToList();
 
                 for (int j = 0; j < listChannelsTitles.Count; j++)
                 {

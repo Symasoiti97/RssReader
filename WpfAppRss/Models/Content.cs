@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using WpfAppRss.ViewModels;
+using DataBase.Models;
 
 namespace WpfAppRss.Models
 {
@@ -27,7 +28,7 @@ namespace WpfAppRss.Models
             RssChannels = new ObservableCollection<RssChannel>();
             RssChannel = new RssChannel();
             Catalogs = new ObservableCollection<Catalog>();
-            RssChannel.RssItems = new ObservableCollection<RssItem>();
+            RssItems = new ObservableCollection<RssItem>();
             RssItem.PubTime = new DateTime();
 
             User.Login = "user1";
@@ -39,7 +40,7 @@ namespace WpfAppRss.Models
             return _content;
         }
 
-        public User User { get; set; }
+        public DataBase.Models.User User { get; set; }
 
         public Page ContentPage { get; set; }
 
@@ -51,5 +52,6 @@ namespace WpfAppRss.Models
 
         public ObservableCollection<Catalog> Catalogs { get; set; }
         public ObservableCollection<RssChannel> RssChannels { get; set; }
+        public ObservableCollection<RssItem> RssItems { get; set; }
     }
 }

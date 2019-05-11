@@ -16,8 +16,6 @@ namespace WpfAppRss.ViewModels
         private Page _loginPage;
         private readonly Page _registrationPage;
 
-        private Page _currentPage;
-
         public LoginWindowViewModel()
         {
             _loginPage = new Pages.LoginPage();

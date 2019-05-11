@@ -46,23 +46,20 @@ namespace WpfAppRss.ViewModels
                     {
                         MessageBox.Show("Error");
                     }
-
                 });
             }
         }
 
         private bool LogIn()
         {
-            var user = _operationDataBase.FindUser(CurrentContent.User.Login, CurrentContent.User.Password);
+            var user = _operationDataBase.GetUser(CurrentContent.User);
 
             if (user == null)
             {
                 return false;
             }
 
-            CurrentContent.User.Login = user.Login;
-            CurrentContent.User.Password = user.Password;
-            CurrentContent.User.Email = user.Email;
+            CurrentContent.User = user;
 
             return true;
         }

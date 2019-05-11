@@ -23,19 +23,19 @@
                 <TextBlock Text="Login"
                            Style="{StaticResource BaseTextBlock}"/>
                 <TextBox Style="{StaticResource BaseTextBox}"
-                         Text="{Binding Login}"/>
+                         Text="{Binding NewUser.Login}"/>
             </StackPanel>
             <StackPanel Margin="10">
                 <TextBlock Text="Password"
                            Style="{StaticResource BaseTextBlock}"/>
                 <TextBox Style="{StaticResource BaseTextBox}"
-                         Text="{Binding Password}"/>
+                         Text="{Binding NewUser.Password}"/>
             </StackPanel>
             <StackPanel Margin="10">
                 <TextBlock Text="Email"
                            Style="{StaticResource BaseTextBlock}"/>
                 <TextBox Style="{StaticResource BaseTextBox}"
-                         Text="{Binding Email}"/>
+                         Text="{Binding NewUser.Email}"/>
             </StackPanel>
         </StackPanel>
 
