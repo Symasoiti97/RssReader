@@ -1,11 +1,8 @@
 ﻿using DataBase;
 using Parsers.ParserRss;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using WpfAppRss.Models;
 using DataBase.Models;
 

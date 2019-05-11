@@ -1,15 +1,9 @@
 ﻿using DataBase;
 using DevExpress.Mvvm;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Interactivity;
 using WpfAppRss.Helper;
 using WpfAppRss.Models;
 using DataBase.Models;

@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 using DevExpress.Mvvm;
-using Parsers.ParserRss;
-using DataBase.Models;
 using DataBase;
 using WpfAppRss.Models;
 using WpfAppRss.Helper;

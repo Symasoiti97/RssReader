@@ -1,8 +1,6 @@
 ﻿using DataBase.Models;
-using System;
 using System.Collections.Generic;
 using System.ServiceModel.Syndication;
-using System.Text;
 using System.Xml;
 
 namespace Parsers.ParserRss
