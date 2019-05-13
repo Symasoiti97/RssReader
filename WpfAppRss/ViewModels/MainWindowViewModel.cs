@@ -7,11 +7,17 @@ using System.Windows.Input;
 using WpfAppRss.Helper;
 using WpfAppRss.Models;
 using DataBase.Models;
+using Ninject;
+using Logger;
+using static Logger.Logger;
 
 namespace WpfAppRss.ViewModels
 {
     class MainWindowViewModel : BaseViewModel
     {
+        private static IKernel ninjectKernel = new StandardKernel(new LoggerModule());
+        private static ILogger _logger = ninjectKernel.Get<ILogger>();
+
         public Content CurrentContent { get; set; }
         private OperationDataBase _operationDataBase;
 
@@ -63,7 +69,9 @@ namespace WpfAppRss.ViewModels
             {
                 return new DelegateCommand(() =>
                 {
+                    _logger.Log(TypeLog.Info, $"{CurrentContent.User.Login} Start Update Rss");
                     UpdaterRss.UpdateRssChannelsDateBase(CurrentContent.User);
+                    _logger.Log(TypeLog.Info, $"{CurrentContent.User.Login} Finish Update Rss");
                 });
             }
         }

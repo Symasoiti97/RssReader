@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataBase", "DataBase\DataBa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Parsers", "Parsers\Parsers.csproj", "{56EBC336-83B0-451D-8C03-F169B9185069}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logger", "Logger\Logger.csproj", "{3AD8CD25-9371-4873-919A-65BD7819CAC9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{56EBC336-83B0-451D-8C03-F169B9185069}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{56EBC336-83B0-451D-8C03-F169B9185069}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{56EBC336-83B0-451D-8C03-F169B9185069}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3AD8CD25-9371-4873-919A-65BD7819CAC9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3AD8CD25-9371-4873-919A-65BD7819CAC9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3AD8CD25-9371-4873-919A-65BD7819CAC9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3AD8CD25-9371-4873-919A-65BD7819CAC9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
