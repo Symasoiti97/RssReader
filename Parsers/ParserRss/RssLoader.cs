@@ -1,7 +1,10 @@
 ﻿using DataBase.Models;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.ServiceModel.Syndication;
 using System.Xml;
+using System.Xml.Linq;
 
 namespace Parsers.ParserRss
 {
@@ -33,6 +36,31 @@ namespace Parsers.ParserRss
             }
 
             return rssChanel;
+        }
+
+        public RssChannel ParseChannel(string link)
+        {
+            var rss = XDocument.Load(link);
+
+            var ch = rss.Root?.Element("channel");
+
+            var items = from i in rss.Descendants("item")
+                        select new RssItem
+                        {
+                            Title =  i.Element("title").Value,
+                            Content = i.Element("description").Value,
+                            Link =  i.Element("link").Value,
+                            PubTime = DateTime.Parse(i.Element("pubDate")?.Value)
+                        };
+
+            var channel = new RssChannel
+            {
+                Title = ch.Element("title")?.Value,
+                Link = ch.Element("link")?.Value,
+                RssItems = items.ToArray()
+            };
+
+            return channel;
         }
     }
 }
