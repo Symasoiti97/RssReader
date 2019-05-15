@@ -3,8 +3,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace DataBase.Models
 {
-    public class RssChannel
+    public class RssChannel : IEntity
     {
+        [Key]
         public int Id { get; set; }
         [Required]
         public string Title { get; set; }

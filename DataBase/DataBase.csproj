@@ -37,6 +37,9 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Ninject, Version=3.3.4.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ninject.3.3.4\lib\net45\Ninject.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -49,17 +52,23 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataBases\ApplicationContext.cs" />
+    <Compile Include="DbModule.cs" />
+    <Compile Include="IOperationDb.cs" />
+    <Compile Include="Models\IEntity.cs" />
     <Compile Include="Models\RssChannel.cs" />
     <Compile Include="Models\RssItem.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\UserContent.cs" />
     <Compile Include="Models\UserFavoriteItem.cs" />
-    <Compile Include="OperationDataBase.cs" />
+    <Compile Include="ConcreteOperationDb.cs" />
+    <Compile Include="OperationDb.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />

@@ -10,13 +10,13 @@ namespace WpfAppRss.ViewModels
     class RssItemPageViewModel : BaseViewModel
     {
         public Content CurrentContent { get; set; }
-        private OperationDataBase _operationDataBase;
+        private ConcreteOperationDb _operationDataBase;
         private bool _favorite_Checked;
 
         public RssItemPageViewModel()
         {
             CurrentContent = Content.GetInstance();
-            _operationDataBase = OperationDataBase.GetInstance();
+            _operationDataBase = ConcreteOperationDb.GetInstance();
 
             PrintRssItems();
 

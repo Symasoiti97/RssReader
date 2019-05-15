@@ -8,12 +8,12 @@ namespace WpfAppRss.ViewModels
 {
     class RegistrationPageViewModel : BaseViewModel
     {
-        private OperationDataBase _operationDataBase;
+        private ConcreteOperationDb _operationDataBase;
         private User _currentRegistrUser;
 
         public RegistrationPageViewModel()
         {
-            _operationDataBase = OperationDataBase.GetInstance();
+            _operationDataBase = ConcreteOperationDb.GetInstance();
             _currentRegistrUser = new User();
         }
 

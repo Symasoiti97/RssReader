@@ -13,11 +13,11 @@ namespace WpfAppRss.ViewModels
     class MainWindowViewModel : BaseViewModel
     {
         public Content CurrentContent { get; set; }
-        private OperationDataBase _operationDataBase;
+        private ConcreteOperationDb _operationDataBase;
 
         public MainWindowViewModel()
         {
-            _operationDataBase = OperationDataBase.GetInstance();
+            _operationDataBase = ConcreteOperationDb.GetInstance();
 
             CurrentContent = Content.GetInstance();
 

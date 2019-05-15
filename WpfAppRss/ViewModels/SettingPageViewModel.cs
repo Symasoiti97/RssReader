@@ -9,12 +9,12 @@ namespace WpfAppRss.ViewModels
     class SettingPageViewModel : BaseViewModel
     {
         public Content CurrentContent { get; set; }
-        public OperationDataBase _operationDataBase;
+        public ConcreteOperationDb _operationDataBase;
         public User NewUser { get; set; }
 
         public SettingPageViewModel()
         {
-            _operationDataBase = OperationDataBase.GetInstance();
+            _operationDataBase = ConcreteOperationDb.GetInstance();
             CurrentContent = Content.GetInstance();
 
             NewUser = new User
