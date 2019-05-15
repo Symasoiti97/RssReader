@@ -3,8 +3,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DataBase.Models
 {
-    public class UserContent
+    public class UserContent : IEntity
     {
+        [Key]
         public int Id { get; set; }
         [Required]
         public string Category { get; set; }

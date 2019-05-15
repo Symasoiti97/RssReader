@@ -3,8 +3,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace DataBase.Models
 {
-    public class User
+    public class User : IEntity
     {
+        [Key]
         public int Id { get; set; }
         [Required]
         public string Login { get; set; }

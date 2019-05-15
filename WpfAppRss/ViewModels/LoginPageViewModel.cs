@@ -4,12 +4,19 @@ using System.Windows;
 using System.Windows.Input;
 using WpfAppRss.Models;
 using WpfAppRss.Views;
+using Ninject;
+using WpfAppRss.Helper;
+using Logger;
+using static Logger.Logger;
 
 namespace WpfAppRss.ViewModels
 {
     class LoginPageViewModel : BaseViewModel
     {
-        private OperationDataBase _operationDataBase;
+        private static IKernel ninjectKernel = new StandardKernel(new LoggerModule());
+        private static ILogger _logger = ninjectKernel.Get<ILogger>();
+
+        private ConcreteOperationDb _operationDataBase;
         public Content CurrentContent { get; set; }
 
         public Window CurrentWindow { get; set; }
@@ -17,7 +24,7 @@ namespace WpfAppRss.ViewModels
         public LoginPageViewModel()
         {
             CurrentContent = Content.GetInstance();
-            _operationDataBase = OperationDataBase.GetInstance();
+            _operationDataBase = ConcreteOperationDb.GetInstance();
         }
 
         public ICommand LogIn_Click
@@ -34,10 +41,12 @@ namespace WpfAppRss.ViewModels
                         {
                             CurrentWindow.Close();
                         }
+                        _logger.Log(TypeLog.Info, $"{CurrentContent.User.Login} Log In");
                     }
                     else
                     {
                         MessageBox.Show("Error");
+                        _logger.Log(TypeLog.Eror, $"{CurrentContent.User.Login} Not Log In");
                     }
                 });
             }

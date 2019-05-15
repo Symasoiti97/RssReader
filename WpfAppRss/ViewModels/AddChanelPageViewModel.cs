@@ -8,14 +8,14 @@ namespace WpfAppRss.ViewModels
 {
     class AddChanelPageViewModel : BaseViewModel
     {
-        private OperationDataBase _operationDataBase;
+        private ConcreteOperationDb _operationDataBase;
 
         public Content CurrentContent { get; set; }
 
         public AddChanelPageViewModel()
         {
             CurrentContent = Content.GetInstance();
-            _operationDataBase = OperationDataBase.GetInstance();
+            _operationDataBase = ConcreteOperationDb.GetInstance();
         }
 
         public ICommand AddChannel_Click

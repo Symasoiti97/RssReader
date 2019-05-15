@@ -10,11 +10,11 @@ namespace WpfAppRss.Helper
 {
     static class UpdaterRss
     {
-        private static OperationDataBase _operationDataBase;
+        private static ConcreteOperationDb _operationDataBase;
 
         static UpdaterRss()
         {
-            _operationDataBase = OperationDataBase.GetInstance();
+            _operationDataBase = ConcreteOperationDb.GetInstance();
         }
 
         public static ObservableCollection<Catalog> UpdateTreeViewChannels(string login)
@@ -66,7 +66,7 @@ namespace WpfAppRss.Helper
 
         public static void UpdateRssChannelsDateBase(User user)
         {
-            List<string> listUrl = _operationDataBase.GetCurrentListUrlChannels(user.Login);
+            ICollection<string> listUrl = _operationDataBase.GetCurrentListUrlChannels(user.Login);
 
             foreach (var url in listUrl)
             {
