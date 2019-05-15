@@ -98,7 +98,7 @@
                             <HierarchicalDataTemplate.ItemTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding Title}" 
-                                               Width="150"
+                                               Width="140"
                                                TextWrapping="Wrap"/>
                                 </DataTemplate>
                             </HierarchicalDataTemplate.ItemTemplate>

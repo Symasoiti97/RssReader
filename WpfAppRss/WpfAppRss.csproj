@@ -52,6 +52,9 @@
     <Reference Include="Microsoft.Expression.Interactions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Windows.Interactivity.WPF.2.0.20525\lib\net40\Microsoft.Expression.Interactions.dll</HintPath>
     </Reference>
+    <Reference Include="Ninject, Version=3.3.4.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ninject.3.3.4\lib\net45\Ninject.dll</HintPath>
+    </Reference>
     <Reference Include="PropertyChanged, Version=2.1.4.0, Culture=neutral, PublicKeyToken=ee3ee20bcf148ddd, processorArchitecture=MSIL">
       <HintPath>..\packages\PropertyChanged.Fody.2.1.4\lib\netstandard1.0\PropertyChanged.dll</HintPath>
       <Private>False</Private>
@@ -140,6 +143,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Helper\LoggerModule.cs" />
     <Compile Include="Helper\UpdaterRss.cs" />
     <Compile Include="Models\Catalog.cs" />
     <Compile Include="Models\Content.cs" />
@@ -213,6 +217,10 @@
     <ProjectReference Include="..\DataBase\DataBase.csproj">
       <Project>{7a6a84e2-7326-466c-86c7-b3ba31f6458f}</Project>
       <Name>DataBase</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Logger\Logger.csproj">
+      <Project>{3ad8cd25-9371-4873-919a-65bd7819cac9}</Project>
+      <Name>Logger</Name>
     </ProjectReference>
     <ProjectReference Include="..\Parsers\Parsers.csproj">
       <Project>{56ebc336-83b0-451d-8c03-f169b9185069}</Project>
