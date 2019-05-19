@@ -54,7 +54,7 @@ namespace WpfAppRss.Helper
 
         public static ObservableCollection<Catalog> AddChannelDataBase(string url, string catalog, string login)
         {
-            var rssChannel = RssLoader.ParserRss(url);
+            var rssChannel = RssLoader.ParseChannel(url);
             rssChannel.Link = url;
 
             if (catalog == "" || catalog == null) catalog = "Different";
@@ -70,7 +70,7 @@ namespace WpfAppRss.Helper
 
             foreach (var url in listUrl)
             {
-                var rssChannel = RssLoader.ParserRss(url);
+                var rssChannel = RssLoader.ParseChannel(url);
                 rssChannel.Link = url;
 
                 _operationDataBase.UpdateUserContent(user.Login, rssChannel);

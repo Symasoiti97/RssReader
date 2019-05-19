@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DataBase.Models
 {
@@ -17,8 +18,9 @@ namespace DataBase.Models
         public string Author { get; set; }
         public string Category { get; set; }
         public DateTime PubTime { get; set; }
-
+   
         public int RssChannelId { get; set; }
+        [ForeignKey("RssChannelId")]
         public RssChannel RssChannel { get; set; }
 
         public ICollection<UserFavoriteItem> UserFavoriteItems { get; set; }

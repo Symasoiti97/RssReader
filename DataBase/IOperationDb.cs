@@ -13,8 +13,8 @@ namespace DataBase
         void CreateModel<T>(T model) where T : class, IEntity;
         void RemoveModel<T>(T model) where T : class, IEntity;
         void UpdateModel<T>(T model) where T : class, IEntity;
-        IQueryable<T> GetModels<T>(T model) where T : class, IEntity;
+        IQueryable<T> GetModels<T>() where T : class, IEntity;
         IQueryable<T> GetModels<T>(Expression<Func<T, bool>> predicate) where T : class, IEntity;
-        T GetModel<T>(Expression<Func<T, bool>> predicate) where T : class, IEntity;
+        T GetModelFirstOfDefault<T>(Expression<Func<T, bool>> predicate) where T : class, IEntity;
     }
 }

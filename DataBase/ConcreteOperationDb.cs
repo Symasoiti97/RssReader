@@ -8,13 +8,17 @@ using System.Reflection;
 
 namespace DataBase
 {
-    public class ConcreteOperationDb : OperationDb
+    public class ConcreteOperationDb
     {
         private static ConcreteOperationDb _operationDataBase;
 
+        private readonly IKernel _kernal;
+        private readonly IOperationDb _oDb;
+
         private ConcreteOperationDb()
         {
-
+            _kernal = new StandardKernel(new DbModule());
+            _oDb = _kernal.Get<IOperationDb>();
         }
 
         public static ConcreteOperationDb GetInstance()
@@ -30,11 +34,11 @@ namespace DataBase
         public bool AddUser(User user)
         {
             bool flag;
-            var u = GetModel<User>(p => p.Login == user.Login && p.Email == user.Email);
+            var u = _oDb.GetModelFirstOfDefault<User>(p => p.Login == user.Login && p.Email == user.Email);
 
             if (u == null)
             {
-                CreateModel<User>(user);
+                _oDb.CreateModel<User>(user);
                 flag = true;
             }
             else
@@ -47,7 +51,7 @@ namespace DataBase
 
         public bool EditUser(User oldUser, User newUser)
         {
-            var user = GetModel<User>(p => p.Login == oldUser.Login);
+            var user = _oDb.GetModelFirstOfDefault<User>(p => p.Login == oldUser.Login);
 
             if (user == null)
             {
@@ -58,20 +62,20 @@ namespace DataBase
             user.Login = newUser.Login;
             user.Password = newUser.Password;
 
-            UpdateModel<User>(user);
+            _oDb.UpdateModel<User>(user);
 
             return true;
         }
 
         public void RemoveUser(User user)
         {
-            var u = GetModel<User>(p => p.Login == user.Login);
-            RemoveModel<User>(u);
+            var u = _oDb.GetModelFirstOfDefault<User>(p => p.Login == user.Login);
+            _oDb.RemoveModel<User>(u);
         }
 
         public User GetUser(User user)
         {
-            return GetModel<User>(p => p.Login == user.Login && p.Password == user.Password);
+            return _oDb.GetModelFirstOfDefault<User>(p => p.Login == user.Login && p.Password == user.Password);
         }
 
         public bool AddUserContent(string login, RssChannel rssChannel, string catalog)
@@ -79,8 +83,8 @@ namespace DataBase
 
             UserContent userContent;
 
-            var userId = GetModel<User>(u => u.Login == login).Id;
-            var rssCh = GetModel<RssChannel>(rs => rs.Title == rssChannel.Title);
+            var userId = _oDb.GetModelFirstOfDefault<User>(u => u.Login == login).Id;
+            var rssCh = _oDb.GetModelFirstOfDefault<RssChannel>(rs => rs.Title == rssChannel.Title);
 
             if (rssCh == null)
             {
@@ -93,14 +97,14 @@ namespace DataBase
             }
             else
             {
-                userContent = GetModel<UserContent>(rs => rs.Category == catalog &&
+                userContent = _oDb.GetModelFirstOfDefault<UserContent>(rs => rs.Category == catalog &&
                     rs.RssChannelId == rssCh.Id && rs.UserId == userId);
 
                 if (userContent != null)
                 {
                     userContent.RssChannel = rssCh;
 
-                    UpdateModel<UserContent>(userContent);
+                    _oDb.UpdateModel<UserContent>(userContent);
 
                     return false;
                 }
@@ -115,70 +119,70 @@ namespace DataBase
                 }
             }
 
-            CreateModel<UserContent>(userContent);
+            _oDb.CreateModel<UserContent>(userContent);
 
             return true;
         }
 
         public void UpdateUserContent(string login, RssChannel rssChannel)
         {
-            var userId = GetModel<User>(u => u.Login == login).Id;
-            var rssCh = GetModel<RssChannel>(rs => rs.Title == rssChannel.Title);
+            var userId = _oDb.GetModelFirstOfDefault<User>(u => u.Login == login).Id;
+            var rssCh = _oDb.GetModelFirstOfDefault<RssChannel>(rs => rs.Title == rssChannel.Title);
 
-            UserContent userContent = GetModel<UserContent>(rs =>
+            UserContent userContent = _oDb.GetModelFirstOfDefault<UserContent>(rs =>
                 rs.RssChannelId == rssCh.Id && rs.UserId == userId && rs.RssChannel.Link == rssChannel.Link);
 
             if (userContent != null)
             {
                 userContent.RssChannel = rssCh;
 
-                UpdateModel<UserContent>(userContent);
+                _oDb.UpdateModel<UserContent>(userContent);
             }
         }
 
         public void RemoveUserContent(string login, string title)
         {
-            var userContent = GetModel<UserContent>(rs => rs.User.Login == login && rs.RssChannel.Title == title);
+            var userContent = _oDb.GetModelFirstOfDefault<UserContent>(rs => rs.User.Login == login && rs.RssChannel.Title == title);
 
-            RemoveModel<UserContent>(userContent);
+            _oDb.RemoveModel<UserContent>(userContent);
         }
 
         public ICollection<string> GetCatologsRssChannels(string login)
         {
-            return GetModels<UserContent>(t => t.User.Login == login).Select(rc => rc.Category).ToArray();
+            return _oDb.GetModels<UserContent>(t => t.User.Login == login).Select(rc => rc.Category).ToArray();
         }
 
         public ICollection<RssChannel> GetRssChannels(string login, string category)
         {
-            return GetModels<UserContent>(t => t.User.Login == login && t.Category == category).Select(rs => rs.RssChannel).ToArray();
+            return _oDb.GetModels<UserContent>(t => t.User.Login == login && t.Category == category).Select(rs => rs.RssChannel).ToArray();
         }
 
         public ICollection<RssItem> GetRssItems(string titleRssChannel)
         {
-            return GetModels<RssItem>(ri => ri.RssChannel.Title == titleRssChannel).ToArray();
+            return _oDb.GetModels<RssItem>(ri => ri.RssChannel.Title == titleRssChannel).ToArray();
         }
 
         public RssItem GetRssItem(string title)
         {
-            return GetModel<RssItem>(ri => ri.Title == title);
+            return _oDb.GetModelFirstOfDefault<RssItem>(ri => ri.Title == title);
         }
 
         public RssItem GetRssItemFavorite(string login, string title)
         {
-            return GetModel<UserFavoriteItem>(ufi => ufi.RssItem.Title == title && ufi.User.Login == login).RssItem;
+            return _oDb.GetModelFirstOfDefault<UserFavoriteItem>(ufi => ufi.RssItem.Title == title && ufi.User.Login == login).RssItem;
         }
 
         public ICollection<RssItem> GetFivoriteRssItems(User user)
         {
-            return GetModels<UserFavoriteItem>(ufi => ufi.User.Login == user.Login).Select(rs => rs.RssItem).ToArray();
+            return _oDb.GetModels<UserFavoriteItem>(ufi => ufi.User.Login == user.Login).Select(rs => rs.RssItem).ToArray();
         }
 
         public bool AddRssItemFavorite(string login, string title)
         {
-            var userId = GetModel<User>(u => u.Login == login).Id;
-            var rssItemId = GetModel<RssItem>(ri => ri.Title == title).Id;
+            var userId = _oDb.GetModelFirstOfDefault<User>(u => u.Login == login).Id;
+            var rssItemId = _oDb.GetModelFirstOfDefault<RssItem>(ri => ri.Title == title).Id;
 
-            var userFavoriteItem = GetModel<UserFavoriteItem>(ufi => ufi.RssItemId == rssItemId && ufi.UserId == userId);
+            var userFavoriteItem = _oDb.GetModelFirstOfDefault<UserFavoriteItem>(ufi => ufi.RssItemId == rssItemId && ufi.UserId == userId);
 
             if (userFavoriteItem != null)
             {
@@ -191,29 +195,29 @@ namespace DataBase
                 RssItemId = rssItemId
             };
 
-            CreateModel<UserFavoriteItem>(userFavoriteItem);
+            _oDb.CreateModel<UserFavoriteItem>(userFavoriteItem);
 
             return true;
         }
 
         public void RemoveRssItemFavorite(string login, string title)
         {
-            var userId = GetModel<User>(u => u.Login == login).Id;
-            var rssItemId = GetModel<RssItem>(ri => ri.Title == title).Id;
+            var userId = _oDb.GetModelFirstOfDefault<User>(u => u.Login == login).Id;
+            var rssItemId = _oDb.GetModelFirstOfDefault<RssItem>(ri => ri.Title == title).Id;
 
-            var userFavoriteItem = GetModel<UserFavoriteItem>(ufi => ufi.RssItemId == rssItemId && ufi.UserId == userId);
+            var userFavoriteItem = _oDb.GetModelFirstOfDefault<UserFavoriteItem>(ufi => ufi.RssItemId == rssItemId && ufi.UserId == userId);
 
-            RemoveModel<UserFavoriteItem>(userFavoriteItem);
+            _oDb.RemoveModel<UserFavoriteItem>(userFavoriteItem);
         }
 
         public bool CheckedFavoriteItem(string login, string title)
         {
             bool flag = false;
 
-            var userId = GetModel<User>(u => u.Login == login).Id;
-            var rssItemId = GetModel<RssItem>(ri => ri.Title == title).Id;
+            var userId = _oDb.GetModelFirstOfDefault<User>(u => u.Login == login).Id;
+            var rssItemId = _oDb.GetModelFirstOfDefault<RssItem>(ri => ri.Title == title).Id;
 
-            var favoriteItem = GetModel<UserFavoriteItem>(ufi => ufi.RssItemId == rssItemId && ufi.UserId == userId);
+            var favoriteItem = _oDb.GetModelFirstOfDefault<UserFavoriteItem>(ufi => ufi.RssItemId == rssItemId && ufi.UserId == userId);
 
             if (favoriteItem != null)
             {
@@ -225,8 +229,8 @@ namespace DataBase
 
         public ICollection<string> GetCurrentListUrlChannels(string login)
         {
-            var userId = GetModel<User>(u => u.Login == login).Id;
-            var listUrl = GetModels<UserContent>(uc => uc.UserId == userId).Select(uc => uc.RssChannel.Link).ToArray();
+            var userId = _oDb.GetModelFirstOfDefault<User>(u => u.Login == login).Id;
+            var listUrl = _oDb.GetModels<UserContent>(uc => uc.UserId == userId).Select(uc => uc.RssChannel.Link).ToArray();
 
             return listUrl;
         }

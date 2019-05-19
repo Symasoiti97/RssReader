@@ -9,8 +9,8 @@ namespace DataBase
 {
     public abstract class OperationDb : IOperationDb
     {
-        private ApplicationContext _db;
-        private IKernel _kernal;
+        private readonly ApplicationContext _db;
+        private readonly IKernel _kernal;
 
         public OperationDb()
         {
@@ -24,7 +24,7 @@ namespace DataBase
             _db.SaveChanges();
         }
 
-        public IQueryable<T> GetModels<T>(T model) where T : class, IEntity
+        public IQueryable<T> GetModels<T>() where T : class, IEntity
         {
             return _db.Set<T>();
         }
@@ -42,7 +42,7 @@ namespace DataBase
             _db.SaveChanges();
         }
 
-        public T GetModel<T>(Expression<Func<T, bool>> predicate) where T : class, IEntity
+        public T GetModelFirstOfDefault<T>(Expression<Func<T, bool>> predicate) where T : class, IEntity
         {
             return _db.Set<T>().Where(predicate).FirstOrDefault();
         }

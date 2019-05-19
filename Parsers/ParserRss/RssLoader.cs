@@ -38,7 +38,7 @@ namespace Parsers.ParserRss
             return rssChanel;
         }
 
-        public RssChannel ParseChannel(string link)
+        public static RssChannel ParseChannel(string link)
         {
             var rss = XDocument.Load(link);
 
@@ -47,9 +47,11 @@ namespace Parsers.ParserRss
             var items = from i in rss.Descendants("item")
                         select new RssItem
                         {
-                            Title =  i.Element("title").Value,
-                            Content = i.Element("description").Value,
-                            Link =  i.Element("link").Value,
+                            Title =  i.Element("title")?.Value,
+                            Content = i.Element("description")?.Value,
+                            Link =  i.Element("link")?.Value,
+                            Author = i.Element("author")?.Value,
+                            Category = i.Element("category")?.Value,
                             PubTime = DateTime.Parse(i.Element("pubDate")?.Value)
                         };
 

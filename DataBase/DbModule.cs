@@ -13,7 +13,6 @@ namespace DataBase
         public override void Load()
         {
             Bind<IOperationDb>().To<OperationDb>();
-            Bind<OperationDb>().To<ConcreteOperationDb>();
             Bind<ApplicationContext>().ToSelf();
         }
     }
