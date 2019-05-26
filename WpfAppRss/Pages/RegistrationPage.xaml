@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:WpfAppRss.Pages"
       xmlns:vm="clr-namespace:WpfAppRss.ViewModels"
       mc:Ignorable="d" 
-      d:DesignHeight="230" d:DesignWidth="200"
+      d:DesignHeight="270" d:DesignWidth="200"
       Title="RegistrationPage">
 
     <Page.DataContext>
@@ -21,20 +21,24 @@
         
         <Grid>
             <StackPanel>
-                <TextBox Text="{Binding LoginText}"
+                <TextBox Text="{Binding Login, ValidatesOnDataErrors=True}"
+                         Validation.ErrorTemplate="{StaticResource validationFailed}"
                          Style="{StaticResource BaseTextBox}"
                          Tag="Login"
                          Margin="10"/>
-                <TextBox Text="{Binding PasswordFirstText}"
+                <TextBox Text="{Binding Password, ValidatesOnDataErrors=True}"
                          Style="{StaticResource BaseTextBox}"
+                         Validation.ErrorTemplate="{StaticResource validationFailed}"
                          Tag="Password"
                          Margin="10"/>
-                <TextBox Text="{Binding PasswordSecondText}"
+                <TextBox Text="{Binding ConfirmPassword, ValidatesOnDataErrors=True}"
                          Style="{StaticResource BaseTextBox}"
+                         Validation.ErrorTemplate="{StaticResource validationFailed}"
                          Tag="Confirm password"
                          Margin="10"/>
-                <TextBox Text="{Binding EmailText}"
+                <TextBox Text="{Binding Email, ValidatesOnDataErrors=True}"
                          Style="{StaticResource BaseTextBox}"
+                         Validation.ErrorTemplate="{StaticResource validationFailed}"
                          Tag="Email"
                          Margin="10"/>
             </StackPanel>

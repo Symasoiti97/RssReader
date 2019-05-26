@@ -7,13 +7,11 @@ namespace WpfAppRss.ViewModels
 {
     class LoginWindowViewModel : BaseViewModel
     {
-        private Page _loginPage;
-        private readonly Page _registrationPage;
+        private readonly Page _loginPage;
 
         public LoginWindowViewModel()
         {
             _loginPage = new Pages.LoginPage();
-            _registrationPage = new Pages.RegistrationPage();
 
             CurrentPage = _loginPage;
         }
@@ -35,7 +33,7 @@ namespace WpfAppRss.ViewModels
             {
                 return new DelegateCommand(() =>
                 {
-                    CurrentPage = _registrationPage;
+                    CurrentPage = new Pages.RegistrationPage();
                 });
             }
         }

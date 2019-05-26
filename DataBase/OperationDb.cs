@@ -7,7 +7,7 @@ using System.Linq.Expressions;
 
 namespace DataBase
 {
-    public abstract class OperationDb : IOperationDb
+    public class OperationDb : IOperationDb
     {
         private readonly ApplicationContext _db;
         private readonly IKernel _kernal;

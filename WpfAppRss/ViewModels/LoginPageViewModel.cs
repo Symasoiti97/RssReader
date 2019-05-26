@@ -8,6 +8,8 @@ using Ninject;
 using WpfAppRss.Helper;
 using Logger;
 using static Logger.Logger;
+using System.ComponentModel;
+using System;
 
 namespace WpfAppRss.ViewModels
 {

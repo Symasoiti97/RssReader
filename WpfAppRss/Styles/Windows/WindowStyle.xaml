@@ -69,7 +69,9 @@
 
                                 <Grid DockPanel.Dock="Bottom"
                                   Background="{TemplateBinding Background}">
-                                    <ContentPresenter />
+                                    <AdornerDecorator>
+                                        <ContentPresenter />
+                                    </AdornerDecorator>
                                 </Grid>
 
                             </DockPanel>

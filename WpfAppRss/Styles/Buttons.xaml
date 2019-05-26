@@ -31,6 +31,36 @@
         </Setter>
     </Style>
 
+    <Style x:Key="changePassToggleButton" TargetType="ToggleButton">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Foreground" Value="LightGray"/>
+        <Setter Property="FontFamily" Value="{StaticResource FontFamily1}"/>
+        <Setter Property="FontSize" Value="{StaticResource h5}"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ToggleButton">
+                    <Grid>
+                        <Border x:Name="PART_border"
+                                Background="{TemplateBinding Background}"/>
+                        <ContentPresenter />
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsChecked"  Value="False">
+                            <Setter Property="Foreground" Value="LightGray" />
+                        </Trigger>
+                        <Trigger Property="IsChecked"  Value="True">
+                            <Setter Property="Foreground" Value="LightBlue" />
+                        </Trigger>
+                        <Trigger Property="IsMouseOver"  Value="True">
+                            <Setter Property="Foreground" Value="LightBlue"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <Style x:Key="StarToggleButton" TargetType="ToggleButton">
         <Setter Property="Template">
             <Setter.Value>

@@ -10,19 +10,13 @@ namespace WpfAppRss.ViewModels
     {
         public Content CurrentContent { get; set; }
         public ConcreteOperationDb _operationDataBase;
-        public User NewUser { get; set; }
+
+        private User _newUser;
 
         public SettingPageViewModel()
         {
             _operationDataBase = ConcreteOperationDb.GetInstance();
             CurrentContent = Content.GetInstance();
-
-            NewUser = new User
-            {
-                Login = CurrentContent.User.Login,
-                Password = CurrentContent.User.Password,
-                Email = CurrentContent.User.Email
-            };
         }
 
         public ICommand ApplySetting_Click
@@ -31,12 +25,24 @@ namespace WpfAppRss.ViewModels
             {
                 return new DelegateCommand(()=>
                 {
-                    if (_operationDataBase.EditUser(CurrentContent.User, NewUser))
+                    _newUser = new User
                     {
-                        CurrentContent.User = NewUser;
+                        Login = Login,
+                        Password = Password,
+                        Email = Email
+                    };
+
+                    if (_operationDataBase.EditUser(CurrentContent.User, _newUser))
+                    {
+                        CurrentContent.User = _newUser;
                     }
                 });
             }
         }
+
+        public string Login { get; set; }
+        public string Password { get; set; }
+        public string ConfirmPassword { get; set; }
+        public string Email { get; set; }
     }
 }

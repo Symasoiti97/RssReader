@@ -26,8 +26,8 @@ namespace WpfAppRss.Models
             RssItems = new ObservableCollection<RssItem>();
             RssItem.PubTime = new DateTime();
 
-            User.Login = "user1";
-            User.Password = "pass1";
+            User.Login = "useruser";
+            User.Password = "passpass";
         }
 
         public static Content GetInstance()
@@ -35,12 +35,11 @@ namespace WpfAppRss.Models
             return _content;
         }
 
-        public DataBase.Models.User User { get; set; }
+        public User User { get; set; }
 
         public Page ContentPage { get; set; }
 
         public RssItem RssItems_SelectValue;
-
 
         public RssChannel RssChannel { get; set; }
         public RssItem RssItem { get; set; }

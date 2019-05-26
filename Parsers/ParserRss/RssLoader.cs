@@ -40,28 +40,37 @@ namespace Parsers.ParserRss
 
         public static RssChannel ParseChannel(string link)
         {
-            var rss = XDocument.Load(link);
+            XDocument xDocument;
 
-            var ch = rss.Root?.Element("channel");
-
-            var items = from i in rss.Descendants("item")
-                        select new RssItem
-                        {
-                            Title =  i.Element("title")?.Value,
-                            Content = i.Element("description")?.Value,
-                            Link =  i.Element("link")?.Value,
-                            Author = i.Element("author")?.Value,
-                            Category = i.Element("category")?.Value,
-                            PubTime = DateTime.Parse(i.Element("pubDate")?.Value)
-                        };
-
-            var channel = new RssChannel
+            try
             {
-                Title = ch.Element("title")?.Value,
-                Link = ch.Element("link")?.Value,
-                RssItems = items.ToArray()
-            };
+                xDocument = XDocument.Load(link);
+            }
+            catch
+            {
+                throw new Exception("Link does not exist!");
+            }
 
+            var ch = xDocument.Root?.Element("channel");
+
+                var items = from i in xDocument.Descendants("item")
+                            select new RssItem
+                            {
+                                Title = i.Element("title")?.Value,
+                                Content = i.Element("description")?.Value,
+                                Link = i.Element("link")?.Value,
+                                Author = i.Element("author")?.Value,
+                                Category = i.Element("category")?.Value,
+                                PubTime = DateTime.Parse(i.Element("pubDate")?.Value)
+                            };
+
+                var channel = new RssChannel
+                {
+                    Title = ch.Element("title")?.Value,
+                    Link = ch.Element("link")?.Value,
+                    RssItems = items.ToArray()
+                };
+        
             return channel;
         }
     }

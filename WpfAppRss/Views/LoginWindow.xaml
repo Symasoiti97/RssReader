@@ -11,6 +11,7 @@
         Title="LoginWindow" 
         Height="310" 
         Width="250"
+        ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
         Style="{StaticResource BaseWindow}">
 

@@ -23,19 +23,50 @@
                 <TextBlock Text="Login"
                            Style="{StaticResource BaseTextBlock}"/>
                 <TextBox Style="{StaticResource BaseTextBox}"
-                         Text="{Binding NewUser.Login}"/>
-            </StackPanel>
-            <StackPanel Margin="10">
-                <TextBlock Text="Password"
-                           Style="{StaticResource BaseTextBlock}"/>
-                <TextBox Style="{StaticResource BaseTextBox}"
-                         Text="{Binding NewUser.Password}"/>
+                         Tag="New login"
+                         Text="{Binding Login}"/>
             </StackPanel>
             <StackPanel Margin="10">
                 <TextBlock Text="Email"
                            Style="{StaticResource BaseTextBlock}"/>
                 <TextBox Style="{StaticResource BaseTextBox}"
-                         Text="{Binding NewUser.Email}"/>
+                         Tag="New email"
+                         Text="{Binding Email}"/>
+            </StackPanel>
+            <StackPanel Margin="10">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Password"
+                               Style="{StaticResource BaseTextBlock}"/>
+                    <ToggleButton Content="сменить"
+                                  x:Name="changePass"
+                                  Style="{StaticResource changePassToggleButton}"
+                                  Margin="5,0"
+                                  Foreground="LightGray"/>
+                </StackPanel>
+                <StackPanel>
+                    <StackPanel.Resources>
+                        <Style TargetType="StackPanel">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding ElementName=changePass, Path=IsChecked}"
+                                             Value="True">
+                                    <Setter Property="Height" Value="Auto"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding ElementName=changePass, Path=IsChecked}"
+                                             Value="false">
+                                    <Setter Property="Height" Value="0"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </StackPanel.Resources>
+                    <TextBox Style="{StaticResource BaseTextBox}"
+                             Text="{Binding Password}"
+                             Tag="New password"
+                             Margin="0,5"/>
+                    <TextBox Style="{StaticResource BaseTextBox}"
+                             Text="{Binding ConfirmPassword}"
+                             Tag="Confirm new password"
+                             Margin="0,5"/>
+                </StackPanel>
             </StackPanel>
         </StackPanel>
 

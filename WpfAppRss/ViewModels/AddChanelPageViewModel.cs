@@ -3,6 +3,9 @@ using DevExpress.Mvvm;
 using DataBase;
 using WpfAppRss.Models;
 using WpfAppRss.Helper;
+using System.IO;
+using System.Windows;
+using System;
 
 namespace WpfAppRss.ViewModels
 {
@@ -24,7 +27,14 @@ namespace WpfAppRss.ViewModels
             {
                 return new DelegateCommand(()=>
                 {
-                    CurrentContent.Catalogs = UpdaterRss.AddChannelDataBase(RssLinkText, CatalogText, CurrentContent.User.Login);
+                    try
+                    {
+                        CurrentContent.Catalogs = UpdaterRss.AddChannelDataBase(RssLinkText, CatalogText, CurrentContent.User.Login);
+                    }
+                    catch (Exception exc)
+                    {
+                        MessageBox.Show(exc.Message);
+                    }
                 });
             }
         }
