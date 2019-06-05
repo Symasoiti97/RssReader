@@ -5,6 +5,7 @@ using System.Linq;
 using System.Data.Entity;
 using Ninject;
 using System.Reflection;
+using DataBase.Ninject;
 
 namespace DataBase
 {
@@ -12,13 +13,11 @@ namespace DataBase
     {
         private static ConcreteOperationDb _operationDataBase;
 
-        private readonly IKernel _kernal;
         private readonly IOperationDb _oDb;
 
         private ConcreteOperationDb()
         {
-            _kernal = new StandardKernel(new DbModule());
-            _oDb = _kernal.Get<IOperationDb>();
+            _oDb = NinjectContext.Kernel.Get<IOperationDb>();
         }
 
         public static ConcreteOperationDb GetInstance()

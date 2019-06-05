@@ -1,4 +1,4 @@
-﻿using Logger;
+﻿using DataBase.DataBases;
 using Ninject.Modules;
 using System;
 using System.Collections.Generic;
@@ -6,13 +6,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WpfAppRss.Helper
+namespace DataBase.Ninject
 {
-    class LoggerModule : NinjectModule
+    class DbModule : NinjectModule
     {
         public override void Load()
         {
-            Bind<ILogger>().To<Logger.Logger>();
+            Bind<IOperationDb>().To<OperationDb>();
+            Bind<ApplicationContext>().ToSelf();
         }
     }
 }

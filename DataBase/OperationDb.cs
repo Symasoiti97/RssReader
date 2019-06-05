@@ -1,5 +1,6 @@
 ﻿using DataBase.DataBases;
 using DataBase.Models;
+using DataBase.Ninject;
 using Ninject;
 using System;
 using System.Linq;
@@ -10,12 +11,10 @@ namespace DataBase
     public class OperationDb : IOperationDb
     {
         private readonly ApplicationContext _db;
-        private readonly IKernel _kernal;
 
         public OperationDb()
         {
-            _kernal = new StandardKernel(new DbModule());
-            _db = _kernal.Get<ApplicationContext>();
+            _db = NinjectContext.Kernel.Get<ApplicationContext>();
         }
 
         public void CreateModel<T>(T model) where T : class, IEntity

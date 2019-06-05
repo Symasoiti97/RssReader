@@ -73,7 +73,7 @@ namespace WpfAppRss.ViewModels
             }
             else
             {
-                MessageBox.Show("rssItem == null");
+                throw new System.Exception("rssItem == null");
             }
         }
     }

@@ -32,8 +32,7 @@ namespace WpfAppRss.ViewModels
                 {
                     if (Errors.Count > 0)
                     {
-                        MessageBox.Show("Sorry:(");
-                        return;
+                        throw new Exception("Valid Errors");
                     }
 
                     RegistrationUser();

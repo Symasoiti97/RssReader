@@ -10,13 +10,15 @@ using DataBase.Models;
 using Ninject;
 using Logger;
 using static Logger.Logger;
+using WpfAppRss.Ninject;
+using System.Windows;
+using System.Windows.Media;
 
 namespace WpfAppRss.ViewModels
 {
     class MainWindowViewModel : BaseViewModel
     {
-        private static IKernel ninjectKernel = new StandardKernel(new LoggerModule());
-        private static ILogger _logger = ninjectKernel.Get<ILogger>();
+        private static ILogger _logger = NinjectContext.Kernel.Get<ILogger>();
 
         public Content CurrentContent { get; set; }
         private ConcreteOperationDb _operationDataBase;
@@ -95,9 +97,9 @@ namespace WpfAppRss.ViewModels
 
             if (i is RssChannel)
             {
-                RssChannel selectTitle = (RssChannel)i as RssChannel;
+                RssChannel selectRssChannel = (RssChannel)i as RssChannel;
 
-                ICollection<RssItem> rssItems = _operationDataBase.GetRssItems(selectTitle.Title);
+                ICollection<RssItem> rssItems = _operationDataBase.GetRssItems(selectRssChannel.Title);
                 ObservableCollection<RssItem> selectRssItems = new ObservableCollection<RssItem>();
 
                 foreach (var ri in rssItems)
@@ -107,13 +109,15 @@ namespace WpfAppRss.ViewModels
 
                 CurrentContent.RssItems = selectRssItems;
 
+                
+
                 CurrentContent.ContentPage = new Pages.SettingRssChannelPage()
                 {
                     DataContext = new SettingRssChannelPageViewModel()
                     {
-                        Catalog = "NZ",
+                        Catalog = GetPaternHeader(selectRssChannel.Title, item),
                         NumberOfRssItems = selectRssItems.Count.ToString(),
-                        RssChannelTitle = selectTitle.Title
+                        RssChannelTitle = selectRssChannel.Title
                     }
                 };
             }
@@ -135,5 +139,27 @@ namespace WpfAppRss.ViewModels
                 }
             }
         }
+
+        private string GetPaternHeader(string title, TreeView item)
+        {
+            var propl = item.ItemsSource;
+
+            foreach (Catalog catalog in propl)
+            {
+                if (catalog.RssChannels != null)
+                {
+                    foreach (RssChannel rssChannel in catalog.RssChannels)
+                    {
+                        if (rssChannel.Title == title)
+                        {
+                            return catalog.CatalogName;
+                        }
+                    }
+                }
+            }
+
+            return string.Empty;
+        }
+
     }
 }

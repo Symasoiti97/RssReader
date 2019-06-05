@@ -12,6 +12,8 @@ namespace WpfAppRss.Helper
     {
         private static ConcreteOperationDb _operationDataBase;
 
+        private const string _defaultCatalog = "Different";
+
         static UpdaterRss()
         {
             _operationDataBase = ConcreteOperationDb.GetInstance();
@@ -32,8 +34,10 @@ namespace WpfAppRss.Helper
 
             for (int i = 0; i < catalogsTitle.Count; i++)
             {
-                Catalog catalog = new Catalog();
-                catalog.CatalogName = catalogsTitle[i];
+                Catalog catalog = new Catalog
+                {
+                    CatalogName = catalogsTitle[i]
+                };
 
                 ObservableCollection<RssChannel> rssChannels = new ObservableCollection<RssChannel>();
 
@@ -57,7 +61,7 @@ namespace WpfAppRss.Helper
             var rssChannel = RssLoader.ParseChannel(url);
             rssChannel.Link = url;
 
-            if (catalog == "" || catalog == null) catalog = "Different";
+            if (catalog == "" || catalog == null) catalog = _defaultCatalog;
 
             _operationDataBase.AddUserContent(login, rssChannel, catalog);
 

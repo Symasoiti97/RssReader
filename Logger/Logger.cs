@@ -9,9 +9,8 @@ namespace Logger
 {
     public class Logger : ILogger
     {
-        private const string path = "Logs/LogFile_{0}.txt";
-        private readonly string log = "{0} | {1} | {2}";
-        private static object locker = new object();
+        private const string _path = "Logs/LogFile_{0}.txt";
+        private readonly string _log = "{0} | {1} | {2}";
 
         public enum TypeLog
         {
@@ -27,9 +26,9 @@ namespace Logger
 
         public async void Log(TypeLog typeLog, string message)
         {
-            using (StreamWriter sw = new StreamWriter(string.Format(path, DateTime.Now.ToShortDateString()), true, Encoding.Unicode))
+            using (StreamWriter sw = new StreamWriter(string.Format(_path, DateTime.Now.ToShortDateString()), true, Encoding.Unicode))
             {
-                await sw.WriteLineAsync(string.Format(log, DateTime.Now.ToString("hh:mm:ss:ff"), typeLog, message));
+                await sw.WriteLineAsync(string.Format(_log, DateTime.Now.ToString("hh:mm:ss:ff"), typeLog, message));
             }
         }
     }

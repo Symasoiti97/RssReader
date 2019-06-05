@@ -143,11 +143,12 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Helper\LoggerModule.cs" />
     <Compile Include="Helper\UpdaterRss.cs" />
     <Compile Include="Helper\Validation.cs" />
     <Compile Include="Models\Catalog.cs" />
     <Compile Include="Models\Content.cs" />
+    <Compile Include="Ninject\NinjectContext.cs" />
+    <Compile Include="Ninject\NModule.cs" />
     <Compile Include="Pages\AddChanelPage.xaml.cs">
       <DependentUpon>AddChanelPage.xaml</DependentUpon>
     </Compile>

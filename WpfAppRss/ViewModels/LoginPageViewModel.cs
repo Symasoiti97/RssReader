@@ -10,13 +10,13 @@ using Logger;
 using static Logger.Logger;
 using System.ComponentModel;
 using System;
+using WpfAppRss.Ninject;
 
 namespace WpfAppRss.ViewModels
 {
     class LoginPageViewModel : BaseViewModel
     {
-        private static IKernel ninjectKernel = new StandardKernel(new LoggerModule());
-        private static ILogger _logger = ninjectKernel.Get<ILogger>();
+        private static ILogger _logger = NinjectContext.Kernel.Get<ILogger>();
 
         private ConcreteOperationDb _operationDataBase;
         public Content CurrentContent { get; set; }

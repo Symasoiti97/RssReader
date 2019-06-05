@@ -52,7 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataBases\ApplicationContext.cs" />
-    <Compile Include="DbModule.cs" />
+    <Compile Include="Ninject\DbModule.cs" />
     <Compile Include="IOperationDb.cs" />
     <Compile Include="Models\IEntity.cs" />
     <Compile Include="Models\RssChannel.cs" />
@@ -61,6 +61,7 @@
     <Compile Include="Models\UserContent.cs" />
     <Compile Include="Models\UserFavoriteItem.cs" />
     <Compile Include="ConcreteOperationDb.cs" />
+    <Compile Include="Ninject\NinjectContext.cs" />
     <Compile Include="OperationDb.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
