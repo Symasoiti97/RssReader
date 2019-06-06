@@ -1,10 +1,7 @@
-﻿using DataBase.DataBases;
-using DataBase.Models;
+﻿using DataBase.Models;
 using System.Collections.Generic;
 using System.Linq;
-using System.Data.Entity;
 using Ninject;
-using System.Reflection;
 using DataBase.Ninject;
 
 namespace DataBase

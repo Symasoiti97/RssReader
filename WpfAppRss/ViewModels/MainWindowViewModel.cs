@@ -11,8 +11,6 @@ using Ninject;
 using Logger;
 using static Logger.Logger;
 using WpfAppRss.Ninject;
-using System.Windows;
-using System.Windows.Media;
 
 namespace WpfAppRss.ViewModels
 {
@@ -94,7 +92,6 @@ namespace WpfAppRss.ViewModels
         private void ActionSelectTreeItem(TreeView item)
         {
             object i = item.SelectedValue;
-
             if (i is RssChannel)
             {
                 RssChannel selectRssChannel = (RssChannel)i as RssChannel;

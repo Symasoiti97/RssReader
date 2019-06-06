@@ -5,11 +5,8 @@ using System.Windows.Input;
 using WpfAppRss.Models;
 using WpfAppRss.Views;
 using Ninject;
-using WpfAppRss.Helper;
 using Logger;
 using static Logger.Logger;
-using System.ComponentModel;
-using System;
 using WpfAppRss.Ninject;
 
 namespace WpfAppRss.ViewModels

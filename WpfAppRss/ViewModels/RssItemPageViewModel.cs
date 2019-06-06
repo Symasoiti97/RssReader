@@ -1,6 +1,5 @@
 ﻿using DataBase;
 using DevExpress.Mvvm;
-using System.Windows;
 using System.Windows.Controls;
 using WpfAppRss.Models;
 using DataBase.Models;
