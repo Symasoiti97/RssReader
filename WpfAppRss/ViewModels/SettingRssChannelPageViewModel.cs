@@ -20,7 +20,8 @@ namespace WpfAppRss.ViewModels
             {
                 return new DelegateCommand(()=>
                 {
-                    UpdaterRss.RemoveUserContentAndUpdate(CurrentContent.User.Login, RssChannelTitle);
+                    CurrentContent.Catalogs = UpdaterRss.RemoveUserContentAndReturnUpdateTree(CurrentContent.User.Login, RssChannelTitle);
+                    CurrentContent.ContentPage = null;
                 });
             }
         }

@@ -11,7 +11,7 @@ namespace Logger
 
         public enum TypeLog
         {
-            Eror,
+            Error,
             Info,
             Warring
         }

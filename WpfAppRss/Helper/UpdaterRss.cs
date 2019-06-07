@@ -81,10 +81,10 @@ namespace WpfAppRss.Helper
             }
         }
 
-        public static void RemoveUserContentAndUpdate(string login, string title)
+        public static ObservableCollection<Catalog> RemoveUserContentAndReturnUpdateTree(string login, string title)
         {
             _operationDataBase.RemoveUserContent(login, title);
-            UpdateTreeViewChannels(login);
+            return UpdateTreeViewChannels(login);
         }
     }
 }

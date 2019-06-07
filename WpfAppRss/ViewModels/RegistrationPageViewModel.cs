@@ -1,12 +1,16 @@
 ﻿using DataBase;
 using DataBase.Models;
 using DevExpress.Mvvm;
+using Logger;
+using static Logger.Logger;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Input;
 using WpfAppRss.Helper;
+using Ninject;
+using WpfAppRss.Ninject;
 
 namespace WpfAppRss.ViewModels
 {
@@ -14,6 +18,7 @@ namespace WpfAppRss.ViewModels
     {
         private ConcreteOperationDb _operationDataBase;
         private User _currentRegistrUser;
+        private static ILogger _logger = NinjectContext.Kernel.Get<ILogger>();
 
         public Dictionary<string, string> Errors { get; set; }
 
@@ -30,12 +35,20 @@ namespace WpfAppRss.ViewModels
             {
                 return new DelegateCommand(()=>
                 {
-                    if (Errors.Count > 0)
+                    try
                     {
-                        throw new Exception("Valid Errors");
-                    }
+                        if (Errors.Count > 0)
+                        {
+                            throw new Exception("Valid Errors");
+                        }
 
-                    RegistrationUser();
+                        RegistrationUser();
+                    }
+                    catch (Exception exc)
+                    {
+                        MessageBox.Show("Error", exc.Message);
+                        _logger.Log(TypeLog.Error, exc.Message);
+                    }
                 });
             }
         }

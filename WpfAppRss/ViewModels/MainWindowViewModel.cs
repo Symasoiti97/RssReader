@@ -11,6 +11,8 @@ using Ninject;
 using Logger;
 using static Logger.Logger;
 using WpfAppRss.Ninject;
+using System;
+using System.Windows;
 
 namespace WpfAppRss.ViewModels
 {
@@ -69,9 +71,18 @@ namespace WpfAppRss.ViewModels
             {
                 return new DelegateCommand(() =>
                 {
-                    _logger.Log(TypeLog.Info, $"{CurrentContent.User.Login} Start Update Rss");
-                    UpdaterRss.UpdateRssChannelsDateBase(CurrentContent.User);
-                    _logger.Log(TypeLog.Info, $"{CurrentContent.User.Login} Finish Update Rss");
+                    try
+                    {
+                        _logger.Log(TypeLog.Info, $"{CurrentContent.User.Login} Start Update Rss");
+                        UpdaterRss.UpdateRssChannelsDateBase(CurrentContent.User);
+                        CurrentContent.Catalogs = UpdaterRss.UpdateTreeViewChannels(CurrentContent.User.Login);
+                        _logger.Log(TypeLog.Info, $"{CurrentContent.User.Login} Finish Update Rss");
+                    } 
+                    catch (Exception exc)
+                    {
+                        MessageBox.Show("Внимание",exc.Message);
+                        _logger.Log(TypeLog.Error, exc.Message);
+                    }
                 });
             }
         }

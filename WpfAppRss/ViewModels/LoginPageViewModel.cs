@@ -45,7 +45,7 @@ namespace WpfAppRss.ViewModels
                     else
                     {
                         MessageBox.Show("Error");
-                        _logger.Log(TypeLog.Eror, $"{CurrentContent.User.Login} Not Log In");
+                        _logger.Log(TypeLog.Error, $"{CurrentContent.User.Login} Not Log In");
                     }
                 });
             }
